@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.exercise.commons.core.GuiSettings;
 import seedu.exercise.model.exercise.Exercise;
+import seedu.exercise.model.regime.Regime;
 
 /**
  * The API of the Model component.
@@ -87,5 +88,13 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredExerciseList(Predicate<Exercise> predicate);
+
+    boolean hasRegime(Regime regime);
+
+    void addRegime(Regime regime);
+
+    void setRegime(Regime target, Regime editedRegime);
+
+    void deleteRegime(Regime regime);
 
 }

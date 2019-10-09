@@ -2,6 +2,7 @@ package seedu.exercise.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -35,6 +36,15 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    public static ArrayList<Index> parseIndexes(Collection<String> indexes) throws ParseException {
+        requireNonNull(indexes);
+        final ArrayList<Index> indexSet = new ArrayList<>();
+        for (String index : indexes) {
+            indexSet.add(parseIndex(index));
+        }
+        return indexSet;
     }
 
     /**
@@ -137,5 +147,14 @@ public class ParserUtil {
             muscleSet.add(parseMuscle(muscleName));
         }
         return muscleSet;
+    }
+
+    public static String parseCategory(String category) throws ParseException {
+        requireNonNull(category);
+        String trimmedCategory = category.trim();
+        if (!trimmedCategory.equals("exercise") && !trimmedCategory.equals("regime")) {
+            throw new ParseException("Category can only be \'exercise\' or \'regime\'");
+        }
+        return trimmedCategory;
     }
 }

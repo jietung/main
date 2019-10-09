@@ -7,6 +7,8 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.exercise.UniqueExerciseList;
+import seedu.exercise.model.regime.Regime;
+import seedu.exercise.model.regime.UniqueRegimeList;
 
 /**
  * Wraps all data at the exercise-book level
@@ -15,6 +17,7 @@ import seedu.exercise.model.exercise.UniqueExerciseList;
 public class ExerciseBook implements ReadOnlyExerciseBook {
 
     private final UniqueExerciseList exercises;
+    private final UniqueRegimeList regimes;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +28,7 @@ public class ExerciseBook implements ReadOnlyExerciseBook {
      */
     {
         exercises = new UniqueExerciseList();
+        regimes = new UniqueRegimeList();
     }
 
     public ExerciseBook() {}
@@ -47,6 +51,10 @@ public class ExerciseBook implements ReadOnlyExerciseBook {
         this.exercises.setExercises(exercises);
     }
 
+    public void setRegimes(List<Regime> regimes) {
+        this.regimes.setRegimes(regimes);
+    }
+
     /**
      * Resets the existing data of this {@code ExerciseBook} with {@code newData}.
      */
@@ -54,6 +62,8 @@ public class ExerciseBook implements ReadOnlyExerciseBook {
         requireNonNull(newData);
 
         setExercises(newData.getExerciseList());
+
+        setRegimes(newData.getRegimeList());
     }
 
     //// exercise-level operations
@@ -94,6 +104,34 @@ public class ExerciseBook implements ReadOnlyExerciseBook {
         exercises.remove(key);
     }
 
+    //// regime-level operations
+
+    /**
+     * Returns true if a regime with the same name exists in the regime book.
+     */
+    public boolean hasRegime(Regime regime) {
+        requireNonNull(regime);
+        return regimes.contains(regime);
+    }
+
+    /**
+     * Adds a regime to the regime book.
+     * THe regime must not already exist in the exercise book.
+     */
+    public void addRegime(Regime r) {
+        regimes.add(r);
+    }
+
+    public void setRegime(Regime target, Regime editedRegime) {
+        requireNonNull(editedRegime);
+
+        regimes.setRegime(target, editedRegime);
+    }
+
+    public void removeRegime(Regime key) {
+        regimes.remove(key);
+    }
+
     //// util methods
 
     @Override
@@ -105,6 +143,11 @@ public class ExerciseBook implements ReadOnlyExerciseBook {
     @Override
     public ObservableList<Exercise> getExerciseList() {
         return exercises.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Regime> getRegimeList() {
+        return regimes.asUnmodifiableObservableList();
     }
 
     @Override

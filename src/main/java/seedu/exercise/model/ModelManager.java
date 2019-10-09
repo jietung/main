@@ -13,6 +13,7 @@ import javafx.collections.transformation.SortedList;
 import seedu.exercise.commons.core.GuiSettings;
 import seedu.exercise.commons.core.LogsCenter;
 import seedu.exercise.model.exercise.Exercise;
+import seedu.exercise.model.regime.Regime;
 
 /**
  * Represents the in-memory model of the exercise book data.
@@ -24,6 +25,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Exercise> filteredExercises;
     private final SortedList<Exercise> sortedExercises;
+    private final FilteredList<Regime> filteredRegimes;
 
     /**
      * Initializes a ModelManager with the given exerciseBook and userPrefs.
@@ -38,6 +40,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredExercises = new FilteredList<>(this.exerciseBook.getExerciseList());
         sortedExercises = new SortedList<>(this.exerciseBook.getExerciseList());
+        filteredRegimes = new FilteredList<>(this.exerciseBook.getRegimeList());
 
     }
 
@@ -117,6 +120,24 @@ public class ModelManager implements Model {
         exerciseBook.setExercise(target, editedExercise);
     }
 
+    public void addRegime(Regime regime)  {
+        exerciseBook.addRegime(regime);
+    }
+
+    public void deleteRegime(Regime target) {
+        exerciseBook.removeRegime(target);
+    }
+
+    public void setRegime(Regime target, Regime editedRegime) {
+        exerciseBook.setRegime(target, editedRegime);
+    }
+
+    public boolean hasRegime(Regime regime) {
+        requireNonNull(regime);
+
+        return exerciseBook.hasRegime(regime);
+    }
+
     //=========== Filtered Exercise List Accessors =============================================================
 
     /**
@@ -137,6 +158,10 @@ public class ModelManager implements Model {
     public void updateFilteredExerciseList(Predicate<Exercise> predicate) {
         requireNonNull(predicate);
         filteredExercises.setPredicate(predicate);
+    }
+
+    public ObservableList<Regime> getFilteredRegimeList() {
+        return filteredRegimes;
     }
 
     @Override
