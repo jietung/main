@@ -25,7 +25,7 @@ import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.exercise.Name;
 import seedu.exercise.model.exercise.Quantity;
 import seedu.exercise.model.exercise.Unit;
-import seedu.exercise.model.tag.Muscle;
+import seedu.exercise.model.exercise.Muscle;
 
 /**
  * Edits the details of an existing exercise in the exercise book.

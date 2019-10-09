@@ -41,7 +41,7 @@ import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.exercise.Name;
 import seedu.exercise.model.exercise.Quantity;
 import seedu.exercise.model.exercise.Unit;
-import seedu.exercise.model.tag.Muscle;
+import seedu.exercise.model.exercise.Muscle;
 import seedu.exercise.testutil.ExerciseBuilder;
 
 public class AddCommandParserTest {

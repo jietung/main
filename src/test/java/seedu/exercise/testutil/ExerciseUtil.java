@@ -12,7 +12,7 @@ import java.util.Set;
 import seedu.exercise.logic.commands.AddCommand;
 import seedu.exercise.logic.commands.EditCommand;
 import seedu.exercise.model.exercise.Exercise;
-import seedu.exercise.model.tag.Muscle;
+import seedu.exercise.model.exercise.Muscle;
 
 /**
  * A utility class for Exercise.
