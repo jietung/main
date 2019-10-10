@@ -70,11 +70,6 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Exercise> getSortedExerciseList() {
-        return model.getSortedExerciseList();
-    }
-
-    @Override
     public ReadOnlyRegimeBook getRegimeBook() {
         return model.getAllRegimeData();
     }

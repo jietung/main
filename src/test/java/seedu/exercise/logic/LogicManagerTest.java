@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.exercise.commons.core.Messages.MESSAGE_INVALID_EXERCISE_DISPLAYED_INDEX;
 import static seedu.exercise.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.exercise.logic.commands.CommandTestUtil.CALORIES_DESC_AEROBICS;
+import static seedu.exercise.logic.commands.CommandTestUtil.CATEGORY_DESC_EXERCISE;
 import static seedu.exercise.logic.commands.CommandTestUtil.DATE_DESC_AEROBICS;
 import static seedu.exercise.logic.commands.CommandTestUtil.NAME_DESC_AEROBICS;
 import static seedu.exercise.logic.commands.CommandTestUtil.QUANTITY_DESC_AEROBICS;
@@ -63,7 +64,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
+        String deleteCommand = "delete t/exercise i/9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_EXERCISE_DISPLAYED_INDEX);
     }
 
@@ -86,8 +87,8 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddECommand.COMMAND_WORD + NAME_DESC_AEROBICS + DATE_DESC_AEROBICS + CALORIES_DESC_AEROBICS
-            + QUANTITY_DESC_AEROBICS + UNIT_DESC_AEROBICS;
+        String addCommand = AddECommand.COMMAND_WORD + CATEGORY_DESC_EXERCISE + NAME_DESC_AEROBICS + DATE_DESC_AEROBICS
+            + CALORIES_DESC_AEROBICS + QUANTITY_DESC_AEROBICS + UNIT_DESC_AEROBICS;
         Exercise expectedExercise = new ExerciseBuilder(AEROBICS).withMuscles().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addExercise(expectedExercise);

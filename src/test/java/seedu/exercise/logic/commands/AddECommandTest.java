@@ -188,11 +188,6 @@ public class AddECommandTest {
         }
 
         @Override
-        public ObservableList<Exercise> getSortedExerciseList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ObservableList<Regime> getFilteredRegimeList() {
             throw new AssertionError("This method should not be called.");
         }

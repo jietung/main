@@ -34,9 +34,6 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Exercise> getFilteredExerciseList();
-
-    ObservableList<Exercise> getSortedExerciseList();
-
     /**
      * Returns the RegimeBook.
      *

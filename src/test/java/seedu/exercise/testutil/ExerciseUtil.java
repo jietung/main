@@ -1,6 +1,7 @@
 package seedu.exercise.testutil;
 
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CALORIES;
+import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_MUSCLE;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_NAME;
@@ -31,6 +32,7 @@ public class ExerciseUtil {
      */
     private static String getExerciseDetails(Exercise exercise) {
         StringBuilder sb = new StringBuilder();
+        sb.append(PREFIX_CATEGORY + "exercise ");
         sb.append(PREFIX_NAME + exercise.getName().fullName + " ");
         sb.append(PREFIX_DATE + exercise.getDate().toString() + " ");
         sb.append(PREFIX_CALORIES + exercise.getCalories().value + " ");

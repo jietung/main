@@ -81,8 +81,7 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered exercise list */
     ObservableList<Exercise> getFilteredExerciseList();
 
-    ObservableList<Exercise> getSortedExerciseList();
-
+    /** Returns an unmodifiable view of the filtered regime list */
     ObservableList<Regime> getFilteredRegimeList();
 
     /**

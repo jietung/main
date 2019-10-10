@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.exercise.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.exercise.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.exercise.logic.commands.CommandTestUtil.CATEGORY_DESC_EXERCISE;
+import static seedu.exercise.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.exercise.testutil.Assert.assertThrows;
 import static seedu.exercise.testutil.TypicalIndexes.INDEX_FIRST_EXERCISE;
 
@@ -49,7 +51,8 @@ public class ExerciseBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteECommand command = (DeleteECommand) parser.parseCommand(
-                DeleteECommand.COMMAND_WORD + " " + INDEX_FIRST_EXERCISE.getOneBased());
+                DeleteECommand.COMMAND_WORD + " " + CATEGORY_DESC_EXERCISE + " "
+                        + PREFIX_INDEX + INDEX_FIRST_EXERCISE.getOneBased());
         assertEquals(new DeleteECommand(INDEX_FIRST_EXERCISE), command);
     }
 
