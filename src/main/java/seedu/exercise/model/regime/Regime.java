@@ -35,8 +35,10 @@ public class Regime {
     @Override
     public String toString() {
         String str = "";
+        int i = 1;
         for (Exercise e : exercises) {
-            str += " " + e.getName().toString() + "\n";
+            str += "Exercise " + i + ": " + e.getName().toString() + "\n";
+            i++;
         }
         return str;
     }

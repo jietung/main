@@ -54,6 +54,8 @@ public class SampleDataUtil {
         list1.add(new Exercise(new Name("Bench Press"), new Date("26/09/2019"), new Calories("222"),
                 new Quantity("30"), new Unit("counts"),
                 getMuscleSet("Triceps")));
+
+
         ArrayList<Exercise> list2 = new ArrayList<>();
         list2.add(new Exercise(new Name("Running"), new Date("26/09/2019"), new Calories("9999999"),
                 new Quantity("2.4"), new Unit("km"),
@@ -65,8 +67,27 @@ public class SampleDataUtil {
                 new Quantity("10"), new Unit("laps"),
                 getMuscleSet("Calves")));
 
+        ArrayList<Exercise> list3 = new ArrayList<>();
+        list3.add(new Exercise(new Name("Rope Skipping"), new Date("26/09/2019"), new Calories("330"),
+                new Quantity("10"), new Unit("counts"),
+                getMuscleSet("Legs")));
+        list3.add(new Exercise(new Name("Swimming"), new Date("26/09/2019"), new Calories("354"),
+                new Quantity("10"), new Unit("laps"),
+                getMuscleSet("Calves")));
+        list3.add(new Exercise(new Name("Bench Press"), new Date("26/09/2019"), new Calories("222"),
+                new Quantity("30"), new Unit("counts"),
+                getMuscleSet("Triceps")));
+        list3.add( new Exercise(new Name("Cycling"), new Date("26/09/2019"), new Calories("284"),
+                new Quantity("5"), new Unit("km"),
+                getMuscleSet("Legs")));
+        list3.add(new Exercise(new Name("Strength Training"), new Date("26/09/2019"), new Calories("341"),
+                new Quantity("20"), new Unit("counts"),
+                getMuscleSet("Chest")));
+
         return new Regime[] {
-            new Regime(new RegimeName("level 1"), list1), new Regime(new RegimeName("level 2"), list2)
+            new Regime(new RegimeName("level 1"), list1),
+            new Regime(new RegimeName("level 2"), list2),
+            new Regime(new RegimeName("level 3"), list3)
         };
     }
 

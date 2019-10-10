@@ -2,6 +2,8 @@ package seedu.exercise.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.exercise.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.exercise.logic.parser.CliSyntax.PREFIX_INDEX;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,14 @@ public class AddRCommand extends AddCommand {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds exercises to the regime list.";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds exercises to the regime list."
+            + "Parameters: "
+            + PREFIX_CATEGORY + "CATEGORY "
+            + PREFIX_INDEX + "INDEX"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_CATEGORY + "regime"
+            + PREFIX_INDEX + "1 "
+            +PREFIX_CATEGORY + "2";
 
     public static final String MESSAGE_SUCCESS_REGIME = "Added regime";
 
