@@ -9,7 +9,7 @@ import static seedu.exercise.logic.parser.CliSyntax.PREFIX_UNIT;
 
 import java.util.Set;
 
-import seedu.exercise.logic.commands.AddCommand;
+import seedu.exercise.logic.commands.AddECommand;
 import seedu.exercise.logic.commands.EditCommand;
 import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.exercise.Muscle;
@@ -23,7 +23,7 @@ public class ExerciseUtil {
      * Returns an add command string for adding the {@code exercise}.
      */
     public static String getAddCommand(Exercise exercise) {
-        return AddCommand.COMMAND_WORD + " " + getExerciseDetails(exercise);
+        return AddECommand.COMMAND_WORD + " " + getExerciseDetails(exercise);
     }
 
     /**

@@ -15,9 +15,9 @@ import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.testutil.ExerciseBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code AddCommand}.
+ * Contains integration tests (interaction with the Model) for {@code AddECommand}.
  */
-public class AddCommandIntegrationTest {
+public class AddECommandIntegrationTest {
 
     private Model model;
 
@@ -33,14 +33,14 @@ public class AddCommandIntegrationTest {
         Model expectedModel = new ModelManager(model.getAllExerciseData(), new RegimeBook(), new UserPrefs());
         expectedModel.addExercise(validExercise);
 
-        assertCommandSuccess(new AddCommand(validExercise), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, validExercise), expectedModel);
+        assertCommandSuccess(new AddECommand(validExercise), model,
+                String.format(AddECommand.MESSAGE_SUCCESS, validExercise), expectedModel);
     }
 
     @Test
     public void execute_duplicateExercise_throwsCommandException() {
         Exercise exerciseInList = model.getAllExerciseData().getExerciseList().get(0);
-        assertCommandFailure(new AddCommand(exerciseInList), model, AddCommand.MESSAGE_DUPLICATE_EXERCISE);
+        assertCommandFailure(new AddECommand(exerciseInList), model, AddECommand.MESSAGE_DUPLICATE_EXERCISE);
     }
 
 }

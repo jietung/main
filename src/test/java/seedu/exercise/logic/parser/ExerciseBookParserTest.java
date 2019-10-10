@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.exercise.logic.commands.AddCommand;
+import seedu.exercise.logic.commands.AddECommand;
 import seedu.exercise.logic.commands.ClearCommand;
 import seedu.exercise.logic.commands.DeleteCommand;
 import seedu.exercise.logic.commands.EditCommand;
@@ -36,8 +36,8 @@ public class ExerciseBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Exercise exercise = new ExerciseBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(ExerciseUtil.getAddCommand(exercise));
-        assertEquals(new AddCommand(exercise), command);
+        AddECommand command = (AddECommand) parser.parseCommand(ExerciseUtil.getAddCommand(exercise));
+        assertEquals(new AddECommand(exercise), command);
     }
 
     @Test

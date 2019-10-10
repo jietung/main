@@ -25,11 +25,11 @@ import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.regime.Regime;
 import seedu.exercise.testutil.ExerciseBuilder;
 
-public class AddCommandTest {
+public class AddECommandTest {
 
     @Test
     public void constructor_nullExercise_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddCommand(null));
+        assertThrows(NullPointerException.class, () -> new AddECommand(null));
     }
 
     @Test
@@ -37,34 +37,34 @@ public class AddCommandTest {
         ModelStubAcceptingExerciseAdded modelStub = new ModelStubAcceptingExerciseAdded();
         Exercise validPerson = new ExerciseBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new AddECommand(validPerson).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddECommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validPerson), modelStub.exercisesAdded);
     }
 
     @Test
     public void execute_duplicateExercise_throwsCommandException() {
         Exercise validExercise = new ExerciseBuilder().build();
-        AddCommand addCommand = new AddCommand(validExercise);
+        AddECommand addECommand = new AddECommand(validExercise);
         ModelStub modelStub = new ModelStubWithExercise(validExercise);
 
         assertThrows(CommandException.class,
-            AddCommand.MESSAGE_DUPLICATE_EXERCISE, () -> addCommand.execute(modelStub));
+            AddECommand.MESSAGE_DUPLICATE_EXERCISE, () -> addECommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
         Exercise aerobics = new ExerciseBuilder().withName("Aerobics").build();
         Exercise basketball = new ExerciseBuilder().withName("Basketball").build();
-        AddCommand addAliceCommand = new AddCommand(aerobics);
-        AddCommand addBobCommand = new AddCommand(basketball);
+        AddECommand addAliceCommand = new AddECommand(aerobics);
+        AddECommand addBobCommand = new AddECommand(basketball);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(aerobics);
+        AddECommand addAliceCommandCopy = new AddECommand(aerobics);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false

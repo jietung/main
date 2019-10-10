@@ -34,7 +34,7 @@ import static seedu.exercise.testutil.TypicalExercises.BASKETBALL;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.exercise.logic.commands.AddCommand;
+import seedu.exercise.logic.commands.AddECommand;
 import seedu.exercise.model.exercise.Calories;
 import seedu.exercise.model.exercise.Date;
 import seedu.exercise.model.exercise.Exercise;
@@ -44,7 +44,7 @@ import seedu.exercise.model.exercise.Unit;
 import seedu.exercise.model.exercise.Muscle;
 import seedu.exercise.testutil.ExerciseBuilder;
 
-public class AddCommandParserTest {
+public class AddECommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
@@ -55,44 +55,44 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BASKETBALL
             + DATE_DESC_BASKETBALL + CALORIES_DESC_BASKETBALL
             + QUANTITY_DESC_BASKETBALL + UNIT_DESC_BASKETBALL + MUSCLE_DESC_BASKETBALL,
-            new AddCommand(expectedExercise));
+            new AddECommand(expectedExercise));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AEROBICS + NAME_DESC_BASKETBALL
             + DATE_DESC_BASKETBALL + CALORIES_DESC_BASKETBALL
             + QUANTITY_DESC_BASKETBALL + UNIT_DESC_BASKETBALL + MUSCLE_DESC_BASKETBALL,
-            new AddCommand(expectedExercise));
+            new AddECommand(expectedExercise));
 
         // multiple dates - last date accepted
         assertParseSuccess(parser, NAME_DESC_BASKETBALL + DATE_DESC_AEROBICS
             + DATE_DESC_BASKETBALL + CALORIES_DESC_BASKETBALL
             + QUANTITY_DESC_BASKETBALL + UNIT_DESC_BASKETBALL + MUSCLE_DESC_BASKETBALL,
-            new AddCommand(expectedExercise));
+            new AddECommand(expectedExercise));
 
         // multiple calories - last calories accepted
         assertParseSuccess(parser, NAME_DESC_BASKETBALL + DATE_DESC_BASKETBALL
             + CALORIES_DESC_AEROBICS + CALORIES_DESC_BASKETBALL
             + QUANTITY_DESC_BASKETBALL + UNIT_DESC_BASKETBALL + MUSCLE_DESC_BASKETBALL,
-            new AddCommand(expectedExercise));
+            new AddECommand(expectedExercise));
 
         // multiple quantities - last quantity accepted
         assertParseSuccess(parser, NAME_DESC_BASKETBALL + DATE_DESC_BASKETBALL
             + CALORIES_DESC_BASKETBALL + QUANTITY_DESC_AEROBICS
             + QUANTITY_DESC_BASKETBALL + UNIT_DESC_BASKETBALL + MUSCLE_DESC_BASKETBALL,
-            new AddCommand(expectedExercise));
+            new AddECommand(expectedExercise));
 
         // multiple units - last unit accepted
         assertParseSuccess(parser, NAME_DESC_BASKETBALL + DATE_DESC_BASKETBALL
             + CALORIES_DESC_BASKETBALL + QUANTITY_DESC_BASKETBALL
             + UNIT_DESC_AEROBICS + UNIT_DESC_BASKETBALL + MUSCLE_DESC_BASKETBALL,
-            new AddCommand(expectedExercise));
+            new AddECommand(expectedExercise));
 
         // multiple muscles - all accepted
         Exercise expectedExerciseMultipleTags = new ExerciseBuilder(BASKETBALL)
             .withMuscles(VALID_MUSCLE_BASKETBALL, VALID_MUSCLE_AEROBICS).build();
         assertParseSuccess(parser, NAME_DESC_BASKETBALL + DATE_DESC_BASKETBALL
             + CALORIES_DESC_BASKETBALL + QUANTITY_DESC_BASKETBALL + UNIT_DESC_BASKETBALL
-            + MUSCLE_DESC_AEROBICS + MUSCLE_DESC_BASKETBALL, new AddCommand(expectedExerciseMultipleTags));
+            + MUSCLE_DESC_AEROBICS + MUSCLE_DESC_BASKETBALL, new AddECommand(expectedExerciseMultipleTags));
     }
 
     @Test
@@ -100,12 +100,12 @@ public class AddCommandParserTest {
         // zero tags
         Exercise expectedExercise = new ExerciseBuilder(AEROBICS).withMuscles().build();
         assertParseSuccess(parser, NAME_DESC_AEROBICS + DATE_DESC_AEROBICS
-            + CALORIES_DESC_AEROBICS + QUANTITY_DESC_AEROBICS + UNIT_DESC_AEROBICS, new AddCommand(expectedExercise));
+            + CALORIES_DESC_AEROBICS + QUANTITY_DESC_AEROBICS + UNIT_DESC_AEROBICS, new AddECommand(expectedExercise));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddECommand.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BASKETBALL + DATE_DESC_BASKETBALL
@@ -161,6 +161,6 @@ public class AddCommandParserTest {
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BASKETBALL
                 + DATE_DESC_BASKETBALL + CALORIES_DESC_BASKETBALL
                 + QUANTITY_DESC_BASKETBALL + UNIT_DESC_BASKETBALL + MUSCLE_DESC_AEROBICS + MUSCLE_DESC_BASKETBALL,
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddECommand.MESSAGE_USAGE));
     }
 }

@@ -6,7 +6,7 @@ import static seedu.exercise.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.exercise.logic.commands.AddCommand;
+import seedu.exercise.logic.commands.AddECommand;
 import seedu.exercise.logic.commands.ClearCommand;
 import seedu.exercise.logic.commands.Command;
 import seedu.exercise.logic.commands.DeleteCommand;
@@ -44,7 +44,7 @@ public class ExerciseBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
+        case AddECommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:

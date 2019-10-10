@@ -16,6 +16,8 @@ import java.util.stream.Stream;
 
 import seedu.exercise.commons.core.index.Index;
 import seedu.exercise.logic.commands.AddCommand;
+import seedu.exercise.logic.commands.AddECommand;
+import seedu.exercise.logic.commands.AddRCommand;
 import seedu.exercise.logic.parser.exceptions.ParseException;
 import seedu.exercise.model.exercise.Calories;
 import seedu.exercise.model.exercise.Date;
@@ -27,13 +29,13 @@ import seedu.exercise.model.exercise.Muscle;
 import seedu.exercise.model.regime.RegimeName;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AddECommand object
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddECommand
+     * and returns an AddECommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
@@ -50,7 +52,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE, PREFIX_CALORIES,
                         PREFIX_QUANTITY, PREFIX_UNIT)
                         || !argMultimap.getPreamble().isEmpty()) {
-                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddECommand.MESSAGE_USAGE));
                 }
 
                 Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
@@ -62,7 +64,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
                 Exercise exercise = new Exercise(name, date, calories, quantity, unit, muscleList);
 
-                return new AddCommand(exercise);
+                return new AddECommand(exercise);
             }
 
             if (category.equals("regime")) {
@@ -74,11 +76,11 @@ public class AddCommandParser implements Parser<AddCommand> {
                 }
                 List<Index> indexes = ParserUtil.parseIndexes(argMultimap.getAllValues(PREFIX_INDEX));
 
-                return new AddCommand(indexes, regimeName);
+                return new AddRCommand(indexes, regimeName);
             }
         }
 
-        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddECommand.MESSAGE_USAGE));
 
     }
 
