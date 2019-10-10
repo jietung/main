@@ -14,11 +14,4 @@ public interface ReadOnlyExerciseBook {
      * This list will not contain any duplicate exercises.
      */
     ObservableList<Exercise> getExerciseList();
-
-    /**
-     * Returns an unmodifiable view of the regimes list.
-     * This list will not contain any duplicate regimes.
-     */
-    ObservableList<Regime> getRegimeList();
-
 }

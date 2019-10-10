@@ -51,7 +51,7 @@ public interface Model {
     void setExerciseBook(ReadOnlyExerciseBook anotherBook);
 
     /** Returns the data in the exercise book */
-    ReadOnlyExerciseBook getAllData();
+    ReadOnlyExerciseBook getAllExerciseData();
 
     /**
      * Returns true if an exercise with the same identity as {@code exercise} exists in the exercise book.
@@ -90,6 +90,25 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredExerciseList(Predicate<Exercise> predicate);
+
+
+    /**
+     * Returns the user prefs' regime book file path.
+     */
+    Path getRegimeBookFilePath();
+
+    /**
+     * Sets the user prefs' regime book file path.
+     */
+    void setRegimeBookFilePath(Path regimeBookFilePath);
+
+    /**
+     * Replaces regime book data with the data in {@code anotherBook}.
+     */
+    void setRegimeBook(ReadOnlyRegimeBook anotherBook);
+
+    /** Returns the data in the regime book */
+    ReadOnlyRegimeBook getAllRegimeData();
 
     boolean hasRegime(Regime regime);
 

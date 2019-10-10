@@ -22,6 +22,7 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final ExerciseBook exerciseBook;
+    private final RegimeBook regimeBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Exercise> filteredExercises;
     private final SortedList<Exercise> sortedExercises;
@@ -30,22 +31,23 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given exerciseBook and userPrefs.
      */
-    public ModelManager(ReadOnlyExerciseBook exerciseBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyExerciseBook exerciseBook, ReadOnlyRegimeBook regimeBook, ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(exerciseBook, userPrefs);
 
         logger.fine("Initializing with exercise book: " + exerciseBook + " and user prefs " + userPrefs);
 
         this.exerciseBook = new ExerciseBook(exerciseBook);
+        this.regimeBook = new RegimeBook(regimeBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredExercises = new FilteredList<>(this.exerciseBook.getExerciseList());
         sortedExercises = new SortedList<>(this.exerciseBook.getExerciseList());
-        filteredRegimes = new FilteredList<>(this.exerciseBook.getRegimeList());
+        filteredRegimes = new FilteredList<>(this.regimeBook.getRegimeList());
 
     }
 
     public ModelManager() {
-        this(new ExerciseBook(), new UserPrefs());
+        this(new ExerciseBook(), new RegimeBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -83,6 +85,17 @@ public class ModelManager implements Model {
         userPrefs.setExerciseBookFilePath(exerciseBookFilePath);
     }
 
+    @Override
+    public Path getRegimeBookFilePath() {
+        return userPrefs.getRegimeBookFilePath();
+    }
+
+    @Override
+    public void setRegimeBookFilePath(Path regimeBookFilePath) {
+        requireNonNull(regimeBookFilePath);
+        userPrefs.setRegimeBookFilePath(regimeBookFilePath);
+    }
+
     //=========== ExerciseBook ================================================================================
 
     @Override
@@ -91,7 +104,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ReadOnlyExerciseBook getAllData() {
+    public ReadOnlyExerciseBook getAllExerciseData() {
         return exerciseBook;
     }
 
@@ -119,23 +132,33 @@ public class ModelManager implements Model {
 
         exerciseBook.setExercise(target, editedExercise);
     }
+    //===================RegimeBook==============================================================================
+    @Override
+    public void setRegimeBook(ReadOnlyRegimeBook anotherBook) {
+        this.regimeBook.resetData(anotherBook);
+    }
+
+    @Override
+    public ReadOnlyRegimeBook getAllRegimeData() {
+        return regimeBook;
+    }
 
     public void addRegime(Regime regime)  {
-        exerciseBook.addRegime(regime);
+        regimeBook.addRegime(regime);
     }
 
     public void deleteRegime(Regime target) {
-        exerciseBook.removeRegime(target);
+        regimeBook.removeRegime(target);
     }
 
     public void setRegime(Regime target, Regime editedRegime) {
-        exerciseBook.setRegime(target, editedRegime);
+        regimeBook.setRegime(target, editedRegime);
     }
 
     public boolean hasRegime(Regime regime) {
         requireNonNull(regime);
 
-        return exerciseBook.hasRegime(regime);
+        return regimeBook.hasRegime(regime);
     }
 
     //=========== Filtered Exercise List Accessors =============================================================

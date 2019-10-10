@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 import seedu.exercise.model.ExerciseBook;
 import seedu.exercise.model.ReadOnlyExerciseBook;
+import seedu.exercise.model.ReadOnlyRegimeBook;
+import seedu.exercise.model.RegimeBook;
 import seedu.exercise.model.exercise.Calories;
 import seedu.exercise.model.exercise.Date;
 import seedu.exercise.model.exercise.Exercise;
@@ -73,10 +75,6 @@ public class SampleDataUtil {
         for (Exercise sampleExercise : getSampleExercises()) {
             sampleEb.addExercise(sampleExercise);
         }
-
-        for (Regime r : getSampleRegimes()) {
-            sampleEb.addRegime(r);
-        }
         return sampleEb;
     }
 
@@ -89,4 +87,11 @@ public class SampleDataUtil {
             .collect(Collectors.toSet());
     }
 
+    public static ReadOnlyRegimeBook getSampleRegimeBook() {
+        RegimeBook sampleRb = new RegimeBook();
+        for (Regime r : getSampleRegimes()) {
+            sampleRb.addRegime(r);
+        }
+        return sampleRb;
+    }
 }
