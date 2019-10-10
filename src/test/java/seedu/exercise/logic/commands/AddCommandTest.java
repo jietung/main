@@ -19,8 +19,10 @@ import seedu.exercise.logic.commands.exceptions.CommandException;
 import seedu.exercise.model.ExerciseBook;
 import seedu.exercise.model.Model;
 import seedu.exercise.model.ReadOnlyExerciseBook;
+import seedu.exercise.model.ReadOnlyRegimeBook;
 import seedu.exercise.model.ReadOnlyUserPrefs;
 import seedu.exercise.model.exercise.Exercise;
+import seedu.exercise.model.regime.Regime;
 import seedu.exercise.testutil.ExerciseBuilder;
 
 public class AddCommandTest {
@@ -120,7 +122,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyExerciseBook getAllData() {
+        public ReadOnlyExerciseBook getAllExerciseData() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -139,6 +141,47 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        //=======================regime================================================================================
+        @Override
+        public Path getRegimeBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setRegimeBookFilePath(Path exerciseBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addRegime(Regime regime) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setRegimeBook(ReadOnlyRegimeBook anotherBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyRegimeBook getAllRegimeData() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasRegime(Regime regime) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteRegime(Regime regime) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setRegime(Regime target, Regime editedRegime) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public ObservableList<Exercise> getFilteredExerciseList() {
             throw new AssertionError("This method should not be called.");
@@ -146,6 +189,11 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Exercise> getSortedExerciseList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Regime> getFilteredRegimeList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -192,7 +240,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyExerciseBook getAllData() {
+        public ReadOnlyExerciseBook getAllExerciseData() {
             return new ExerciseBook();
         }
     }
