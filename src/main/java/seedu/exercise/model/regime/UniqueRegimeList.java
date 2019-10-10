@@ -37,7 +37,6 @@ public class UniqueRegimeList implements Iterable<Regime> {
     public void add(Regime toAdd) {
         requireNonNull(toAdd);
         internalList.add(toAdd);
-        System.out.println(internalList.size());
     }
 
     /**

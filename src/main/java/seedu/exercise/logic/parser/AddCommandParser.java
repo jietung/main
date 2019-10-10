@@ -40,7 +40,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_CATEGORY, PREFIX_NAME, PREFIX_DATE, PREFIX_CALORIES, PREFIX_QUANTITY,
-                PREFIX_UNIT, PREFIX_MUSCLE);
+                PREFIX_UNIT, PREFIX_MUSCLE, PREFIX_INDEX);
 
         if (arePrefixesPresent(argMultimap, PREFIX_CATEGORY) || !argMultimap.getPreamble().isEmpty()) {
 

@@ -15,6 +15,7 @@ import seedu.exercise.logic.parser.exceptions.ParseException;
 import seedu.exercise.model.Model;
 import seedu.exercise.model.ReadOnlyExerciseBook;
 import seedu.exercise.model.exercise.Exercise;
+import seedu.exercise.model.regime.Regime;
 import seedu.exercise.storage.Storage;
 
 /**
@@ -64,6 +65,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Exercise> getSortedExerciseList() {
         return model.getSortedExerciseList();
+    }
+
+    @Override
+    public ObservableList<Regime> getRegimeList() {
+        return model.getFilteredRegimeList();
     }
 
     @Override

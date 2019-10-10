@@ -9,6 +9,7 @@ import seedu.exercise.logic.commands.exceptions.CommandException;
 import seedu.exercise.logic.parser.exceptions.ParseException;
 import seedu.exercise.model.ReadOnlyExerciseBook;
 import seedu.exercise.model.exercise.Exercise;
+import seedu.exercise.model.regime.Regime;
 
 /**
  * API of the Logic component
@@ -34,6 +35,8 @@ public interface Logic {
     ObservableList<Exercise> getFilteredExerciseList();
 
     ObservableList<Exercise> getSortedExerciseList();
+
+    ObservableList<Regime> getRegimeList();
 
     /**
      * Returns the user prefs' exercise book file path.

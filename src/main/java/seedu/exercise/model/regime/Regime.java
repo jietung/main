@@ -27,4 +27,17 @@ public class Regime {
         }
         return false;
     }
+
+    public List<Exercise> getExercises() {
+        return exercises;
+    }
+
+    @Override
+    public String toString() {
+        String str = "";
+        for (Exercise e : exercises) {
+            str += " " + e.getName().toString() + "\n";
+        }
+        return str;
+    }
 }

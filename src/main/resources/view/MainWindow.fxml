@@ -47,7 +47,7 @@
                 </StackPane>
                 <BorderPane prefHeight="58.0" prefWidth="410.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                     <left>
-                        <StackPane fx:id="sortedListPanelPlaceholder" minHeight="150.0" minWidth="100.0"
+                        <StackPane fx:id="regimeListPanelPlaceholder" minHeight="150.0" minWidth="100.0"
                                    prefHeight="150.0" prefWidth="400.0" BorderPane.alignment="CENTER"/>
                     </left>
                     <bottom>

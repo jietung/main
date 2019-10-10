@@ -83,6 +83,8 @@ public interface Model {
 
     ObservableList<Exercise> getSortedExerciseList();
 
+    ObservableList<Regime> getFilteredRegimeList();
+
     /**
      * Updates the filter of the filtered exercise list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
