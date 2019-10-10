@@ -21,31 +21,31 @@ import seedu.exercise.model.exercise.Exercise;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
- * {@code DeleteCommand}.
+ * {@code DeleteECommand}.
  */
-public class DeleteCommandTest {
+public class DeleteECommandTest {
 
     private Model model = new ModelManager(getTypicalExerciseBook(), new RegimeBook(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Exercise exerciseToDelete = model.getFilteredExerciseList().get(INDEX_FIRST_EXERCISE.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_EXERCISE);
+        DeleteECommand deleteECommand = new DeleteECommand(INDEX_FIRST_EXERCISE);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_EXERCISE_SUCCESS, exerciseToDelete);
+        String expectedMessage = String.format(DeleteECommand.MESSAGE_DELETE_EXERCISE_SUCCESS, exerciseToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAllExerciseData(), new RegimeBook(), new UserPrefs());
         expectedModel.deleteExercise(exerciseToDelete);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteECommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredExerciseList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        DeleteECommand deleteECommand = new DeleteECommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_EXERCISE_DISPLAYED_INDEX);
+        assertCommandFailure(deleteECommand, model, Messages.MESSAGE_INVALID_EXERCISE_DISPLAYED_INDEX);
     }
 
     @Test
@@ -53,15 +53,15 @@ public class DeleteCommandTest {
         showExerciseAtIndex(model, INDEX_FIRST_EXERCISE);
 
         Exercise exerciseToDelete = model.getFilteredExerciseList().get(INDEX_FIRST_EXERCISE.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_EXERCISE);
+        DeleteECommand deleteECommand = new DeleteECommand(INDEX_FIRST_EXERCISE);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_EXERCISE_SUCCESS, exerciseToDelete);
+        String expectedMessage = String.format(DeleteECommand.MESSAGE_DELETE_EXERCISE_SUCCESS, exerciseToDelete);
 
         Model expectedModel = new ModelManager(model.getAllExerciseData(), new RegimeBook(), new UserPrefs());
         expectedModel.deleteExercise(exerciseToDelete);
         showNoExercise(expectedModel);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deleteECommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -72,21 +72,21 @@ public class DeleteCommandTest {
         // ensures that outOfBoundIndex is still in bounds of exercise book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAllExerciseData().getExerciseList().size());
 
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
+        DeleteECommand deleteECommand = new DeleteECommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_EXERCISE_DISPLAYED_INDEX);
+        assertCommandFailure(deleteECommand, model, Messages.MESSAGE_INVALID_EXERCISE_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_EXERCISE);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_EXERCISE);
+        DeleteECommand deleteFirstCommand = new DeleteECommand(INDEX_FIRST_EXERCISE);
+        DeleteECommand deleteSecondCommand = new DeleteECommand(INDEX_SECOND_EXERCISE);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_EXERCISE);
+        DeleteECommand deleteFirstCommandCopy = new DeleteECommand(INDEX_FIRST_EXERCISE);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

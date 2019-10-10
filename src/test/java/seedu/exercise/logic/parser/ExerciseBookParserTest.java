@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.exercise.logic.commands.AddECommand;
 import seedu.exercise.logic.commands.ClearCommand;
-import seedu.exercise.logic.commands.DeleteCommand;
+import seedu.exercise.logic.commands.DeleteECommand;
 import seedu.exercise.logic.commands.EditCommand;
 import seedu.exercise.logic.commands.EditCommand.EditExerciseDescriptor;
 import seedu.exercise.logic.commands.ExitCommand;
@@ -48,9 +48,9 @@ public class ExerciseBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_EXERCISE.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_EXERCISE), command);
+        DeleteECommand command = (DeleteECommand) parser.parseCommand(
+                DeleteECommand.COMMAND_WORD + " " + INDEX_FIRST_EXERCISE.getOneBased());
+        assertEquals(new DeleteECommand(INDEX_FIRST_EXERCISE), command);
     }
 
     @Test
