@@ -36,12 +36,16 @@ public class MainWindow extends UiPart<Stage> {
     private RegimeListPanel regimeListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ResolveWindow resolveWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem resolveWindowMenuItem;
 
     @FXML
     private StackPane filteredListPanelPlaceholder;
@@ -70,12 +74,12 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
-        primaryStage.setMaximized(true);
         primaryStage.setTitle("ExerHealth");
 
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        resolveWindow = new ResolveWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -160,6 +164,20 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the resolve window and blocks all events until closed
+     */
+    @FXML
+    private void handleResolve() {
+        String testData = "This is clearly test data. DELETE".repeat(1000);
+        resolveWindow.setLeftRightText(testData, testData);
+        if (resolveWindow.isShowing()) {
+            resolveWindow.focus();
+        } else {
+            resolveWindow.show();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -173,6 +191,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        resolveWindow.hideAndClearText();
         primaryStage.hide();
     }
 
