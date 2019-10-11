@@ -41,11 +41,11 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_CATEGORY, PREFIX_NAME, PREFIX_DATE, PREFIX_CALORIES, PREFIX_QUANTITY,
-                        PREFIX_UNIT, PREFIX_MUSCLE, PREFIX_INDEX);
+                ArgumentTokenizer.tokenize(args, PREFIX_CATEGORY, PREFIX_NAME, PREFIX_DATE, PREFIX_CALORIES,
+                        PREFIX_QUANTITY, PREFIX_UNIT, PREFIX_MUSCLE, PREFIX_INDEX);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_CATEGORY) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExerciseCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         String category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
@@ -54,7 +54,8 @@ public class AddCommandParser implements Parser<AddCommand> {
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE, PREFIX_CALORIES,
                     PREFIX_QUANTITY, PREFIX_UNIT)
                     || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExerciseCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddExerciseCommand.MESSAGE_USAGE));
             }
 
             Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());

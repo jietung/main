@@ -2,9 +2,6 @@ package seedu.exercise.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.exercise.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CATEGORY;
-import static seedu.exercise.logic.parser.CliSyntax.PREFIX_INDEX;
-import static seedu.exercise.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
 
@@ -19,22 +16,10 @@ import seedu.exercise.model.regime.RegimeName;
 
 public class AddRegimeCommand extends AddCommand {
 
-    public static final String COMMAND_WORD = "add";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds exercises to the regime list."
-            + "Parameters: "
-            + PREFIX_CATEGORY + "CATEGORY "
-            + PREFIX_NAME + "REGIME NAME "
-            + PREFIX_INDEX + "INDEX\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_CATEGORY + "regime "
-            + PREFIX_NAME + "power set"
-            + PREFIX_INDEX + "1 "
-            + PREFIX_INDEX + "2";
-
     public static final String MESSAGE_SUCCESS_NEW_REGIME = "Added new regime to regime list.";
     public static final String MESSAGE_SUCCESS_ADD_EXERCISE_TO_REGIME = "Added exercises to regime.";
     public static final String MESSAGE_DUPLICATE_EXERCISE_IN_REGIME = "Exercise already in regime.";
+    public static final String MESSAGE_NO_EXERCISES_ADDED = "No index provided, nothing changes.";
 
     private List<Index> toAddIndexes;
     private RegimeName name;
@@ -58,7 +43,7 @@ public class AddRegimeCommand extends AddCommand {
             }
         }
 
-        //add exercise to new regime
+        //create new regime
         Regime regime = new Regime(name, new UniqueExerciseList());
         if (!model.hasRegime(regime)) {
             for (Index index : toAddIndexes) {
@@ -67,7 +52,11 @@ public class AddRegimeCommand extends AddCommand {
 
             model.addRegime(regime);
             return new CommandResult(MESSAGE_SUCCESS_NEW_REGIME);
-        } else {
+        } else { //add exercise to existing regime
+            if (toAddIndexes.size() == 0) {
+                throw new CommandException(MESSAGE_NO_EXERCISES_ADDED);
+            }
+
             int indexOfRegime = model.getRegimeIndex(regime);
             List<Regime> regimes = model.getFilteredRegimeList();
             Regime regimeToAddExercises = regimes.get(indexOfRegime);

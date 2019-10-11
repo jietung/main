@@ -1,8 +1,6 @@
 package seedu.exercise.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CATEGORY;
-import static seedu.exercise.logic.parser.CliSyntax.PREFIX_INDEX;
 
 import java.util.List;
 
@@ -16,13 +14,6 @@ import seedu.exercise.model.exercise.Exercise;
  * Deletes a exercise identified using it's displayed index from the exercise book.
  */
 public class DeleteExerciseCommand extends DeleteCommand {
-
-    public static final String COMMAND_WORD = "delete";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the exercise identified by the index number used in the displayed exercise list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_CATEGORY + "exercise " + PREFIX_INDEX + "1";
 
     public static final String MESSAGE_DELETE_EXERCISE_SUCCESS = "Deleted Exercise: %1$s";
 

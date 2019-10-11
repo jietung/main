@@ -1,9 +1,6 @@
 package seedu.exercise.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CATEGORY;
-import static seedu.exercise.logic.parser.CliSyntax.PREFIX_INDEX;
-import static seedu.exercise.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
 
@@ -17,14 +14,6 @@ import seedu.exercise.model.regime.Regime;
 import seedu.exercise.model.regime.RegimeName;
 
 public class DeleteRegimeCommand extends DeleteCommand {
-    public static final String COMMAND_WORD = "delete";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the regimes identified by the name used in the displayed regime list.\n"
-            + "or Deletes the exercise identified by index in the list of input regime name.\n "
-            + "Parameters: REGIME NAME, INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_CATEGORY + "regime "
-            + PREFIX_NAME + "level 1 " + PREFIX_INDEX + "1";
 
     public static final String MESSAGE_DELETE_REGIME_SUCCESS = "Deleted Regime: %1$s";
     private static final String MESSAGE_REGIME_DOES_NOT_EXIST = "No such regime in regime book.";
