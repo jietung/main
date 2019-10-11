@@ -14,6 +14,7 @@ import seedu.exercise.model.exercise.Date;
 import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.exercise.Name;
 import seedu.exercise.model.exercise.Quantity;
+import seedu.exercise.model.exercise.UniqueExerciseList;
 import seedu.exercise.model.exercise.Unit;
 import seedu.exercise.model.exercise.Muscle;
 import seedu.exercise.model.regime.Regime;
@@ -47,7 +48,7 @@ public class SampleDataUtil {
     }
 
     public static Regime[] getSampleRegimes() {
-        ArrayList<Exercise> list1 = new ArrayList<>();
+        UniqueExerciseList list1 = new UniqueExerciseList();
         list1.add(new Exercise(new Name("Rope Skipping"), new Date("26/09/2019"), new Calories("330"),
                 new Quantity("10"), new Unit("counts"),
                 getMuscleSet("Legs")));
@@ -56,7 +57,7 @@ public class SampleDataUtil {
                 getMuscleSet("Triceps")));
 
 
-        ArrayList<Exercise> list2 = new ArrayList<>();
+        UniqueExerciseList list2 = new UniqueExerciseList();
         list2.add(new Exercise(new Name("Running"), new Date("26/09/2019"), new Calories("9999999"),
                 new Quantity("2.4"), new Unit("km"),
                 getMuscleSet("Legs")));
@@ -67,7 +68,7 @@ public class SampleDataUtil {
                 new Quantity("10"), new Unit("laps"),
                 getMuscleSet("Calves")));
 
-        ArrayList<Exercise> list3 = new ArrayList<>();
+        UniqueExerciseList list3 = new UniqueExerciseList();
         list3.add(new Exercise(new Name("Rope Skipping"), new Date("26/09/2019"), new Calories("330"),
                 new Quantity("10"), new Unit("counts"),
                 getMuscleSet("Legs")));

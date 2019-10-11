@@ -15,6 +15,9 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Exercise> PREDICATE_SHOW_ALL_EXERCISES = unused -> true;
 
+    /** {@code Predicate} that always evaluate to true*/
+    Predicate<Regime> PREDICATE_SHOW_ALL_REGIMES = unused -> true;
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -109,12 +112,39 @@ public interface Model {
     /** Returns the data in the regime book */
     ReadOnlyRegimeBook getAllRegimeData();
 
+    /**
+     * Returns true if an regime with the same identity as {@code regime} exists in the regime book.
+     */
     boolean hasRegime(Regime regime);
 
+    /**
+     * Adds the given regime.
+     * {@code regime} must not already exist in regime book.
+     */
     void addRegime(Regime regime);
 
+    /**
+     * Replaces the given regime {@code target} with {@code editedRegime}.
+     * {@code target} must exist in regime book.
+     * The regime identity of {@code editedRegime} must not be the same as another existing regime in
+     * the regime book.
+     */
     void setRegime(Regime target, Regime editedRegime);
 
+    /**
+     * Deletes the given regime.
+     * The regime must exist in the regime book.
+     */
     void deleteRegime(Regime regime);
 
+    /**
+     * Returns the index of regime in regime book.
+     */
+    int getRegimeIndex(Regime regime);
+
+    /**
+     * Updates the filter of the filtered exercise list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredRegimeList(Predicate<Regime> predicate);
 }

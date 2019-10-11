@@ -160,6 +160,10 @@ public class ModelManager implements Model {
         return regimeBook.hasRegime(regime);
     }
 
+    public int getRegimeIndex(Regime regime) {
+        return regimeBook.getRegimeIndex(regime);
+    }
+
     //=========== Filtered Exercise List Accessors =============================================================
 
     /**
@@ -184,6 +188,12 @@ public class ModelManager implements Model {
      */
     public ObservableList<Regime> getFilteredRegimeList() {
         return filteredRegimes;
+    }
+
+    @Override
+    public void updateFilteredRegimeList(Predicate<Regime> predicate) {
+        requireNonNull(predicate);
+        filteredRegimes.setPredicate(predicate);
     }
 
     @Override

@@ -3,6 +3,7 @@ package seedu.exercise.logic.parser;
 import static seedu.exercise.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_INDEX;
+import static seedu.exercise.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.stream.Stream;
 
@@ -25,7 +26,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     public DeleteCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_CATEGORY, PREFIX_INDEX);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_CATEGORY, PREFIX_INDEX )
+        if (!arePrefixesPresent(argMultimap, PREFIX_CATEGORY)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw  new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteExerciseCommand.MESSAGE_USAGE));
         }
@@ -33,6 +34,9 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         String category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
 
         if (category.equals("exercise")) {
+            if (!arePrefixesPresent(argMultimap, PREFIX_INDEX)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,DeleteExerciseCommand.MESSAGE_USAGE));
+            }
             try {
                 Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
                 return new DeleteExerciseCommand(index);
@@ -41,6 +45,9 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteExerciseCommand.MESSAGE_USAGE), pe);
             }
         } else {
+            if (!arePrefixesPresent(argMultimap, PREFIX_NAME)) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteRegimeCommand.MESSAGE_USAGE));
+            }
             try {
                 Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
                 return new DeleteRegimeCommand(index);

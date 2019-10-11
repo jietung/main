@@ -83,6 +83,20 @@ public class RegimeBook implements ReadOnlyRegimeBook {
         regimes.remove(key);
     }
 
+    /**
+     * Returns the index of regime in regime book.
+     */
+    public int getRegimeIndex(Regime regime) {
+        int i = 0;
+        for (Regime r : regimes) {
+            if (r.equals(regime)) {
+                return i;
+            }
+            i++;
+        }
+        return -1;
+    }
+
     @Override
     public String toString() {
         return regimes.asUnmodifiableObservableList().size() + " regimes";

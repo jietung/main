@@ -1,14 +1,13 @@
 package seedu.exercise.model.regime;
 
-import java.util.List;
-
 import seedu.exercise.model.exercise.Exercise;
+import seedu.exercise.model.exercise.UniqueExerciseList;
 
 public class Regime {
-    public RegimeName name;
-    public List<Exercise> exercises;
+    private final RegimeName name;
+    private final UniqueExerciseList exercises;
 
-    public Regime(RegimeName name, List<Exercise> exercises) {
+    public Regime(RegimeName name, UniqueExerciseList exercises) {
         this.name = name;
         this.exercises = exercises;
     }
@@ -28,7 +27,7 @@ public class Regime {
         return false;
     }
 
-    public List<Exercise> getExercises() {
+    public UniqueExerciseList getExercises() {
         return exercises;
     }
 
@@ -41,5 +40,12 @@ public class Regime {
             i++;
         }
         return str;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+               || (other instanceof Regime)
+               && name.equals(((Regime) other).getRegimeName());
     }
 }

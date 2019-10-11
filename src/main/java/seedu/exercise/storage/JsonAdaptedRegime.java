@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import seedu.exercise.commons.exceptions.IllegalValueException;
 import seedu.exercise.model.exercise.Exercise;
+import seedu.exercise.model.exercise.UniqueExerciseList;
 import seedu.exercise.model.regime.Regime;
 import seedu.exercise.model.regime.RegimeName;
 
@@ -32,7 +33,8 @@ public class JsonAdaptedRegime {
      */
     public JsonAdaptedRegime(Regime source) {
         name = source.getRegimeName().toString();
-        exercises.addAll(source.getExercises().stream()
+
+        exercises.addAll(source.getExercises().asUnmodifiableObservableList().stream()
                 .map(JsonAdaptedExercise::new)
                 .collect(Collectors.toList()));
     }
@@ -43,13 +45,12 @@ public class JsonAdaptedRegime {
      * @throws IllegalValueException if there were any data constraints violated in the adapted regime.
      */
     public Regime toModelType() throws IllegalValueException {
-        final List<Exercise> eList = new ArrayList<>();
+        final UniqueExerciseList modelExercises = new UniqueExerciseList();
         for (JsonAdaptedExercise exercise : exercises) {
-            eList.add(exercise.toModelType());
+            modelExercises.add(exercise.toModelType());
         }
 
         final RegimeName modelName = new RegimeName(name);
-        final List<Exercise> modelExercises = new ArrayList<>(eList);
         return new Regime(modelName, modelExercises);
     }
 }
