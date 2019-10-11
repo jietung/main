@@ -16,6 +16,10 @@ public class Regime {
         exercises.add(exercise);
     }
 
+    public void deleteExercise(Exercise exercise) {
+        exercises.remove(exercise);
+    }
+
     public RegimeName getRegimeName() {
         return name;
     }

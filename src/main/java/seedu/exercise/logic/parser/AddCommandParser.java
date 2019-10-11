@@ -41,46 +41,46 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_CATEGORY, PREFIX_NAME, PREFIX_DATE, PREFIX_CALORIES, PREFIX_QUANTITY,
-                PREFIX_UNIT, PREFIX_MUSCLE, PREFIX_INDEX);
+                ArgumentTokenizer.tokenize(args, PREFIX_CATEGORY, PREFIX_NAME, PREFIX_DATE, PREFIX_CALORIES, PREFIX_QUANTITY,
+                        PREFIX_UNIT, PREFIX_MUSCLE, PREFIX_INDEX);
 
-        if (arePrefixesPresent(argMultimap, PREFIX_CATEGORY) || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_CATEGORY) || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExerciseCommand.MESSAGE_USAGE));
+        }
 
-            String category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
+        String category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
 
-            if (category.equals("exercise")) {
-                if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE, PREFIX_CALORIES,
-                        PREFIX_QUANTITY, PREFIX_UNIT)
-                        || !argMultimap.getPreamble().isEmpty()) {
-                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExerciseCommand.MESSAGE_USAGE));
-                }
-
-                Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-                Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-                Calories calories = ParserUtil.parseCalories(argMultimap.getValue(PREFIX_CALORIES).get());
-                Quantity quantity = ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
-                Unit unit = ParserUtil.parseUnit(argMultimap.getValue(PREFIX_UNIT).get());
-                Set<Muscle> muscleList = ParserUtil.parseMuscles(argMultimap.getAllValues(PREFIX_MUSCLE));
-
-                Exercise exercise = new Exercise(name, date, calories, quantity, unit, muscleList);
-
-                return new AddExerciseCommand(exercise);
+        if (category.equals("exercise")) {
+            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE, PREFIX_CALORIES,
+                    PREFIX_QUANTITY, PREFIX_UNIT)
+                    || !argMultimap.getPreamble().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExerciseCommand.MESSAGE_USAGE));
             }
 
-            if (category.equals("regime")) {
-                if (!arePrefixesPresent(argMultimap, PREFIX_NAME) || !argMultimap.getPreamble().isEmpty()){
-                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddRegimeCommand.MESSAGE_USAGE));
-                }
+            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+            Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+            Calories calories = ParserUtil.parseCalories(argMultimap.getValue(PREFIX_CALORIES).get());
+            Quantity quantity = ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
+            Unit unit = ParserUtil.parseUnit(argMultimap.getValue(PREFIX_UNIT).get());
+            Set<Muscle> muscleList = ParserUtil.parseMuscles(argMultimap.getAllValues(PREFIX_MUSCLE));
 
-                RegimeName regimeName = ParserUtil.parseRegimeName(argMultimap.getValue(PREFIX_NAME).get());
-                List<Index> indexes = ParserUtil.parseIndexes(argMultimap.getAllValues(PREFIX_INDEX));
+            Exercise exercise = new Exercise(name, date, calories, quantity, unit, muscleList);
 
-                return new AddRegimeCommand(indexes, regimeName);
+            return new AddExerciseCommand(exercise);
+        }
+
+        if (category.equals("regime")) {
+            if (!arePrefixesPresent(argMultimap, PREFIX_NAME) || !argMultimap.getPreamble().isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddRegimeCommand.MESSAGE_USAGE));
             }
+
+            RegimeName regimeName = ParserUtil.parseRegimeName(argMultimap.getValue(PREFIX_NAME).get());
+            List<Index> indexes = ParserUtil.parseIndexes(argMultimap.getAllValues(PREFIX_INDEX));
+
+            return new AddRegimeCommand(indexes, regimeName);
         }
 
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExerciseCommand.MESSAGE_USAGE));
-
     }
 
     /**

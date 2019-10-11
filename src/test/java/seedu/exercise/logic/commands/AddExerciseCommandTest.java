@@ -183,6 +183,11 @@ public class AddExerciseCommandTest {
         }
 
         @Override
+        public int getRegimeIndex(Regime regime) {
+            throw new AssertionError("This method shuold not be called.");
+        }
+
+        @Override
         public ObservableList<Exercise> getFilteredExerciseList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -194,6 +199,11 @@ public class AddExerciseCommandTest {
 
         @Override
         public void updateFilteredExerciseList(Predicate<Exercise> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredRegimeList(Predicate<Regime> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
