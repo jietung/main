@@ -11,7 +11,7 @@ import seedu.exercise.model.Model;
 import seedu.exercise.model.exercise.Exercise;
 
 /**
- * Deletes a exercise identified using it's displayed index from the exercise book.
+ * Deletes an exercise identified using it's displayed index from the exercise book.
  */
 public class DeleteExerciseCommand extends DeleteCommand {
 

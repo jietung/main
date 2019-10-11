@@ -12,10 +12,10 @@ import seedu.exercise.commons.util.StringUtil;
 import seedu.exercise.logic.parser.exceptions.ParseException;
 import seedu.exercise.model.exercise.Calories;
 import seedu.exercise.model.exercise.Date;
+import seedu.exercise.model.exercise.Muscle;
 import seedu.exercise.model.exercise.Name;
 import seedu.exercise.model.exercise.Quantity;
 import seedu.exercise.model.exercise.Unit;
-import seedu.exercise.model.exercise.Muscle;
 import seedu.exercise.model.regime.RegimeName;
 
 /**
@@ -39,6 +39,9 @@ public class ParserUtil {
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
+    /**
+     * Parses {@code Collection<String> indexes} into a {@code ArrayList<Index>}.
+     */
     public static ArrayList<Index> parseIndexes(Collection<String> indexes) throws ParseException {
         requireNonNull(indexes);
         final ArrayList<Index> indexSet = new ArrayList<>();
@@ -165,6 +168,12 @@ public class ParserUtil {
         return muscleSet;
     }
 
+    /**
+     * Parses a {@code String category} into a String.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException
+     */
     public static String parseCategory(String category) throws ParseException {
         requireNonNull(category);
         String trimmedCategory = category.trim();

@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.exercise.commons.exceptions.IllegalValueException;
-import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.exercise.UniqueExerciseList;
 import seedu.exercise.model.regime.Regime;
 import seedu.exercise.model.regime.RegimeName;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Jackson-friendly version of {@link Regime}.
@@ -20,6 +19,9 @@ public class JsonAdaptedRegime {
     private final String name;
     private final List<JsonAdaptedExercise> exercises = new ArrayList<>();
 
+    /**
+     * Constructs a {@code JsonAdaptedRegime} with the given regime details.
+     */
     public JsonAdaptedRegime(@JsonProperty("name") String name,
                              @JsonProperty("exercises") List<JsonAdaptedExercise> exercises) {
         this.name = name;

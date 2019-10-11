@@ -6,7 +6,11 @@ import java.util.Optional;
 
 import seedu.exercise.commons.exceptions.DataConversionException;
 import seedu.exercise.model.ReadOnlyRegimeBook;
+import seedu.exercise.model.RegimeBook;
 
+/**
+ * Represents a storage for {@link RegimeBook}.
+ */
 public interface RegimeBookStorage {
 
     /**

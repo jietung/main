@@ -14,7 +14,6 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.RegisterExtension;
 
 import seedu.exercise.model.Model;
 import seedu.exercise.model.ModelManager;

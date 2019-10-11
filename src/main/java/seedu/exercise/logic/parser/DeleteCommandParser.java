@@ -38,7 +38,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
         if (category.equals("exercise")) {
             if (!arePrefixesPresent(argMultimap, PREFIX_INDEX)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteExerciseCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        DeleteExerciseCommand.MESSAGE_USAGE));
             }
 
             Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
@@ -46,7 +47,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
         } else { //regime
             if (!arePrefixesPresent(argMultimap, PREFIX_NAME)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteRegimeCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        DeleteRegimeCommand.MESSAGE_USAGE));
             }
 
             RegimeName name = ParserUtil.parseRegimeName(argMultimap.getValue(PREFIX_NAME).get());

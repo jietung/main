@@ -143,23 +143,28 @@ public class ModelManager implements Model {
     /**
      * Adds a {@code Regime} object into the regime book.
      */
-    public void addRegime(Regime regime)  {
+    @Override
+    public void addRegime(Regime regime) {
         regimeBook.addRegime(regime);
     }
 
+    @Override
     public void deleteRegime(Regime target) {
         regimeBook.removeRegime(target);
     }
 
+    @Override
     public void setRegime(Regime target, Regime editedRegime) {
         regimeBook.setRegime(target, editedRegime);
     }
 
+    @Override
     public boolean hasRegime(Regime regime) {
         requireNonNull(regime);
         return regimeBook.hasRegime(regime);
     }
 
+    @Override
     public int getRegimeIndex(Regime regime) {
         return regimeBook.getRegimeIndex(regime);
     }

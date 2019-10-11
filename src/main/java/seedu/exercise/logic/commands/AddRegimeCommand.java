@@ -14,6 +14,10 @@ import seedu.exercise.model.exercise.UniqueExerciseList;
 import seedu.exercise.model.regime.Regime;
 import seedu.exercise.model.regime.RegimeName;
 
+/**
+ *
+ * Adds a regime to the regime book.
+ */
 public class AddRegimeCommand extends AddCommand {
 
     public static final String MESSAGE_SUCCESS_NEW_REGIME = "Added new regime to regime list.";

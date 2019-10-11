@@ -119,7 +119,8 @@ public class EditCommandTest {
         showExerciseAtIndex(model, INDEX_FIRST_EXERCISE);
 
         // edit exercise in filtered list into a duplicate in exercise book
-        Exercise exerciseInList = model.getAllExerciseData().getExerciseList().get(INDEX_SECOND_EXERCISE.getZeroBased());
+        Exercise exerciseInList = model.getAllExerciseData().getExerciseList()
+                .get(INDEX_SECOND_EXERCISE.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_EXERCISE,
             new EditExerciseDescriptorBuilder(exerciseInList).build());
 

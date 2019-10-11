@@ -40,10 +40,10 @@ import seedu.exercise.logic.commands.AddExerciseCommand;
 import seedu.exercise.model.exercise.Calories;
 import seedu.exercise.model.exercise.Date;
 import seedu.exercise.model.exercise.Exercise;
+import seedu.exercise.model.exercise.Muscle;
 import seedu.exercise.model.exercise.Name;
 import seedu.exercise.model.exercise.Quantity;
 import seedu.exercise.model.exercise.Unit;
-import seedu.exercise.model.exercise.Muscle;
 import seedu.exercise.testutil.ExerciseBuilder;
 
 public class AddExerciseCommandParserTest {
@@ -102,7 +102,8 @@ public class AddExerciseCommandParserTest {
         // zero tags
         Exercise expectedExercise = new ExerciseBuilder(AEROBICS).withMuscles().build();
         assertParseSuccess(parser, CATEGORY_DESC_EXERCISE + NAME_DESC_AEROBICS + DATE_DESC_AEROBICS
-            + CALORIES_DESC_AEROBICS + QUANTITY_DESC_AEROBICS + UNIT_DESC_AEROBICS, new AddExerciseCommand(expectedExercise));
+            + CALORIES_DESC_AEROBICS + QUANTITY_DESC_AEROBICS + UNIT_DESC_AEROBICS,
+            new AddExerciseCommand(expectedExercise));
     }
 
     @Test

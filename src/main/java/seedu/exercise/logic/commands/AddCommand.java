@@ -9,6 +9,9 @@ import static seedu.exercise.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_UNIT;
 
+/**
+ * Represents an AddCommand with hidden internal logic and the ability to be executed.
+ */
 public abstract class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
     public static final String MESSAGE_USAGE_EXERCISE = "Parameters: "
@@ -39,7 +42,7 @@ public abstract class AddCommand extends Command {
             + PREFIX_INDEX + "2";
 
 
-    public final static String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds exercise to exercise list or adds regime to regime list.\n"
             + "EXERCISE: " + MESSAGE_USAGE_EXERCISE + "\n"
             + "REGIME: " + MESSAGE_USAGE_REGIME;

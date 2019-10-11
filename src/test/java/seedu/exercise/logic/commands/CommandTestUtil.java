@@ -3,12 +3,12 @@ package seedu.exercise.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CALORIES;
+import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_MUSCLE;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_UNIT;
-import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.exercise.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;

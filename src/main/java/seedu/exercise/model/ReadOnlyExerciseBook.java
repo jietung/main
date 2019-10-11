@@ -2,7 +2,6 @@ package seedu.exercise.model;
 
 import javafx.collections.ObservableList;
 import seedu.exercise.model.exercise.Exercise;
-import seedu.exercise.model.regime.Regime;
 
 /**
  * Unmodifiable view of an exercise book

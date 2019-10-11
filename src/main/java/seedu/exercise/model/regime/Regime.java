@@ -3,6 +3,9 @@ package seedu.exercise.model.regime;
 import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.exercise.UniqueExerciseList;
 
+/**
+ * Represents a Regime in the regime book.
+ */
 public class Regime {
     private final RegimeName name;
     private final UniqueExerciseList exercises;
@@ -24,6 +27,9 @@ public class Regime {
         return name;
     }
 
+    /**
+     * Returns true if both regimes have the same name.
+     */
     public boolean isSameRegime(Regime regime) {
         if (name.equals(regime.getRegimeName())) {
             return true;

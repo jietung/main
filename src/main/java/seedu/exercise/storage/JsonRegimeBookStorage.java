@@ -14,6 +14,9 @@ import seedu.exercise.commons.util.FileUtil;
 import seedu.exercise.commons.util.JsonUtil;
 import seedu.exercise.model.ReadOnlyRegimeBook;
 
+/**
+ * A class to access RegimeBook data stored as a json file on the hard disk.
+ */
 public class JsonRegimeBookStorage implements RegimeBookStorage {
     private static final Logger logger = LogsCenter.getLogger(JsonRegimeBookStorage.class);
 

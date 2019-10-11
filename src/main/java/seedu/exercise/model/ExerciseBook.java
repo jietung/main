@@ -7,8 +7,6 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.exercise.UniqueExerciseList;
-import seedu.exercise.model.regime.Regime;
-import seedu.exercise.model.regime.UniqueRegimeList;
 
 /**
  * Wraps all data at the exercise-book level

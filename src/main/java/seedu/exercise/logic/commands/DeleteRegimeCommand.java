@@ -13,6 +13,9 @@ import seedu.exercise.model.exercise.UniqueExerciseList;
 import seedu.exercise.model.regime.Regime;
 import seedu.exercise.model.regime.RegimeName;
 
+/**
+ * Deletes a regime identified using it's name or deletes exercises in regime.
+ */
 public class DeleteRegimeCommand extends DeleteCommand {
 
     public static final String MESSAGE_DELETE_REGIME_SUCCESS = "Deleted Regime: %1$s";

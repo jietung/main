@@ -11,6 +11,16 @@ import javafx.collections.ObservableList;
 import seedu.exercise.model.regime.exceptions.DuplicateRegimeException;
 import seedu.exercise.model.regime.exceptions.RegimeNotFoundException;
 
+/**
+ * A list of regimes that enforces uniqueness between its elements and does not allow nulls.
+ * A regime is considered unique by comparing using {@code Regime#isSameRegime(Regime)}.
+ * As such, adding and updating of regimes uses Regime#isSameRegime(Regime) for equality so as to ensure that
+ * the regime being added or updated is unique in terms of identity in the UniqueRegimeList.
+ *
+ * Supports a minimal set of list operations.
+ *
+ * @see Regime#isSameRegime(Regime)
+ */
 public class UniqueRegimeList implements Iterable<Regime> {
 
     private final ObservableList<Regime> internalList = FXCollections.observableArrayList();

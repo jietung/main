@@ -23,7 +23,8 @@ public class StorageManager implements Storage {
     private UserPrefsStorage userPrefsStorage;
 
 
-    public StorageManager(ExerciseBookStorage exerciseBookStorage, RegimeBookStorage regimeBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(ExerciseBookStorage exerciseBookStorage,
+                          RegimeBookStorage regimeBookStorage, UserPrefsStorage userPrefsStorage) {
         super();
         this.exerciseBookStorage = exerciseBookStorage;
         this.regimeBookStorage = regimeBookStorage;
