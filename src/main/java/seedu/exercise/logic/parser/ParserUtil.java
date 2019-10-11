@@ -16,6 +16,7 @@ import seedu.exercise.model.exercise.Name;
 import seedu.exercise.model.exercise.Quantity;
 import seedu.exercise.model.exercise.Unit;
 import seedu.exercise.model.exercise.Muscle;
+import seedu.exercise.model.regime.RegimeName;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -60,6 +61,21 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code RegimeName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static RegimeName parseRegimeName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!RegimeName.isValidRegimeName(trimmedName)) {
+            throw new ParseException(RegimeName.MESSAGE_CONSTRAINTS);
+        }
+        return new RegimeName(trimmedName);
     }
 
     /**

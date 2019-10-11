@@ -68,12 +68,11 @@ public class AddCommandParser implements Parser<AddCommand> {
             }
 
             if (category.equals("regime")) {
-                RegimeName regimeName;
-                if (argMultimap.getValue(PREFIX_NAME).isEmpty()) {
-                    regimeName = new RegimeName("");
-                } else {
-                    regimeName = new RegimeName(argMultimap.getValue(PREFIX_NAME).get());
+                if (!arePrefixesPresent(argMultimap, PREFIX_NAME) || !argMultimap.getPreamble().isEmpty()){
+                    throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddRegimeCommand.MESSAGE_USAGE));
                 }
+
+                RegimeName regimeName = ParserUtil.parseRegimeName(argMultimap.getValue(PREFIX_NAME).get());
                 List<Index> indexes = ParserUtil.parseIndexes(argMultimap.getAllValues(PREFIX_INDEX));
 
                 return new AddRegimeCommand(indexes, regimeName);
