@@ -16,7 +16,7 @@ import seedu.exercise.model.exercise.Exercise;
 import seedu.exercise.model.regime.Regime;
 import seedu.exercise.model.regime.RegimeName;
 
-public class AddRCommand extends AddCommand {
+public class AddRegimeCommand extends AddCommand {
 
     public static final String COMMAND_WORD = "add";
 
@@ -34,7 +34,7 @@ public class AddRCommand extends AddCommand {
     private List<Index> toAddIndexes;
     private RegimeName name;
 
-    public AddRCommand(List<Index> indexes, RegimeName name) {
+    public AddRegimeCommand(List<Index> indexes, RegimeName name) {
         requireAllNonNull(indexes, name);
         toAddIndexes = indexes;
         this.name = name;
@@ -66,7 +66,7 @@ public class AddRCommand extends AddCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddRCommand // instanceof handles nulls
-                && toAddIndexes.equals(((AddRCommand) other).toAddIndexes));
+                || (other instanceof AddRegimeCommand // instanceof handles nulls
+                && toAddIndexes.equals(((AddRegimeCommand) other).toAddIndexes));
     }
 }

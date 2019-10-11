@@ -15,7 +15,7 @@ import seedu.exercise.model.exercise.Exercise;
 /**
  * Deletes a exercise identified using it's displayed index from the exercise book.
  */
-public class DeleteECommand extends DeleteCommand {
+public class DeleteExerciseCommand extends DeleteCommand {
 
     public static final String COMMAND_WORD = "delete";
 
@@ -28,7 +28,7 @@ public class DeleteECommand extends DeleteCommand {
 
     private final Index targetIndex;
 
-    public DeleteECommand(Index targetIndex) {
+    public DeleteExerciseCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -49,7 +49,7 @@ public class DeleteECommand extends DeleteCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteECommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteECommand) other).targetIndex)); // state check
+                || (other instanceof DeleteExerciseCommand // instanceof handles nulls
+                && targetIndex.equals(((DeleteExerciseCommand) other).targetIndex)); // state check
     }
 }

@@ -15,9 +15,9 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.exercise.logic.commands.AddECommand;
+import seedu.exercise.logic.commands.AddExerciseCommand;
 import seedu.exercise.logic.commands.ClearCommand;
-import seedu.exercise.logic.commands.DeleteECommand;
+import seedu.exercise.logic.commands.DeleteExerciseCommand;
 import seedu.exercise.logic.commands.EditCommand;
 import seedu.exercise.logic.commands.EditCommand.EditExerciseDescriptor;
 import seedu.exercise.logic.commands.ExitCommand;
@@ -38,8 +38,8 @@ public class ExerciseBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Exercise exercise = new ExerciseBuilder().build();
-        AddECommand command = (AddECommand) parser.parseCommand(ExerciseUtil.getAddCommand(exercise));
-        assertEquals(new AddECommand(exercise), command);
+        AddExerciseCommand command = (AddExerciseCommand) parser.parseCommand(ExerciseUtil.getAddCommand(exercise));
+        assertEquals(new AddExerciseCommand(exercise), command);
     }
 
     @Test
@@ -50,10 +50,10 @@ public class ExerciseBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteECommand command = (DeleteECommand) parser.parseCommand(
-                DeleteECommand.COMMAND_WORD + " " + CATEGORY_DESC_EXERCISE + " "
+        DeleteExerciseCommand command = (DeleteExerciseCommand) parser.parseCommand(
+                DeleteExerciseCommand.COMMAND_WORD + " " + CATEGORY_DESC_EXERCISE + " "
                         + PREFIX_INDEX + INDEX_FIRST_EXERCISE.getOneBased());
-        assertEquals(new DeleteECommand(INDEX_FIRST_EXERCISE), command);
+        assertEquals(new DeleteExerciseCommand(INDEX_FIRST_EXERCISE), command);
     }
 
     @Test

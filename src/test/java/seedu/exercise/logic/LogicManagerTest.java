@@ -19,7 +19,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import seedu.exercise.logic.commands.AddECommand;
+import seedu.exercise.logic.commands.AddExerciseCommand;
 import seedu.exercise.logic.commands.CommandResult;
 import seedu.exercise.logic.commands.ListCommand;
 import seedu.exercise.logic.commands.exceptions.CommandException;
@@ -87,7 +87,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddECommand.COMMAND_WORD + CATEGORY_DESC_EXERCISE + NAME_DESC_AEROBICS + DATE_DESC_AEROBICS
+        String addCommand = AddExerciseCommand.COMMAND_WORD + CATEGORY_DESC_EXERCISE + NAME_DESC_AEROBICS + DATE_DESC_AEROBICS
             + CALORIES_DESC_AEROBICS + QUANTITY_DESC_AEROBICS + UNIT_DESC_AEROBICS;
         Exercise expectedExercise = new ExerciseBuilder(AEROBICS).withMuscles().build();
         ModelManager expectedModel = new ModelManager();

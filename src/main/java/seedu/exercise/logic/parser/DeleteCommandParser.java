@@ -8,18 +8,18 @@ import java.util.stream.Stream;
 
 import seedu.exercise.commons.core.index.Index;
 import seedu.exercise.logic.commands.DeleteCommand;
-import seedu.exercise.logic.commands.DeleteECommand;
-import seedu.exercise.logic.commands.DeleteRCommand;
+import seedu.exercise.logic.commands.DeleteExerciseCommand;
+import seedu.exercise.logic.commands.DeleteRegimeCommand;
 import seedu.exercise.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new DeleteECommand object
+ * Parses input arguments and creates a new DeleteExerciseCommand object
  */
 public class DeleteCommandParser implements Parser<DeleteCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteECommand
-     * and returns a DeleteECommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteExerciseCommand
+     * and returns a DeleteExerciseCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
@@ -27,7 +27,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_CATEGORY, PREFIX_INDEX )
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw  new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteECommand.MESSAGE_USAGE));
+            throw  new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteExerciseCommand.MESSAGE_USAGE));
         }
 
         String category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
@@ -35,18 +35,18 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         if (category.equals("exercise")) {
             try {
                 Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
-                return new DeleteECommand(index);
+                return new DeleteExerciseCommand(index);
             } catch (ParseException pe) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteECommand.MESSAGE_USAGE), pe);
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteExerciseCommand.MESSAGE_USAGE), pe);
             }
         } else {
             try {
                 Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
-                return new DeleteRCommand(index);
+                return new DeleteRegimeCommand(index);
             } catch (ParseException pe) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteRCommand.MESSAGE_USAGE), pe);
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteRegimeCommand.MESSAGE_USAGE), pe);
             }
         }
     }

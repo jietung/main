@@ -10,20 +10,14 @@ import static seedu.exercise.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_UNIT;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import seedu.exercise.commons.core.Messages;
-import seedu.exercise.commons.core.index.Index;
 import seedu.exercise.logic.commands.exceptions.CommandException;
 import seedu.exercise.model.Model;
 import seedu.exercise.model.exercise.Exercise;
-import seedu.exercise.model.regime.Regime;
 
 /**
  * Adds an exercise to the exercise book.
  */
-public class AddECommand extends AddCommand {
+public class AddExerciseCommand extends AddCommand {
 
     public static final String COMMAND_WORD = "add";
 
@@ -51,9 +45,9 @@ public class AddECommand extends AddCommand {
     private Exercise toAdd;
 
     /**
-     * Creates an AddECommand to add the specified {@code Exercise}
+     * Creates an AddExerciseCommand to add the specified {@code Exercise}
      */
-    public AddECommand(Exercise exercise) {
+    public AddExerciseCommand(Exercise exercise) {
         requireNonNull(exercise);
         toAdd = exercise;
     }
@@ -72,7 +66,7 @@ public class AddECommand extends AddCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddECommand // instanceof handles nulls
-                && toAdd.equals(((AddECommand) other).toAdd));
+                || (other instanceof AddExerciseCommand // instanceof handles nulls
+                && toAdd.equals(((AddExerciseCommand) other).toAdd));
     }
 }

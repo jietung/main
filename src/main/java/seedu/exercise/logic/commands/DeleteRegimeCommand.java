@@ -12,7 +12,7 @@ import seedu.exercise.logic.commands.exceptions.CommandException;
 import seedu.exercise.model.Model;
 import seedu.exercise.model.regime.Regime;
 
-public class DeleteRCommand extends DeleteCommand {
+public class DeleteRegimeCommand extends DeleteCommand {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -24,7 +24,7 @@ public class DeleteRCommand extends DeleteCommand {
 
     private final Index targetIndex;
 
-    public DeleteRCommand(Index targetIndex) {
+    public DeleteRegimeCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -45,7 +45,7 @@ public class DeleteRCommand extends DeleteCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteRCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteRCommand) other).targetIndex)); // state check
+                || (other instanceof DeleteRegimeCommand // instanceof handles nulls
+                && targetIndex.equals(((DeleteRegimeCommand) other).targetIndex)); // state check
     }
 }
