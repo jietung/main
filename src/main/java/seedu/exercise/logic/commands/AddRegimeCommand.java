@@ -2,6 +2,9 @@ package seedu.exercise.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.exercise.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.exercise.logic.parser.CliSyntax.PREFIX_INDEX;
+import static seedu.exercise.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.List;
 
@@ -20,10 +23,21 @@ import seedu.exercise.model.regime.RegimeName;
  */
 public class AddRegimeCommand extends AddCommand {
 
+    public static final String MESSAGE_USAGE_REGIME = "Parameters: "
+            + PREFIX_CATEGORY + "CATEGORY "
+            + PREFIX_NAME + "REGIME NAME "
+            + PREFIX_INDEX + "INDEX\n"
+            + "\t\tExample: " + COMMAND_WORD + " "
+            + PREFIX_CATEGORY + "regime "
+            + PREFIX_NAME + "power set"
+            + PREFIX_INDEX + "1 "
+            + PREFIX_INDEX + "2";
+
     public static final String MESSAGE_SUCCESS_NEW_REGIME = "Added new regime to regime list.";
     public static final String MESSAGE_SUCCESS_ADD_EXERCISE_TO_REGIME = "Added exercises to regime.";
     public static final String MESSAGE_DUPLICATE_EXERCISE_IN_REGIME = "Exercise already in regime.";
     public static final String MESSAGE_NO_EXERCISES_ADDED = "No index provided, nothing changes.";
+    public static final String MESSAGE_DUPLICATE_INDEX_WHEN_CREATING_REGIME = "There is duplicate index.";
 
     private List<Index> toAddIndexes;
     private RegimeName name;
@@ -51,6 +65,9 @@ public class AddRegimeCommand extends AddCommand {
         Regime regime = new Regime(name, new UniqueExerciseList());
         if (!model.hasRegime(regime)) {
             for (Index index : toAddIndexes) {
+                if (regime.getExercises().contains(lastShownList.get(index.getZeroBased()))) {
+                    throw new CommandException(MESSAGE_DUPLICATE_INDEX_WHEN_CREATING_REGIME);
+                }
                 regime.addExercise(lastShownList.get(index.getZeroBased()));
             }
 

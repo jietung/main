@@ -41,7 +41,7 @@ public interface Logic {
      */
     ReadOnlyRegimeBook getRegimeBook();
 
-    ObservableList<Regime> getRegimeList();
+    ObservableList<Regime> getFilteredRegimeList();
 
     /**
      * Returns the user prefs' exercise book file path.

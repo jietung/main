@@ -42,10 +42,13 @@ public class UniqueRegimeList implements Iterable<Regime> {
 
     /**
      * Adds an regime to the list.
-     * The person must not already exist in the list.
+     * The regime must not already exist in the list.
      */
     public void add(Regime toAdd) {
         requireNonNull(toAdd);
+        if (contains(toAdd)) {
+            throw new DuplicateRegimeException();
+        }
         internalList.add(toAdd);
     }
 

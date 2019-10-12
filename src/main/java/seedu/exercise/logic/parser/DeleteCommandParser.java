@@ -21,8 +21,8 @@ import seedu.exercise.model.regime.RegimeName;
 public class DeleteCommandParser implements Parser<DeleteCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteExerciseCommand
-     * and returns a DeleteExerciseCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteCommand
+     * and returns a DeleteCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
@@ -37,31 +37,48 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         String category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
 
         if (category.equals("exercise")) {
-            if (!arePrefixesPresent(argMultimap, PREFIX_INDEX)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        DeleteExerciseCommand.MESSAGE_USAGE));
-            }
+            return parseExercise(argMultimap);
+        }
 
-            Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
-            return new DeleteExerciseCommand(index);
+        if (category.equals("regime")) {
+            return parseRegime(argMultimap);
+        }
 
-        } else { //regime
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME)) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        DeleteRegimeCommand.MESSAGE_USAGE));
-            }
+        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
 
-            RegimeName name = ParserUtil.parseRegimeName(argMultimap.getValue(PREFIX_NAME).get());
+    /**
+     * Parses arguments and returns DeleteExerciseCommand for execution
+     */
+    private DeleteExerciseCommand parseExercise(ArgumentMultimap argMultimap) throws ParseException {
+        if (!arePrefixesPresent(argMultimap, PREFIX_INDEX)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteExerciseCommand.MESSAGE_USAGE));
+        }
 
-            // index present, delete exercise in regime
-            if (arePrefixesPresent(argMultimap, PREFIX_INDEX)) {
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
+        return new DeleteExerciseCommand(index);
+    }
 
-                List<Index> indexes = ParserUtil.parseIndexes(argMultimap.getAllValues(PREFIX_INDEX));
-                return new DeleteRegimeCommand(name, indexes);
+    /**
+     * Parses arguments and returns DeleteRegimeCommand for execution
+     */
+    private DeleteRegimeCommand parseRegime(ArgumentMultimap argMultimap) throws ParseException {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteRegimeCommand.MESSAGE_USAGE));
+        }
 
-            } else { //index not present delete regime
-                return new DeleteRegimeCommand(name, null);
-            }
+        RegimeName name = ParserUtil.parseRegimeName(argMultimap.getValue(PREFIX_NAME).get());
+
+        // index present, delete exercise in regime
+        if (arePrefixesPresent(argMultimap, PREFIX_INDEX)) {
+
+            List<Index> indexes = ParserUtil.parseIndexes(argMultimap.getAllValues(PREFIX_INDEX));
+            return new DeleteRegimeCommand(name, indexes);
+
+        } else { //index not present delete regime
+            return new DeleteRegimeCommand(name, null);
         }
     }
 

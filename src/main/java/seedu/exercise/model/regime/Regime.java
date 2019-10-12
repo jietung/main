@@ -31,10 +31,7 @@ public class Regime {
      * Returns true if both regimes have the same name.
      */
     public boolean isSameRegime(Regime regime) {
-        if (name.equals(regime.getRegimeName())) {
-            return true;
-        }
-        return false;
+        return name.equals(regime.getRegimeName());
     }
 
     public UniqueExerciseList getExercises() {

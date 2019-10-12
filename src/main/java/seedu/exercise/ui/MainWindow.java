@@ -32,7 +32,6 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private ExerciseListPanel filteredListPanel;
-    private ExerciseListPanel sortedListPanel;
     private RegimeListPanel regimeListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -48,13 +47,10 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem resolveWindowMenuItem;
 
     @FXML
-    private StackPane filteredListPanelPlaceholder;
+    private StackPane exerciseListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
-
-    @FXML
-    private StackPane sortedListPanelPlaceholder;
 
     @FXML
     private StackPane regimeListPanelPlaceholder;
@@ -125,9 +121,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         filteredListPanel = new ExerciseListPanel(logic.getFilteredExerciseList());
-        filteredListPanelPlaceholder.getChildren().add(filteredListPanel.getRoot());
+        exerciseListPanelPlaceholder.getChildren().add(filteredListPanel.getRoot());
 
-        regimeListPanel = new RegimeListPanel(logic.getRegimeList());
+        regimeListPanel = new RegimeListPanel(logic.getFilteredRegimeList());
         regimeListPanelPlaceholder.getChildren().add(regimeListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();

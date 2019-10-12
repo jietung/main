@@ -75,7 +75,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Regime> getRegimeList() {
+    public ObservableList<Regime> getFilteredRegimeList() {
         return model.getFilteredRegimeList();
     }
 
