@@ -262,6 +262,22 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g user prefs file location, logging level) through the configuration file (default: `config.json`).
 
+=== Statistics
+
+==== Implementation
+Statistics of exercises will be displayed in charts. Supported chart types are Pie Chart, Line Chart and Bar Chart.
+Given below is an example usage scenario of statistics feature.
+
+Step 1: User enters a `stats` command to see statistics of exercises.
+
+Step 2: The `stats` command calls Model#getExerciseBookData to get data of all exercises and pass to `Statistic`.
+
+Step 3: `Statistic` will process data and generate charts.
+
+Shown below us the sequence diagram for when a valid `stats` command is issued:
+
+image::Statistic.png[]
+
 == Documentation
 
 Refer to the guide <<Documentation#, here>>.
