@@ -274,7 +274,7 @@ Step 2: The `stats` command calls Model#getExerciseBookData to get data of all e
 
 Step 3: `Statistic` will process data and generate charts.
 
-Shown below us the sequence diagram for when a valid `stats` command is issued:
+Shown below us the sequence diagram when user enters a valid `stats` command:
 
 image::Statistic.png[]
 
