@@ -1,6 +1,7 @@
 package seedu.exercise.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.exercise.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.exercise.model.property.PropertyManager.getCustomProperties;
 
 import java.util.ArrayList;
@@ -129,6 +130,22 @@ public class ParserUtil {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
         return new Date(trimmedDate);
+    }
+
+    /**
+     * Parses a {@code String endDate} into an {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code endDate} is invalid.
+     */
+    public static Date parseEndDate(Date startDate, String endDate) throws ParseException {
+        requireAllNonNull(startDate, endDate);
+        String trimmedEndDate = endDate.trim();
+        parseDate(trimmedEndDate);
+        if (!Date.isEndDateAfterStartDate(startDate.toString(), trimmedEndDate)) {
+            throw new ParseException("End date must be before ");
+        }
+        return new Date(trimmedEndDate);
     }
 
     /**
@@ -336,4 +353,35 @@ public class ParserUtil {
         }
         return trimmedSuggestType;
     }
-}
+
+    /**
+     * Parses a {@code String chart} into a String.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code chart} is invalid
+     */
+    public static String parseChart(String chart) throws ParseException {
+        requireNonNull(chart);
+        String trimmedCategory = chart.trim();
+        if (!trimmedCategory.equals("piechart") && !trimmedCategory.equals("linechart")
+            && !trimmedCategory.equals("barchart")) {
+            throw new ParseException("Category can only be \'piechart\' or \'linechart\' or \'barchart\'");
+        }
+        return trimmedCategory;
+    }
+
+    /**
+     * Parses a {@code String statisticCategory} into a String.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code statisticCategory} is invalid
+     */
+    public static String parseStatisticCategory(String statisticCategory) throws ParseException {
+        requireNonNull(statisticCategory);
+        String trimmedCategory = statisticCategory.trim();
+        if (!trimmedCategory.equals("exercise") && !trimmedCategory.equals("calories")) {
+            throw new ParseException("Category can only be \'exercise\' or \'calories\'");
+        }
+        return trimmedCategory;
+    }
+ }
