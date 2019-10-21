@@ -1,11 +1,14 @@
 package seedu.exercise.model.property;
 
+import static java.time.temporal.ChronoUnit.DAYS;
 import static java.util.Objects.requireNonNull;
 import static seedu.exercise.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 /**
  * Represents an Exercise's date in ExerHealth.
@@ -39,6 +42,87 @@ public class Date {
         } catch (DateTimeParseException e) {
             return false;
         }
+    }
+
+    /**
+     * Returns true if given end date is before given start date.
+     */
+    public static boolean isEndDateAfterStartDate(String startDate, String endDate) {
+        try {
+            LocalDate sDate = LocalDate.parse(startDate, formatter);
+            LocalDate eDate = LocalDate.parse(endDate, formatter);
+            if (eDate.compareTo(sDate) < 0) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Returns true if given date is between start date and end date.
+     */
+    public static boolean isBetweenStartAndEndDate(Date date, Date startDate, Date endDate) {
+        LocalDate sDate;
+        LocalDate eDate;
+        LocalDate d;
+
+        try {
+            d = LocalDate.parse(date.toString(), formatter);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+
+        if (startDate == null && endDate == null) {
+            eDate = LocalDate.now(ZoneId.of("Asia/Singapore"));
+            sDate  = eDate.minusDays(7);
+        } else {
+            try {
+                sDate = LocalDate.parse(startDate.toString(), formatter);
+                eDate = LocalDate.parse(endDate.toString(), formatter);
+            } catch (DateTimeParseException e) {
+                return false;
+            }
+        }
+
+        if (d.compareTo(sDate) >= 0 && d.compareTo(eDate) <= 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns a list of dates between start date and end date.
+     */
+    public static ArrayList<Date> getListOfDates(Date startDate, Date endDate) {
+        int days;
+        LocalDate sDate;
+        LocalDate eDate;
+        if (startDate == null && endDate == null) {
+            days = 7;
+            eDate = LocalDate.now(ZoneId.of("Asia/Singapore"));
+            sDate  = eDate.minusDays(7);
+        } else {
+            try {
+                sDate = LocalDate.parse(startDate.toString(), formatter);
+                eDate = LocalDate.parse(endDate.toString(), formatter);
+            } catch (DateTimeParseException e) {
+                return new ArrayList<>();
+            }
+            days = (int) DAYS.between(sDate, eDate);
+        }
+
+        ArrayList<Date> dates = new ArrayList<>();
+        for (int i = 0; i < days; i++) {
+            LocalDate temp = sDate.plusDays(i);
+            Date date = new Date(temp.format(formatter));
+            dates.add(date);
+        }
+
+        return dates;
     }
 
     @Override
