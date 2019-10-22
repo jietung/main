@@ -314,6 +314,11 @@ Certain properties of the application can be controlled (e.g user prefs file loc
 
 ==== Implementation
 Statistics of exercises will be displayed in charts. Supported chart types are Pie Chart, Line Chart and Bar Chart.
+StatsFactory will create Statistic using given parameters.
+Figure below shows the class diagram of statistics:
+
+image::StatisticClassDiagram.png[]
+
 Given below is an example usage scenario of statistics feature.
 
 Step 1: User enters a `stats` command to see statistics of exercises.
