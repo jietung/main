@@ -16,13 +16,15 @@ activate Logic LOGIC_COLOR
 
 Logic -[LOGIC_COLOR]> Model: getExerciseBook()
 activate Model MODEL_COLOR
-return exerciseBook
 
-Logic -[LOGIC_COLOR]> Statistic: generateData(exerciseBook)
+Model -[MODEL_COLOR]> Statistic: generateStatistic(exerciseBook)
 activate Statistic #ABC
-return data
+return statistic
 
-Logic --[LOGIC_COLOR]> Ui
+Model -[MODEL_COLOR]> Logic: statistic
+deactivate Model
+
+Logic --[LOGIC_COLOR]> Ui: statistic
 deactivate Logic
 
 Ui --[UI_COLOR]> User
