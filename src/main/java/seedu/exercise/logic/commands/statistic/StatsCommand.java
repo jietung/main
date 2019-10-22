@@ -1,4 +1,4 @@
-package seedu.exercise.logic.commands;
+package seedu.exercise.logic.commands.statistic;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CATEGORY;
@@ -6,7 +6,8 @@ import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CHART;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_ENDDATE;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_STARTDATE;
 
-import javafx.scene.chart.Chart;
+import seedu.exercise.logic.commands.Command;
+import seedu.exercise.logic.commands.CommandResult;
 import seedu.exercise.logic.commands.exceptions.CommandException;
 import seedu.exercise.model.Model;
 import seedu.exercise.model.ReadOnlyResourceBook;
@@ -45,8 +46,8 @@ public class StatsCommand extends Command {
         requireNonNull(model);
         ReadOnlyResourceBook<Exercise> exercises = model.getExerciseBookData();
         StatsFactory statsFactory = new StatsFactory(exercises, chart, category, startDate, endDate);
-        Chart chart = statsFactory.generateChart();
-
+        Statistic statistic = statsFactory.generateStatistic();
+        model.setStatistic(statistic);
         return new CommandResult("Chart displayed");
     }
 

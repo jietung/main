@@ -8,7 +8,7 @@ import static seedu.exercise.logic.parser.CliSyntax.PREFIX_STARTDATE;
 
 import java.util.stream.Stream;
 
-import seedu.exercise.logic.commands.StatsCommand;
+import seedu.exercise.logic.commands.statistic.StatsCommand;
 import seedu.exercise.logic.parser.exceptions.ParseException;
 import seedu.exercise.model.property.Date;
 

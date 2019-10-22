@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.exercise.commons.core.GuiSettings;
 import seedu.exercise.commons.core.LogsCenter;
+import seedu.exercise.logic.commands.statistic.Statistic;
 import seedu.exercise.logic.parser.Prefix;
 import seedu.exercise.model.property.CustomProperty;
 import seedu.exercise.model.property.PropertyManager;
@@ -37,6 +38,7 @@ public class ModelManager implements Model {
     private final FilteredList<Exercise> suggestedExercises;
     private final FilteredList<Regime> filteredRegimes;
     private final FilteredList<Schedule> filteredSchedules;
+    private Statistic statistic;
 
     /**
      * Initializes a ModelManager with the given exerciseBook and userPrefs.
@@ -303,6 +305,16 @@ public class ModelManager implements Model {
     @Override
     public void updateSuggestedExerciseList(Predicate<Exercise> predicate) {
         suggestedExercises.setPredicate(predicate);
+    }
+
+    @Override
+    public void setStatistic(Statistic statistic) {
+        this.statistic = statistic;
+    }
+
+    @Override
+    public Statistic getStatistic() {
+        return statistic;
     }
 
     @Override

@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.exercise.commons.core.GuiSettings;
+import seedu.exercise.logic.commands.statistic.Statistic;
 import seedu.exercise.logic.parser.Prefix;
 import seedu.exercise.model.property.CustomProperty;
 import seedu.exercise.model.property.PropertyManager;
@@ -236,4 +237,8 @@ public interface Model {
      * Returns the data of all exercises in the database
      */
     ReadOnlyResourceBook<Exercise> getDatabaseBook();
+
+    void setStatistic(Statistic statistic);
+
+    Statistic getStatistic();
 }

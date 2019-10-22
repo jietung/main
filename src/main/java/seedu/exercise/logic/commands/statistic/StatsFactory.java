@@ -1,16 +1,9 @@
-package seedu.exercise.logic.commands;
+package seedu.exercise.logic.commands.statistic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javafx.collections.ObservableList;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.Chart;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.PieChart;
-import javafx.scene.chart.XYChart;
 import seedu.exercise.model.ReadOnlyResourceBook;
 import seedu.exercise.model.property.Date;
 import seedu.exercise.model.property.Name;
@@ -34,17 +27,20 @@ public class StatsFactory {
         this.endDate = endDate;
     }
 
-    public Chart generateChart() {
+    public Statistic generateStatistic() {
         HashMap<Name, Double> data;
         if (chart.equals("linechart")) {
             ArrayList<Date> dates = Date.getListOfDates(startDate, endDate);
             ArrayList<Double> values;
+
             if (category.equals("exercies")) {
                 values = exerciseQuantityByDate(getFilteredExercise(), dates);
             } else {
                 values = caloriesByDate(getFilteredExercise(), dates);
             }
-            return generateLineChart(dates, values);
+
+            return new Statistic(category, chart, datesToString(dates), values);
+
         } else {
             if (category.equals("exercise")) {
                 data = getTotalExerciseQuantity();
@@ -56,62 +52,11 @@ public class StatsFactory {
             ArrayList<Double> values = hashMapDoubleToList(data, names);
 
             if (chart.equals("piechart")) {
-                return generatePieChart(names, values);
+                return new Statistic(category, chart, namesToString(names), values);
             } else { //barchart
-                return generateBarChart(names, values);
+                return new Statistic(category, chart, namesToString(names), values);
             }
         }
-    }
-
-    private BarChart generateBarChart(ArrayList<Name> names, ArrayList<Double> values) {
-        CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setLabel(category);
-
-        NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("quantity");
-
-        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
-
-        int size = names.size();
-        for (int i = 0; i < size; i++) {
-            series.getData().add(new XYChart.Data<>(names.get(i).toString(), values.get(i)));
-        }
-
-        barChart.getData().add(series);
-
-        return barChart;
-    }
-
-    private LineChart generateLineChart(ArrayList<Date> dates, ArrayList<Double> values) {
-        CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setLabel("Date");
-
-        NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel(category);
-
-        LineChart<String, Number> lineChart = new LineChart<>(xAxis, yAxis);
-
-        XYChart.Series series = new XYChart.Series();
-
-        int size = dates.size();
-        for (int i = 0; i < size; i++) {
-            series.getData().add(new XYChart.Data<>(dates.get(i).toString(), values.get(i)));
-        }
-
-        lineChart.getData().add(series);
-
-        return lineChart;
-    }
-
-    private PieChart generatePieChart(ArrayList<Name> names, ArrayList<Double> values) {
-        PieChart pieChart = new PieChart();
-        int size = names.size();
-        for (int i = 0; i < size; i++) {
-            PieChart.Data slice = new PieChart.Data(names.get(i).toString(), values.get(i));
-            pieChart.getData().add(slice);
-        }
-        return pieChart;
     }
 
     private HashMap<Name, Double> getTotalExerciseQuantity() {
@@ -180,12 +125,33 @@ public class StatsFactory {
         return values;
     }
 
+    private ArrayList<String> namesToString(ArrayList<Name> names) {
+        ArrayList<String> list = new ArrayList<>();
+        for (Name n : names) {
+            list.add(n.toString());
+        }
+        return list;
+    }
+
+    private ArrayList<String> datesToString(ArrayList<Date> dates) {
+        ArrayList<String> list = new ArrayList<>();
+        for (Date d : dates) {
+            list.add(d.toString());
+        }
+        return list;
+    }
+
+
+
     private ArrayList<Double> exerciseQuantityByDate(ArrayList<Exercise> exercises, ArrayList<Date> dates) {
         ArrayList<Double> values = new ArrayList<>();
+        for (int i = 0; i< dates.size(); i++) {
+            values.add(0.0);
+        }
         for (Exercise e : exercises) {
             Date date = e.getDate();
             int index = dates.indexOf(date);
-            double quantity = Double.parseDouble(e.getQuantity().toString()) + values.get(index);
+            double quantity = values.get(index) + 1;
             values.set(index, quantity);
         }
 
@@ -194,6 +160,9 @@ public class StatsFactory {
 
     private ArrayList<Double> caloriesByDate(ArrayList<Exercise> exercises, ArrayList<Date> dates) {
         ArrayList<Double> values = new ArrayList<>();
+        for (int i = 0; i< dates.size(); i++) {
+            values.add(0.0);
+        }
         for (Exercise e : exercises) {
             Date date = e.getDate();
             int index = dates.indexOf(date);

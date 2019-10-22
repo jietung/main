@@ -112,7 +112,7 @@ public class Date {
             } catch (DateTimeParseException e) {
                 return new ArrayList<>();
             }
-            days = (int) DAYS.between(sDate, eDate);
+            days = (int) DAYS.between(sDate, eDate) + 1;
         }
 
         ArrayList<Date> dates = new ArrayList<>();
