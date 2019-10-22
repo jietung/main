@@ -319,6 +319,10 @@ Figure below shows the class diagram of statistics:
 
 image::StatisticClassDiagram.png[]
 
+Figure below shows the activity diagram when user enter a `stats` command:
+
+image::StatisticActivityDiagram.png[]
+
 Given below is an example usage scenario of statistics feature.
 
 Step 1: User enters a `stats` command to see statistics of exercises.
