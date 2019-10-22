@@ -5,13 +5,13 @@ import java.util.ArrayList;
 public class Statistic {
     private String category;
     private String chart;
-    private ArrayList<String> names;
+    private ArrayList<String> properties;
     private ArrayList<Double> values;
 
-    public Statistic(String category, String chart, ArrayList<String> names, ArrayList<Double> values) {
+    public Statistic(String category, String chart, ArrayList<String> properties, ArrayList<Double> values) {
         this.category = category;
         this.chart = chart;
-        this.names = names;
+        this.properties = properties;
         this.values = values;
     }
 
@@ -23,8 +23,8 @@ public class Statistic {
         return chart;
     }
 
-    public ArrayList<String> getNames() {
-        return names;
+    public ArrayList<String> getProperties() {
+        return properties;
     }
 
     public ArrayList<Double> getValues() {

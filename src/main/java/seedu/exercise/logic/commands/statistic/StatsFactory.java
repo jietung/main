@@ -51,6 +51,8 @@ public class StatsFactory {
             ArrayList<Name> names = hashMapNameToList(data);
             ArrayList<Double> values = hashMapDoubleToList(data, names);
 
+            String quantity = "quantity";
+
             if (chart.equals("piechart")) {
                 return new Statistic(category, chart, namesToString(names), values);
             } else { //barchart
@@ -171,5 +173,13 @@ public class StatsFactory {
         }
 
         return values;
+    }
+
+    public Statistic getDefaultStatistic() {
+        ArrayList<Exercise> filteredExercise = getFilteredExercise();
+        ArrayList<Date> dates = Date.getListOfDates(null, null);
+        ArrayList<String> properties = datesToString(dates);
+        ArrayList<Double> values = caloriesByDate(filteredExercise, dates);
+        return new Statistic("calories", "linechart", properties, values);
     }
 }

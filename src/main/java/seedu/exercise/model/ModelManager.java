@@ -14,6 +14,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.exercise.commons.core.GuiSettings;
 import seedu.exercise.commons.core.LogsCenter;
 import seedu.exercise.logic.commands.statistic.Statistic;
+import seedu.exercise.logic.commands.statistic.StatsFactory;
 import seedu.exercise.logic.parser.Prefix;
 import seedu.exercise.model.property.CustomProperty;
 import seedu.exercise.model.property.PropertyManager;
@@ -60,6 +61,8 @@ public class ModelManager implements Model {
         suggestedExercises = new FilteredList<>(this.databaseBook.getResourceList());
         filteredRegimes = new FilteredList<>(this.regimeBook.getResourceList());
         filteredSchedules = new FilteredList<>(this.scheduleBook.getResourceList());
+        StatsFactory statsFactory = new StatsFactory(exerciseBook, "linechart", "calories", null ,null);
+        this.statistic = statsFactory.getDefaultStatistic();
 
         this.propertyManager = propertyManager;
         this.propertyManager.updatePropertyPrefixes();
