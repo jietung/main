@@ -6,8 +6,6 @@ import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CHART;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_ENDDATE;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_STARTDATE;
 
-import java.util.stream.Stream;
-
 import seedu.exercise.logic.commands.statistic.StatsCommand;
 import seedu.exercise.logic.parser.exceptions.ParseException;
 import seedu.exercise.model.property.Date;
@@ -17,6 +15,12 @@ import seedu.exercise.model.property.Date;
  */
 public class StatsCommandParser implements Parser<StatsCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the StatsCommand
+     * and returns a StatsCommand object for execution.
+     *
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public StatsCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_CATEGORY, PREFIX_CHART,
             PREFIX_STARTDATE, PREFIX_ENDDATE);
@@ -37,12 +41,12 @@ public class StatsCommandParser implements Parser<StatsCommand> {
             endDate = ParserUtil.parseEndDate(startDate, argMultimap.getValue(PREFIX_ENDDATE).get());
 
         } else if (argMultimap.arePrefixesPresent(PREFIX_STARTDATE)
-            && !argMultimap.arePrefixesPresent(PREFIX_ENDDATE)) {   //only start date present
+                && !argMultimap.arePrefixesPresent(PREFIX_ENDDATE)) { //only start date present
 
             throw new ParseException("End date must be provided.");
 
         } else if (argMultimap.arePrefixesPresent(PREFIX_ENDDATE)
-            && !argMultimap.arePrefixesPresent(PREFIX_STARTDATE)) {  //only end date present
+                && !argMultimap.arePrefixesPresent(PREFIX_STARTDATE)) { //only end date present
 
             throw new ParseException("Start date must be provided.");
 

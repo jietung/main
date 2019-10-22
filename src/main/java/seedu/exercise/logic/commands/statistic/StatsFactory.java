@@ -33,6 +33,9 @@ public class StatsFactory {
         this.endDate = endDate;
     }
 
+    /**
+     * Generates and returns statistic for different chart type.
+     */
     public Statistic generateStatistic() {
         HashMap<String, Double> data;
         if (chart.equals("linechart")) {
@@ -50,6 +53,9 @@ public class StatsFactory {
         }
     }
 
+    /**
+     * Generate statistic for line chart.
+     */
     private Statistic generateLineChartStatistic() {
         ArrayList<Date> dates = Date.getListOfDates(startDate, endDate);
         ArrayList<Double> values;
@@ -63,6 +69,9 @@ public class StatsFactory {
         return new Statistic(category, chart, datesToString(dates), values);
     }
 
+    /**
+     * Generate statistic for bar chart.
+     */
     private Statistic generateBarChartStatistic() {
         HashMap<String, Double> data;
         if (category.equals("exercise")) {
@@ -77,6 +86,9 @@ public class StatsFactory {
         return new Statistic(category, chart, names, values);
     }
 
+    /**
+     * Generate statistic for pie chart.
+     */
     private Statistic generatePieChartStatistic() {
         HashMap<String, Double> data;
         if (category.equals("exercise")) {
@@ -91,6 +103,9 @@ public class StatsFactory {
         return new Statistic(category, chart, names, values);
     }
 
+    /**
+     * Compute exercise count with filtered exercises list.
+     */
     private HashMap<String, Double> getTotalExerciseCount() {
         ArrayList<Exercise> filteredExercise = getFilteredExercise();
         HashMap<String, Double> data = new HashMap<>();
@@ -111,6 +126,9 @@ public class StatsFactory {
         return data;
     }
 
+    /**
+     * Compute exercise quantity with filtered exercises list.
+     */
     private HashMap<String, Double> getTotalExerciseQuantity() {
         ArrayList<Exercise> filteredExercise = getFilteredExercise();
         HashMap<String, Double> data = new HashMap<>();
@@ -131,6 +149,9 @@ public class StatsFactory {
         return data;
     }
 
+    /**
+     * Compute calories with filtered exercises list.
+     */
     private HashMap<String, Double> getTotalCaloriesData() {
         ArrayList<Exercise> filteredExercise = getFilteredExercise();
         HashMap<String, Double> data = new HashMap<>();
@@ -150,6 +171,9 @@ public class StatsFactory {
         return data;
     }
 
+    /**
+     * Get all exercises between start and end date.
+     */
     private ArrayList<Exercise> getFilteredExercise() {
         ArrayList<Exercise> filteredExercise = new ArrayList<>();
         for (Exercise e : exercises) {
@@ -162,10 +186,16 @@ public class StatsFactory {
         return filteredExercise;
     }
 
+    /**
+     * Get list of names from data computed.
+     */
     private ArrayList<String> hashMapNameToList(HashMap<String, Double> data) {
         return new ArrayList<>(data.keySet());
     }
 
+    /**
+     * Get list of values from data computed.
+     */
     private ArrayList<Double> hashMapDoubleToList(HashMap<String, Double> data, ArrayList<String> names) {
         ArrayList<Double> values = new ArrayList<>();
 
@@ -176,14 +206,20 @@ public class StatsFactory {
         return values;
     }
 
+    /**
+     * Convert list of dates to list of Strings.
+     */
     private ArrayList<String> datesToString(ArrayList<Date> dates) {
         ArrayList<String> list = new ArrayList<>();
         for (Date d : dates) {
             list.add(d.toString());
         }
-        return  list;
+        return list;
     }
 
+    /**
+     * Generate a list of given size with all zeroes.
+     */
     private ArrayList<Double> listWithZeroes(int listSize) {
         ArrayList<Double> list = new ArrayList<>();
         for (int i = 0; i < listSize; i++) {
@@ -192,6 +228,9 @@ public class StatsFactory {
         return list;
     }
 
+    /**
+     * Compute exercise count by dates with filtered exercises list.
+     */
     private ArrayList<Double> exerciseCountByDate(ArrayList<Exercise> exercises, ArrayList<Date> dates) {
 
         int size = dates.size();
@@ -207,6 +246,9 @@ public class StatsFactory {
         return values;
     }
 
+    /**
+     * Compute calories by date with filtered exercises list.
+     */
     private ArrayList<Double> caloriesByDate(ArrayList<Exercise> exercises, ArrayList<Date> dates) {
 
         int size = dates.size();

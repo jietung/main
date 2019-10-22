@@ -77,7 +77,7 @@ public class Date {
 
         if (startDate == null && endDate == null) {
             eDate = LocalDate.now(ZoneId.of("Asia/Singapore"));
-            sDate  = eDate.minusDays(7);
+            sDate = eDate.minusDays(7);
         } else {
             try {
                 sDate = LocalDate.parse(startDate.toString(), formatter);
@@ -104,7 +104,7 @@ public class Date {
         if (startDate == null && endDate == null) {
             days = 7;
             eDate = LocalDate.now(ZoneId.of("Asia/Singapore"));
-            sDate  = eDate.minusDays(6);
+            sDate = eDate.minusDays(6);
         } else {
             try {
                 sDate = LocalDate.parse(startDate.toString(), formatter);

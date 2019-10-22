@@ -8,7 +8,6 @@ import static seedu.exercise.logic.parser.CliSyntax.PREFIX_STARTDATE;
 
 import seedu.exercise.logic.commands.Command;
 import seedu.exercise.logic.commands.CommandResult;
-import seedu.exercise.logic.commands.exceptions.CommandException;
 import seedu.exercise.model.Model;
 import seedu.exercise.model.ReadOnlyResourceBook;
 import seedu.exercise.model.property.Date;

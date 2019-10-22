@@ -61,7 +61,7 @@ public class ModelManager implements Model {
         suggestedExercises = new FilteredList<>(this.databaseBook.getResourceList());
         filteredRegimes = new FilteredList<>(this.regimeBook.getResourceList());
         filteredSchedules = new FilteredList<>(this.scheduleBook.getResourceList());
-        StatsFactory statsFactory = new StatsFactory(exerciseBook, "linechart", "calories", null ,null);
+        StatsFactory statsFactory = new StatsFactory(exerciseBook, "linechart", "calories", null, null);
         this.statistic = statsFactory.getDefaultStatistic();
 
         this.propertyManager = propertyManager;

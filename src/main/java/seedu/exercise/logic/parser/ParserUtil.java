@@ -384,4 +384,4 @@ public class ParserUtil {
         }
         return trimmedCategory;
     }
- }
+}

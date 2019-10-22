@@ -24,6 +24,9 @@ public class PieChartPanel extends UiPart<Region> {
         display();
     }
 
+    /**
+     * Set data for pie chart to be displayed.
+     */
     private void display() {
         ArrayList<String> names = statistic.getProperties();
         ArrayList<Double> values = statistic.getValues();

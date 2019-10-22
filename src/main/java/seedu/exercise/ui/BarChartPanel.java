@@ -31,6 +31,9 @@ public class BarChartPanel extends UiPart<Region> {
         display();
     }
 
+    /**
+     * Set data for bar chart to be displayed.
+     */
     private void display() {
         barChart.setAnimated(false);
         barChart.layout();

@@ -3,7 +3,6 @@ package seedu.exercise.logic;
 import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
-import javafx.scene.chart.Chart;
 import seedu.exercise.commons.core.GuiSettings;
 import seedu.exercise.logic.commands.CommandResult;
 import seedu.exercise.logic.commands.exceptions.CommandException;
