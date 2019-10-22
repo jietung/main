@@ -31,27 +31,23 @@ public class StatsCommandParser implements Parser<StatsCommand> {
         Date endDate = null;
 
         //date provided
-        if (arePrefixesPresent(argMultimap, PREFIX_STARTDATE, PREFIX_ENDDATE)) { //both dates present
+        if (argMultimap.arePrefixesPresent(PREFIX_STARTDATE, PREFIX_ENDDATE)) { //both dates present
 
             startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get());
             endDate = ParserUtil.parseEndDate(startDate, argMultimap.getValue(PREFIX_ENDDATE).get());
 
-        } else if (arePrefixesPresent(argMultimap, PREFIX_STARTDATE)
-            && !arePrefixesPresent(argMultimap, PREFIX_ENDDATE)) {   //only start date present
+        } else if (argMultimap.arePrefixesPresent(PREFIX_STARTDATE)
+            && !argMultimap.arePrefixesPresent(PREFIX_ENDDATE)) {   //only start date present
 
             throw new ParseException("End date must be provided.");
 
-        } else if (arePrefixesPresent(argMultimap, PREFIX_ENDDATE)
-            && !arePrefixesPresent(argMultimap, PREFIX_STARTDATE)) {  //only end date present
+        } else if (argMultimap.arePrefixesPresent(PREFIX_ENDDATE)
+            && !argMultimap.arePrefixesPresent(PREFIX_STARTDATE)) {  //only end date present
 
             throw new ParseException("Start date must be provided.");
 
         }
 
         return new StatsCommand(chart, category, startDate, endDate);
-    }
-
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

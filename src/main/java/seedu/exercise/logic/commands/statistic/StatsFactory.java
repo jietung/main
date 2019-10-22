@@ -10,6 +10,9 @@ import seedu.exercise.model.property.Name;
 import seedu.exercise.model.property.Unit;
 import seedu.exercise.model.resource.Exercise;
 
+/**
+ * A class to generate Statistic depending on the chart type.
+ */
 public class StatsFactory {
 
     private ObservableList<Exercise> exercises;
@@ -18,6 +21,9 @@ public class StatsFactory {
     private Date startDate;
     private Date endDate;
 
+    /**
+     * Generates a StatsFactory object that can generate Statistic.
+     */
     public StatsFactory(ReadOnlyResourceBook<Exercise> exercises, String chart, String category,
                         Date startDate, Date endDate) {
         this.exercises = exercises.getResourceList();
@@ -28,52 +34,95 @@ public class StatsFactory {
     }
 
     public Statistic generateStatistic() {
-        HashMap<Name, Double> data;
+        HashMap<String, Double> data;
         if (chart.equals("linechart")) {
-            ArrayList<Date> dates = Date.getListOfDates(startDate, endDate);
-            ArrayList<Double> values;
 
-            if (category.equals("exercies")) {
-                values = exerciseQuantityByDate(getFilteredExercise(), dates);
-            } else {
-                values = caloriesByDate(getFilteredExercise(), dates);
-            }
+            return generateLineChartStatistic();
 
-            return new Statistic(category, chart, datesToString(dates), values);
+        } else if (chart.equals("piechart")) {
 
-        } else {
-            if (category.equals("exercise")) {
-                data = getTotalExerciseQuantity();
-            } else { //calories
-                data = getTotalCaloriesData();
-            }
+            return generatePieChartStatistic();
 
-            ArrayList<Name> names = hashMapNameToList(data);
-            ArrayList<Double> values = hashMapDoubleToList(data, names);
+        } else { //barchart
 
-            String quantity = "quantity";
+            return generateBarChartStatistic();
 
-            if (chart.equals("piechart")) {
-                return new Statistic(category, chart, namesToString(names), values);
-            } else { //barchart
-                return new Statistic(category, chart, namesToString(names), values);
-            }
         }
     }
 
-    private HashMap<Name, Double> getTotalExerciseQuantity() {
+    private Statistic generateLineChartStatistic() {
+        ArrayList<Date> dates = Date.getListOfDates(startDate, endDate);
+        ArrayList<Double> values;
+
+        if (category.equals("exercise")) {
+            values = exerciseCountByDate(getFilteredExercise(), dates);
+        } else {
+            values = caloriesByDate(getFilteredExercise(), dates);
+        }
+
+        return new Statistic(category, chart, datesToString(dates), values);
+    }
+
+    private Statistic generateBarChartStatistic() {
+        HashMap<String, Double> data;
+        if (category.equals("exercise")) {
+            data = getTotalExerciseCount();
+        } else { //calories
+            data = getTotalCaloriesData();
+        }
+
+        ArrayList<String> names = hashMapNameToList(data);
+        ArrayList<Double> values = hashMapDoubleToList(data, names);
+
+        return new Statistic(category, chart, names, values);
+    }
+
+    private Statistic generatePieChartStatistic() {
+        HashMap<String, Double> data;
+        if (category.equals("exercise")) {
+            data = getTotalExerciseQuantity();
+        } else { //calories
+            data = getTotalCaloriesData();
+        }
+
+        ArrayList<String> names = hashMapNameToList(data);
+        ArrayList<Double> values = hashMapDoubleToList(data, names);
+
+        return new Statistic(category, chart, names, values);
+    }
+
+    private HashMap<String, Double> getTotalExerciseCount() {
         ArrayList<Exercise> filteredExercise = getFilteredExercise();
-        HashMap<Name, Double> data = new HashMap<>();
+        HashMap<String, Double> data = new HashMap<>();
 
         for (Exercise e : filteredExercise) {
             Name name = e.getName();
             Unit unit = e.getUnit();
-            Name nameWithUnit = new Name(name.toString() + "(" + unit.toString() + ")");
-            double quantity = Double.parseDouble(e.getQuantity().toString());
+            String nameWithUnit = name.toString() + " (" + unit.toString() + ")";
+            double count = 1;
 
             if (data.containsKey(nameWithUnit)) {
-                double temp = data.get(nameWithUnit);
-                quantity += temp;
+                count = data.get(nameWithUnit) + 1;
+            }
+
+            data.put(nameWithUnit, count);
+        }
+
+        return data;
+    }
+
+    private HashMap<String, Double> getTotalExerciseQuantity() {
+        ArrayList<Exercise> filteredExercise = getFilteredExercise();
+        HashMap<String, Double> data = new HashMap<>();
+
+        for (Exercise e : filteredExercise) {
+            Name name = e.getName();
+            Unit unit = e.getUnit();
+            String nameWithUnit = name.toString() + " (" + unit.toString() + ")";
+            double quantity = 1;
+
+            if (data.containsKey(nameWithUnit)) {
+                quantity = data.get(nameWithUnit) + 1;
             }
 
             data.put(nameWithUnit, quantity);
@@ -82,12 +131,12 @@ public class StatsFactory {
         return data;
     }
 
-    private HashMap<Name, Double> getTotalCaloriesData() {
+    private HashMap<String, Double> getTotalCaloriesData() {
         ArrayList<Exercise> filteredExercise = getFilteredExercise();
-        HashMap<Name, Double> data = new HashMap<>();
+        HashMap<String, Double> data = new HashMap<>();
 
         for (Exercise e : filteredExercise) {
-            Name name = e.getName();
+            String name = e.getName().toString();
             double calories = Double.parseDouble(e.getCalories().toString());
 
             if (data.containsKey(name)) {
@@ -113,26 +162,18 @@ public class StatsFactory {
         return filteredExercise;
     }
 
-    private ArrayList<Name> hashMapNameToList(HashMap<Name, Double> data) {
+    private ArrayList<String> hashMapNameToList(HashMap<String, Double> data) {
         return new ArrayList<>(data.keySet());
     }
 
-    private ArrayList<Double> hashMapDoubleToList(HashMap<Name, Double> data, ArrayList<Name> names) {
+    private ArrayList<Double> hashMapDoubleToList(HashMap<String, Double> data, ArrayList<String> names) {
         ArrayList<Double> values = new ArrayList<>();
 
-        for (Name n : names) {
+        for (String n : names) {
             values.add(data.get(n));
         }
 
         return values;
-    }
-
-    private ArrayList<String> namesToString(ArrayList<Name> names) {
-        ArrayList<String> list = new ArrayList<>();
-        for (Name n : names) {
-            list.add(n.toString());
-        }
-        return list;
     }
 
     private ArrayList<String> datesToString(ArrayList<Date> dates) {
@@ -140,16 +181,22 @@ public class StatsFactory {
         for (Date d : dates) {
             list.add(d.toString());
         }
+        return  list;
+    }
+
+    private ArrayList<Double> listWithZeroes(int listSize) {
+        ArrayList<Double> list = new ArrayList<>();
+        for (int i = 0; i < listSize; i++) {
+            list.add(0.0);
+        }
         return list;
     }
 
+    private ArrayList<Double> exerciseCountByDate(ArrayList<Exercise> exercises, ArrayList<Date> dates) {
 
+        int size = dates.size();
+        ArrayList<Double> values = listWithZeroes(size);
 
-    private ArrayList<Double> exerciseQuantityByDate(ArrayList<Exercise> exercises, ArrayList<Date> dates) {
-        ArrayList<Double> values = new ArrayList<>();
-        for (int i = 0; i< dates.size(); i++) {
-            values.add(0.0);
-        }
         for (Exercise e : exercises) {
             Date date = e.getDate();
             int index = dates.indexOf(date);
@@ -161,10 +208,10 @@ public class StatsFactory {
     }
 
     private ArrayList<Double> caloriesByDate(ArrayList<Exercise> exercises, ArrayList<Date> dates) {
-        ArrayList<Double> values = new ArrayList<>();
-        for (int i = 0; i< dates.size(); i++) {
-            values.add(0.0);
-        }
+
+        int size = dates.size();
+        ArrayList<Double> values = listWithZeroes(size);
+
         for (Exercise e : exercises) {
             Date date = e.getDate();
             int index = dates.indexOf(date);
@@ -175,6 +222,9 @@ public class StatsFactory {
         return values;
     }
 
+    /**
+     * Returns line chart of calories of the most recent 7 days.
+     */
     public Statistic getDefaultStatistic() {
         ArrayList<Exercise> filteredExercise = getFilteredExercise();
         ArrayList<Date> dates = Date.getListOfDates(null, null);

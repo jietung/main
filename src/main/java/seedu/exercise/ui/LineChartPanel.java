@@ -10,6 +10,9 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.layout.Region;
 import seedu.exercise.logic.commands.statistic.Statistic;
 
+/**
+ * An UI for line chart.
+ */
 public class LineChartPanel extends UiPart<Region> {
 
     private static final String FXML = "LineChartPanel.fxml";

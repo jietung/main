@@ -14,6 +14,9 @@ import seedu.exercise.model.ReadOnlyResourceBook;
 import seedu.exercise.model.property.Date;
 import seedu.exercise.model.resource.Exercise;
 
+/**
+ * Generate statistic with given parameters.
+ */
 public class StatsCommand extends Command {
 
     public static final String COMMAND_WORD = "stats";
@@ -34,6 +37,9 @@ public class StatsCommand extends Command {
     private Date startDate;
     private Date endDate;
 
+    /**
+     * Creates a StatsCommand to generate statistic.
+     */
     public StatsCommand(String chart, String category, Date startDate, Date endDate) {
         this.chart = chart;
         this.category = category;
@@ -42,7 +48,7 @@ public class StatsCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
         ReadOnlyResourceBook<Exercise> exercises = model.getExerciseBookData();
         StatsFactory statsFactory = new StatsFactory(exercises, chart, category, startDate, endDate);

@@ -8,6 +8,7 @@
     <children>
         <PieChart fx:id="pieChart" maxHeight="1.5" maxWidth="600.0" minHeight="0.0" minWidth="600"
                   prefHeight="330.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0"
-                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        </PieChart>
     </children>
 </AnchorPane>

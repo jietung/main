@@ -7,6 +7,9 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.layout.Region;
 import seedu.exercise.logic.commands.statistic.Statistic;
 
+/**
+ * An UI for pie chart.
+ */
 public class PieChartPanel extends UiPart<Region> {
     private static final String FXML = "PieChartPanel.fxml";
 
