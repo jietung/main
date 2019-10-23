@@ -53,6 +53,8 @@ public class LineChartPanel extends UiPart<Region> {
         }
 
         lineChart.setLegendVisible(false);
+        lineChart.setTitle(statistic.getCategory() + " (" + statistic.getStartDate()
+                + " to " + statistic.getEndDate() + ")");
         lineChart.getData().add(series);
     }
 }

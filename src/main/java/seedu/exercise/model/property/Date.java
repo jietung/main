@@ -71,20 +71,10 @@ public class Date {
 
         try {
             d = LocalDate.parse(date.toString(), formatter);
+            sDate = LocalDate.parse(startDate.toString(), formatter);
+            eDate = LocalDate.parse(endDate.toString(), formatter);
         } catch (DateTimeParseException e) {
             return false;
-        }
-
-        if (startDate == null && endDate == null) {
-            eDate = LocalDate.now(ZoneId.of("Asia/Singapore"));
-            sDate = eDate.minusDays(7);
-        } else {
-            try {
-                sDate = LocalDate.parse(startDate.toString(), formatter);
-                eDate = LocalDate.parse(endDate.toString(), formatter);
-            } catch (DateTimeParseException e) {
-                return false;
-            }
         }
 
         if (d.compareTo(sDate) >= 0 && d.compareTo(eDate) <= 0) {
@@ -95,25 +85,37 @@ public class Date {
     }
 
     /**
+     * Returns today's Date.
+     */
+    public static Date getToday() {
+        LocalDate today = LocalDate.now(ZoneId.of("Asia/Singapore"));
+        return new Date(today.format(formatter));
+    }
+
+    /**
+     * Returns the date of a week before today.
+     */
+    public static Date getOneWeekBeforeToday() {
+        LocalDate today = LocalDate.parse(getToday().toString(), formatter);
+        LocalDate oneWeekBefore = today.minusDays(6);
+        return new Date(oneWeekBefore.format(formatter));
+    }
+
+    /**
      * Returns a list of dates between start date and end date.
      */
     public static ArrayList<Date> getListOfDates(Date startDate, Date endDate) {
         int days;
         LocalDate sDate;
         LocalDate eDate;
-        if (startDate == null && endDate == null) {
-            days = 7;
-            eDate = LocalDate.now(ZoneId.of("Asia/Singapore"));
-            sDate = eDate.minusDays(6);
-        } else {
-            try {
-                sDate = LocalDate.parse(startDate.toString(), formatter);
-                eDate = LocalDate.parse(endDate.toString(), formatter);
-            } catch (DateTimeParseException e) {
-                return new ArrayList<>();
-            }
-            days = (int) DAYS.between(sDate, eDate) + 1;
+
+        try {
+            sDate = LocalDate.parse(startDate.toString(), formatter);
+            eDate = LocalDate.parse(endDate.toString(), formatter);
+        } catch (DateTimeParseException e) {
+            return new ArrayList<>();
         }
+        days = (int) DAYS.between(sDate, eDate) + 1;
 
         ArrayList<Date> dates = new ArrayList<>();
         for (int i = 0; i < days; i++) {

@@ -29,8 +29,13 @@ public class StatsFactory {
         this.exercises = exercises.getResourceList();
         this.chart = chart;
         this.category = category;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        if (startDate == null && endDate == null) {
+            this.startDate = Date.getOneWeekBeforeToday();
+            this.endDate = Date.getToday();
+        } else {
+            this.startDate = startDate;
+            this.endDate = endDate;
+        }
     }
 
     /**
@@ -66,7 +71,7 @@ public class StatsFactory {
             values = caloriesByDate(getFilteredExercise(), dates);
         }
 
-        return new Statistic(category, chart, datesToString(dates), values);
+        return new Statistic(category, chart, startDate, endDate, datesToString(dates), values);
     }
 
     /**
@@ -83,7 +88,7 @@ public class StatsFactory {
         ArrayList<String> names = hashMapNameToList(data);
         ArrayList<Double> values = hashMapDoubleToList(data, names);
 
-        return new Statistic(category, chart, names, values);
+        return new Statistic(category, chart, startDate, endDate, names, values);
     }
 
     /**
@@ -100,7 +105,7 @@ public class StatsFactory {
         ArrayList<String> names = hashMapNameToList(data);
         ArrayList<Double> values = hashMapDoubleToList(data, names);
 
-        return new Statistic(category, chart, names, values);
+        return new Statistic(category, chart, startDate, endDate, names, values);
     }
 
     /**
@@ -269,9 +274,9 @@ public class StatsFactory {
      */
     public Statistic getDefaultStatistic() {
         ArrayList<Exercise> filteredExercise = getFilteredExercise();
-        ArrayList<Date> dates = Date.getListOfDates(null, null);
+        ArrayList<Date> dates = Date.getListOfDates(startDate, endDate);
         ArrayList<String> properties = datesToString(dates);
         ArrayList<Double> values = caloriesByDate(filteredExercise, dates);
-        return new Statistic("calories", "linechart", properties, values);
+        return new Statistic("calories", "linechart", startDate, endDate, properties, values);
     }
 }

@@ -11,7 +11,10 @@ import static seedu.exercise.logic.parser.CliSyntax.PREFIX_UNIT;
 
 import seedu.exercise.logic.commands.events.EventHistory;
 import seedu.exercise.logic.commands.exceptions.CommandException;
+import seedu.exercise.logic.commands.statistic.Statistic;
+import seedu.exercise.logic.commands.statistic.StatsFactory;
 import seedu.exercise.model.Model;
+import seedu.exercise.model.ReadOnlyResourceBook;
 import seedu.exercise.model.resource.Exercise;
 
 /**
@@ -57,8 +60,21 @@ public class AddExerciseCommand extends AddCommand {
         }
 
         model.addExercise(toAdd);
+        updateStatistic(model);
         EventHistory.getInstance().addCommandToUndoStack(this);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+    }
+
+    /**
+     * Update statistic with exercise added.
+     */
+    private void updateStatistic(Model model) {
+        ReadOnlyResourceBook<Exercise> exercises = model.getExerciseBookData();
+        Statistic outdatedStatistic = model.getStatistic();
+        StatsFactory statsFactory = new StatsFactory(exercises, outdatedStatistic.getChart(),
+                outdatedStatistic.getCategory(), outdatedStatistic.getStartDate(), outdatedStatistic.getEndDate());
+        Statistic statistic = statsFactory.generateStatistic();
+        model.setStatistic(statistic);
     }
 
     /**

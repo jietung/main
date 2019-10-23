@@ -8,7 +8,10 @@ import seedu.exercise.commons.core.Messages;
 import seedu.exercise.commons.core.index.Index;
 import seedu.exercise.logic.commands.events.EventHistory;
 import seedu.exercise.logic.commands.exceptions.CommandException;
+import seedu.exercise.logic.commands.statistic.Statistic;
+import seedu.exercise.logic.commands.statistic.StatsFactory;
 import seedu.exercise.model.Model;
+import seedu.exercise.model.ReadOnlyResourceBook;
 import seedu.exercise.model.resource.Exercise;
 
 /**
@@ -36,8 +39,21 @@ public class DeleteExerciseCommand extends DeleteCommand {
 
         exerciseToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteExercise(exerciseToDelete);
+        updateStatistic(model);
         EventHistory.getInstance().addCommandToUndoStack(this);
         return new CommandResult(String.format(MESSAGE_DELETE_EXERCISE_SUCCESS, exerciseToDelete));
+    }
+
+    /**
+     * Update statistic about deleted exercise.
+     */
+    private void updateStatistic(Model model) {
+        ReadOnlyResourceBook<Exercise> exercises = model.getExerciseBookData();
+        Statistic outdatedStatistic = model.getStatistic();
+        StatsFactory statsFactory = new StatsFactory(exercises, outdatedStatistic.getChart(),
+                outdatedStatistic.getCategory(), outdatedStatistic.getStartDate(), outdatedStatistic.getEndDate());
+        Statistic statistic = statsFactory.generateStatistic();
+        model.setStatistic(statistic);
     }
 
     /**

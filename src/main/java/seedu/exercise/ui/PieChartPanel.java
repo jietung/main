@@ -37,6 +37,7 @@ public class PieChartPanel extends UiPart<Region> {
             pieChart.getData().add(slice);
         }
 
-        pieChart.setTitle(statistic.getCategory());
+        pieChart.setTitle(statistic.getCategory() + " (" + statistic.getStartDate()
+                + " to " + statistic.getEndDate() + ")");
     }
 }

@@ -52,6 +52,8 @@ public class BarChartPanel extends UiPart<Region> {
         }
 
         barChart.setLegendVisible(false);
+        barChart.setTitle(statistic.getCategory() + " (" + statistic.getStartDate()
+                + " to " + statistic.getEndDate() + ")");
         barChart.getData().add(series);
     }
 }
