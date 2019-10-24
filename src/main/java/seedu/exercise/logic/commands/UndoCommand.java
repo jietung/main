@@ -46,7 +46,7 @@ public class UndoCommand extends Command {
         StatsFactory statsFactory = new StatsFactory(exercises, outdatedStatistic.getChart(),
                 outdatedStatistic.getCategory(), outdatedStatistic.getStartDate(), outdatedStatistic.getEndDate());
         Statistic statistic = statsFactory.generateStatistic();
-        model.setStatistic(statistic);
+        model.updateStatistic(statistic);
     }
 
 }

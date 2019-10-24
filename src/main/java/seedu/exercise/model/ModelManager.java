@@ -39,7 +39,7 @@ public class ModelManager implements Model {
     private final FilteredList<Exercise> suggestedExercises;
     private final FilteredList<Regime> filteredRegimes;
     private final FilteredList<Schedule> filteredSchedules;
-    private Statistic statistic;
+    private final Statistic statistic;
 
     /**
      * Initializes a ModelManager with the given exerciseBook and userPrefs.
@@ -311,8 +311,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setStatistic(Statistic statistic) {
-        this.statistic = statistic;
+    public void updateStatistic(Statistic statistic) {
+        this.statistic.resetData(statistic);
     }
 
     @Override

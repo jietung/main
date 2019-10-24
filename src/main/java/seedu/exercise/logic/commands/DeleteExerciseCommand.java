@@ -58,7 +58,7 @@ public class DeleteExerciseCommand extends DeleteCommand implements PayloadCarri
         StatsFactory statsFactory = new StatsFactory(exercises, outdatedStatistic.getChart(),
                 outdatedStatistic.getCategory(), outdatedStatistic.getStartDate(), outdatedStatistic.getEndDate());
         Statistic statistic = statsFactory.generateStatistic();
-        model.setStatistic(statistic);
+        model.updateStatistic(statistic);
     }
 
     @Override

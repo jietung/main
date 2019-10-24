@@ -1,5 +1,6 @@
 package seedu.exercise.logic.commands.statistic;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.exercise.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
@@ -28,6 +29,46 @@ public class Statistic {
         this.startDate = startDate;
         this.endDate = endDate;
         this.properties = properties;
+        this.values = values;
+    }
+
+    public void resetData(Statistic statistic) {
+        requireNonNull(statistic);
+        setCategory(statistic.getCategory());
+        setChart(statistic.getChart());
+        setStartDate(statistic.getStartDate());
+        setEndDate(statistic.getEndDate());
+        setProperties(statistic.getProperties());
+        setValues(statistic.getValues());
+    }
+
+    private void setCategory(String category) {
+        requireNonNull(category);
+        this.category = category;
+    }
+
+    private void setChart(String chart) {
+        requireNonNull(chart);
+        this.chart = chart;
+    }
+
+    private void setStartDate(Date startDate) {
+        requireNonNull(startDate);
+        this.startDate = startDate;
+    }
+
+    private void setEndDate(Date endDate) {
+        requireNonNull(endDate);
+        this.endDate = endDate;
+    }
+
+    private void setProperties(ArrayList<String> properties) {
+        requireNonNull(properties);
+        this.properties = properties;
+    }
+
+    private void setValues(ArrayList<Double> values) {
+        requireNonNull(values);
         this.values = values;
     }
 

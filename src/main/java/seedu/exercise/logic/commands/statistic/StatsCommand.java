@@ -52,7 +52,7 @@ public class StatsCommand extends Command {
         ReadOnlyResourceBook<Exercise> exercises = model.getExerciseBookData();
         StatsFactory statsFactory = new StatsFactory(exercises, chart, category, startDate, endDate);
         Statistic statistic = statsFactory.generateStatistic();
-        model.setStatistic(statistic);
+        model.updateStatistic(statistic);
         return new CommandResult("Chart displayed");
     }
 

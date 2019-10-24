@@ -238,7 +238,7 @@ public interface Model {
      */
     ReadOnlyResourceBook<Exercise> getDatabaseBook();
 
-    void setStatistic(Statistic statistic);
+    void updateStatistic(Statistic statistic);
 
     Statistic getStatistic();
 }
