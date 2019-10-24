@@ -80,7 +80,7 @@ public class StatsFactory {
     private Statistic generateBarChartStatistic() {
         HashMap<String, Double> data;
         if (category.equals("exercise")) {
-            data = getTotalExerciseCount();
+            data = getTotalExerciseQuantity();
         } else { //calories
             data = getTotalCaloriesData();
         }
@@ -97,7 +97,7 @@ public class StatsFactory {
     private Statistic generatePieChartStatistic() {
         HashMap<String, Double> data;
         if (category.equals("exercise")) {
-            data = getTotalExerciseQuantity();
+            data = getTotalExerciseCount();
         } else { //calories
             data = getTotalCaloriesData();
         }
@@ -142,10 +142,9 @@ public class StatsFactory {
             Name name = e.getName();
             Unit unit = e.getUnit();
             String nameWithUnit = name.toString() + " (" + unit.toString() + ")";
-            double quantity = 1;
-
+            double quantity = Double.parseDouble(e.getQuantity().toString());
             if (data.containsKey(nameWithUnit)) {
-                quantity = data.get(nameWithUnit) + 1;
+                quantity = data.get(nameWithUnit) + quantity;
             }
 
             data.put(nameWithUnit, quantity);
