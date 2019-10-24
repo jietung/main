@@ -1,20 +1,27 @@
 package seedu.exercise.logic;
 
+import static seedu.exercise.commons.core.Messages.MESSAGE_INVALID_CONTEXT;
+import static seedu.exercise.commons.util.AppUtil.requireMainAppState;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import seedu.exercise.MainApp;
 import seedu.exercise.commons.core.GuiSettings;
 import seedu.exercise.commons.core.LogsCenter;
+import seedu.exercise.commons.core.State;
 import seedu.exercise.logic.commands.Command;
 import seedu.exercise.logic.commands.CommandResult;
+import seedu.exercise.logic.commands.ResolveCommand;
 import seedu.exercise.logic.commands.exceptions.CommandException;
 import seedu.exercise.logic.commands.statistic.Statistic;
 import seedu.exercise.logic.parser.ExerciseBookParser;
 import seedu.exercise.logic.parser.exceptions.ParseException;
 import seedu.exercise.model.Model;
 import seedu.exercise.model.ReadOnlyResourceBook;
+import seedu.exercise.model.conflict.Conflict;
 import seedu.exercise.model.resource.Exercise;
 import seedu.exercise.model.resource.Regime;
 import seedu.exercise.model.resource.Schedule;
@@ -43,6 +50,10 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = exerciseBookParser.parseCommand(commandText);
+        if (!isCommandExecutedInCorrectState(command)) {
+            throw new CommandException(String.format(MESSAGE_INVALID_CONTEXT, command.getClass().getSimpleName()));
+        }
+
         commandResult = command.execute(model);
 
         try {
@@ -108,6 +119,12 @@ public class LogicManager implements Logic {
         return model.getStatistic();
     }
 
+    public Conflict getConflict() {
+        requireMainAppState(State.IN_CONFLICT);
+        return model.getConflict();
+
+    }
+
     /**
      * Saves all book data from ExerHealth to disk
      *
@@ -118,5 +135,10 @@ public class LogicManager implements Logic {
         storage.saveScheduleBook(model.getAllScheduleData());
         storage.saveRegimeBook(model.getAllRegimeData());
         storage.savePropertyBook(model.getPropertyBook());
+    }
+
+    private boolean isCommandExecutedInCorrectState(Command command) {
+        return (MainApp.getState() == State.NORMAL && !(command instanceof ResolveCommand))
+                || (MainApp.getState() == State.IN_CONFLICT && command instanceof ResolveCommand);
     }
 }

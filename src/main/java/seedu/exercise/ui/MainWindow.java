@@ -84,7 +84,6 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-        resolveWindow = new ResolveWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -136,6 +135,8 @@ public class MainWindow extends UiPart<Stage> {
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+
+        resolveWindow = new ResolveWindow(logic, resultDisplay);
 
         scheduleListPanel = new ScheduleListPanel(logic.getFilteredScheduleList());
         scheduleListPanelPlaceholder.getChildren().add(scheduleListPanel.getRoot());
@@ -197,8 +198,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleResolve() {
-        String testData = "This is clearly test data. DELETE".repeat(1000);
-        resolveWindow.setLeftRightText(testData, testData);
+        resolveWindow.setLeftRightPanel();
         if (resolveWindow.isShowing()) {
             resolveWindow.focus();
         } else {
@@ -219,7 +219,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
-        resolveWindow.hideAndClearText();
+        resolveWindow.hideAndClearPanels();
         primaryStage.hide();
     }
 
@@ -243,19 +243,34 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
             setChart();
 
-            if (commandResult.isShowHelp()) {
-                handleHelp();
-            }
-
-            if (commandResult.isExit()) {
-                handleExit();
-            }
+            shouldShowWindowsBasedOnCommandResult(commandResult);
+            shouldExitAppBasedOnCommandResult(commandResult);
 
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
+        }
+    }
+
+    /**
+     * Checks if a secondary window should be shown based on the command results.
+     * Method will show the windows if it is to be shown.
+     */
+    private void shouldShowWindowsBasedOnCommandResult(CommandResult commandResult) {
+        if (commandResult.isShowHelp()) {
+            handleHelp();
+        }
+
+        if (commandResult.isShowResolve()) {
+            handleResolve();
+        }
+    }
+
+    private void shouldExitAppBasedOnCommandResult(CommandResult commandResult) {
+        if (commandResult.isExit()) {
+            handleExit();
         }
     }
 }

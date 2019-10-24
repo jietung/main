@@ -1,11 +1,15 @@
 package seedu.exercise.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.exercise.commons.util.AppUtil.requireMainAppState;
+import static seedu.exercise.commons.util.CollectionUtil.append;
+import static seedu.exercise.commons.util.CollectionUtil.areListsEmpty;
 import static seedu.exercise.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.exercise.model.util.DefaultPropertyBookUtil.getDefaultPropertyBook;
 
 import java.nio.file.Path;
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -13,10 +17,14 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.exercise.commons.core.GuiSettings;
 import seedu.exercise.commons.core.LogsCenter;
+import seedu.exercise.commons.core.State;
+import seedu.exercise.commons.core.index.Index;
 import seedu.exercise.logic.commands.statistic.Statistic;
 import seedu.exercise.logic.commands.statistic.StatsFactory;
 import seedu.exercise.logic.parser.Prefix;
+import seedu.exercise.model.conflict.Conflict;
 import seedu.exercise.model.property.CustomProperty;
+import seedu.exercise.model.property.Name;
 import seedu.exercise.model.property.PropertyBook;
 import seedu.exercise.model.resource.Exercise;
 import seedu.exercise.model.resource.Regime;
@@ -40,6 +48,8 @@ public class ModelManager implements Model {
     private final FilteredList<Regime> filteredRegimes;
     private final FilteredList<Schedule> filteredSchedules;
     private final Statistic statistic;
+
+    private Conflict conflict;
 
     /**
      * Initializes a ModelManager with the given exerciseBook and userPrefs.
@@ -66,6 +76,8 @@ public class ModelManager implements Model {
 
         this.propertyBook = propertyBook;
         this.propertyBook.updatePropertyPrefixes();
+
+        conflict = null;
     }
 
     public ModelManager() {
@@ -229,6 +241,41 @@ public class ModelManager implements Model {
         return scheduleBook;
     }
 
+    //===================Conflicts===============================================================
+
+    @Override
+    public void resolveConflict(Name regimeName, List<Index> indexFromSchedule, List<Index> indexFromConflict) {
+        requireAllNonNull(regimeName, indexFromSchedule, indexFromConflict);
+        requireMainAppState(State.IN_CONFLICT);
+
+        removeOldSchedule();
+
+        if (areListsEmpty(indexFromConflict, indexFromSchedule)) {
+            Regime regime = new Regime(regimeName, new UniqueResourceList<>());
+            addResolvedSchedule(conflict.getScheduleByRegime(regime));
+        } else {
+            UniqueResourceList<Exercise> resolvedExercises =
+                    getResolvedExerciseList(indexFromSchedule, indexFromConflict);
+            Schedule resolvedSchedule = getResolvedSchedule(regimeName, resolvedExercises);
+            addResolvedSchedule(resolvedSchedule);
+            addCombinedRegime(resolvedSchedule.getRegime());
+        }
+    }
+
+    @Override
+    public Conflict getConflict() {
+        requireMainAppState(State.IN_CONFLICT);
+
+        return conflict;
+    }
+
+    @Override
+    public void setConflict(Conflict conflict) {
+        requireMainAppState(State.IN_CONFLICT);
+        requireNonNull(conflict);
+
+        this.conflict = conflict;
+    }
 
     //=========== Filtered Exercise List Accessors =============================================================
 
@@ -346,4 +393,34 @@ public class ModelManager implements Model {
             && propertyBook.equals(other.propertyBook);
     }
 
+    private UniqueResourceList<Exercise> getResolvedExerciseList(List<Index> indexFromSchedule,
+                                                                 List<Index> indexFromConflict) {
+        Regime scheduledRegime = conflict.getScheduledRegime();
+        Regime conflictRegime = conflict.getConflictingRegime();
+        List<Exercise> exercisesToAddFromScheduled = scheduledRegime.getRegimeExercises()
+                .getAllResourcesIndex(indexFromSchedule);
+        List<Exercise> exercisesToAddFromConflicted = conflictRegime.getRegimeExercises()
+                .getAllResourcesIndex(indexFromConflict);
+        List<Exercise> resolvedExercises = append(exercisesToAddFromScheduled, exercisesToAddFromConflicted);
+        UniqueResourceList<Exercise> uniqueResolveList = new UniqueResourceList<>();
+        uniqueResolveList.setAll(resolvedExercises);
+        return uniqueResolveList;
+    }
+
+    private Schedule getResolvedSchedule(Name regimeName, UniqueResourceList<Exercise> exerciseList) {
+        Regime regime = new Regime(regimeName, exerciseList);
+        return new Schedule(regime, conflict.getConflictDate());
+    }
+
+    private void removeOldSchedule() {
+        scheduleBook.removeResource(conflict.getScheduled());
+    }
+
+    private void addResolvedSchedule(Schedule resolvedSchedule) {
+        scheduleBook.addResource(resolvedSchedule);
+    }
+
+    private void addCombinedRegime(Regime regime) {
+        regimeBook.addResource(regime);
+    }
 }
