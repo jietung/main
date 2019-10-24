@@ -40,6 +40,12 @@ public class StatsCommandParser implements Parser<StatsCommand> {
             startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_STARTDATE).get());
             endDate = ParserUtil.parseEndDate(startDate, argMultimap.getValue(PREFIX_ENDDATE).get());
 
+            int numberOfDaysApart = Date.numberOfDaysBetween(startDate, endDate);
+
+            if (numberOfDaysApart > 31) {
+                throw new ParseException("Start date and end date are too far apart");
+            }
+
         } else if (argMultimap.arePrefixesPresent(PREFIX_STARTDATE)
                 && !argMultimap.arePrefixesPresent(PREFIX_ENDDATE)) { //only start date present
 

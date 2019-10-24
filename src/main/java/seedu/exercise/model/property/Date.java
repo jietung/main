@@ -85,6 +85,22 @@ public class Date {
     }
 
     /**
+     * Returns the number of days between start date and end date.
+     */
+    public static int numberOfDaysBetween(Date startDate, Date endDate) {
+        LocalDate sDate;
+        LocalDate eDate;
+        try {
+            sDate = LocalDate.parse(startDate.toString(), formatter);
+            eDate = LocalDate.parse(endDate.toString(), formatter);
+        } catch (DateTimeParseException e) {
+            return -1;
+        }
+
+        return (int) DAYS.between(sDate, eDate);
+    }
+
+    /**
      * Returns today's Date.
      */
     public static Date getToday() {
