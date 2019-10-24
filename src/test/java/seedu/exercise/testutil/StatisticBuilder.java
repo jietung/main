@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import seedu.exercise.logic.commands.statistic.Statistic;
 import seedu.exercise.model.property.Date;
 
+/**
+ * A utility class to help with building Statistic objects.
+ */
 public class StatisticBuilder {
 
     private static final String DEFAULT_CATEGORY = "calories";

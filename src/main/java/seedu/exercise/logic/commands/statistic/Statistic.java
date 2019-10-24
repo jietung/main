@@ -32,14 +32,17 @@ public class Statistic {
         this.values = values;
     }
 
-    public void resetData(Statistic statistic) {
-        requireNonNull(statistic);
-        setCategory(statistic.getCategory());
-        setChart(statistic.getChart());
-        setStartDate(statistic.getStartDate());
-        setEndDate(statistic.getEndDate());
-        setProperties(statistic.getProperties());
-        setValues(statistic.getValues());
+    /**
+     * Resets the existing data of this {@code Statistic} with {@code newStatistic}.
+     */
+    public void resetData(Statistic newStatistic) {
+        requireNonNull(newStatistic);
+        setCategory(newStatistic.getCategory());
+        setChart(newStatistic.getChart());
+        setStartDate(newStatistic.getStartDate());
+        setEndDate(newStatistic.getEndDate());
+        setProperties(newStatistic.getProperties());
+        setValues(newStatistic.getValues());
     }
 
     private void setCategory(String category) {

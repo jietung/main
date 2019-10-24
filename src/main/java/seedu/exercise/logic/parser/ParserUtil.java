@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.exercise.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.exercise.model.property.PropertyBook.getCustomProperties;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
