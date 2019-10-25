@@ -36,16 +36,19 @@ public class LineChartPanel extends UiPart<Region> {
      * Set data for line chart to be displayed.
      */
     private void display() {
+        String category = statistic.getCategory();
+        String startDate = statistic.getStartDate().toString();
+        String endDate = statistic.getEndDate().toString();
+        ArrayList<String> dates = statistic.getProperties();
+        ArrayList<Double> values = statistic.getValues();
+
         lineChart.setAnimated(false);
         lineChart.layout();
 
         xAxis.setLabel("date");
-        yAxis.setLabel(statistic.getCategory());
+        yAxis.setLabel(ChartTextUtil.lineChartLabelFormatter(category));
 
         XYChart.Series series = new XYChart.Series();
-
-        ArrayList<String> dates = statistic.getProperties();
-        ArrayList<Double> values = statistic.getValues();
 
         int size = dates.size();
         for (int i = 0; i < size; i++) {
@@ -53,8 +56,7 @@ public class LineChartPanel extends UiPart<Region> {
         }
 
         lineChart.setLegendVisible(false);
-        lineChart.setTitle(statistic.getCategory() + " (" + statistic.getStartDate()
-                + " to " + statistic.getEndDate() + ")");
+        lineChart.setTitle(ChartTextUtil.titleFormatter(category, startDate, endDate));
         lineChart.getData().add(series);
     }
 }

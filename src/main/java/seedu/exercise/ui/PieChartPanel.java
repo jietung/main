@@ -28,6 +28,9 @@ public class PieChartPanel extends UiPart<Region> {
      * Set data for pie chart to be displayed.
      */
     private void display() {
+        String category = statistic.getCategory();
+        String startDate = statistic.getStartDate().toString();
+        String endDate = statistic.getEndDate().toString();
         ArrayList<String> names = statistic.getProperties();
         ArrayList<Double> values = statistic.getValues();
 
@@ -37,7 +40,6 @@ public class PieChartPanel extends UiPart<Region> {
             pieChart.getData().add(slice);
         }
 
-        pieChart.setTitle(statistic.getCategory() + " (" + statistic.getStartDate()
-                + " to " + statistic.getEndDate() + ")");
+        pieChart.setTitle(ChartTextUtil.titleFormatter(category, startDate, endDate));
     }
 }

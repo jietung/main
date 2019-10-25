@@ -294,7 +294,12 @@ public class AddExerciseCommandTest {
         }
 
         @Override
-        public void updateStatistic(Statistic statistic) {
+        public void updateStatistic() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setStatistic(Statistic statistic) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -346,8 +351,13 @@ public class AddExerciseCommandTest {
         }
 
         @Override
-        public void updateStatistic(Statistic statistic) {
-            requireNonNull(statistic);
+        public void updateStatistic() {
+            //will add here when writing tests
+        }
+
+        @Override
+        public void setStatistic(Statistic statistic) {
+            //will add here when writing tests
         }
 
         @Override

@@ -23,8 +23,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_PARAMETER_TYPE = new Prefix("p/");
     public static final Prefix PREFIX_SUGGEST = new Prefix("g/");
     public static final Prefix PREFIX_CHART = new Prefix("h/");
-    public static final Prefix PREFIX_STARTDATE = new Prefix("s/");
-    public static final Prefix PREFIX_ENDDATE = new Prefix("e/");
+    public static final Prefix PREFIX_START_DATE = new Prefix("s/");
+    public static final Prefix PREFIX_END_DATE = new Prefix("e/");
 
     /* A set consisting of property prefix definitions for add and edit commands */
     public static final Set<Prefix> PREFIXES_SET = new HashSet<>();

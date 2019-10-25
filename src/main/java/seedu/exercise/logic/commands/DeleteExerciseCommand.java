@@ -11,10 +11,7 @@ import seedu.exercise.commons.core.index.IndexUtil;
 import seedu.exercise.logic.commands.events.EventHistory;
 import seedu.exercise.logic.commands.events.EventPayload;
 import seedu.exercise.logic.commands.exceptions.CommandException;
-import seedu.exercise.logic.commands.statistic.Statistic;
-import seedu.exercise.logic.commands.statistic.StatsFactory;
 import seedu.exercise.model.Model;
-import seedu.exercise.model.ReadOnlyResourceBook;
 import seedu.exercise.model.resource.Exercise;
 
 /**
@@ -45,21 +42,9 @@ public class DeleteExerciseCommand extends DeleteCommand implements PayloadCarri
         Exercise exerciseToDelete = lastShownList.get(targetIndex.getZeroBased());
         eventPayload.put(KEY_EXERCISE_TO_DELETE, exerciseToDelete);
         model.deleteExercise(exerciseToDelete);
-        updateStatistic(model);
+        model.updateStatistic();
         EventHistory.getInstance().addCommandToUndoStack(this);
         return new CommandResult(String.format(MESSAGE_DELETE_EXERCISE_SUCCESS, exerciseToDelete));
-    }
-
-    /**
-     * Update statistic about deleted exercise.
-     */
-    private void updateStatistic(Model model) {
-        ReadOnlyResourceBook<Exercise> exercises = model.getExerciseBookData();
-        Statistic outdatedStatistic = model.getStatistic();
-        StatsFactory statsFactory = new StatsFactory(exercises, outdatedStatistic.getChart(),
-                outdatedStatistic.getCategory(), outdatedStatistic.getStartDate(), outdatedStatistic.getEndDate());
-        Statistic statistic = statsFactory.generateStatistic();
-        model.updateStatistic(statistic);
     }
 
     @Override

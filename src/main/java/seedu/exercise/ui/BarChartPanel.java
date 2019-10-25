@@ -35,16 +35,19 @@ public class BarChartPanel extends UiPart<Region> {
      * Set data for bar chart to be displayed.
      */
     private void display() {
+        String category = statistic.getCategory();
+        String startDate = statistic.getStartDate().toString();
+        String endDate = statistic.getEndDate().toString();
+        ArrayList<String> names = statistic.getProperties();
+        ArrayList<Double> values = statistic.getValues();
+
         barChart.setAnimated(false);
         barChart.layout();
 
         xAxis.setLabel(statistic.getCategory());
-        yAxis.setLabel("quantity");
+        yAxis.setLabel(ChartTextUtil.barChartLabelFormatter(statistic.getCategory()));
 
         XYChart.Series series = new XYChart.Series();
-
-        ArrayList<String> names = statistic.getProperties();
-        ArrayList<Double> values = statistic.getValues();
 
         int size = names.size();
         for (int i = 0; i < size; i++) {
@@ -52,8 +55,7 @@ public class BarChartPanel extends UiPart<Region> {
         }
 
         barChart.setLegendVisible(false);
-        barChart.setTitle(statistic.getCategory() + " (" + statistic.getStartDate()
-                + " to " + statistic.getEndDate() + ")");
+        barChart.setTitle(ChartTextUtil.titleFormatter(category, startDate, endDate));
         barChart.getData().add(series);
     }
 }

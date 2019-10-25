@@ -358,7 +358,17 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateStatistic(Statistic statistic) {
+    public void updateStatistic() {
+        ReadOnlyResourceBook<Exercise> exercises = getExerciseBookData();
+        Statistic outdatedStatistic = getStatistic();
+        StatsFactory statsFactory = new StatsFactory(exercises, outdatedStatistic.getChart(),
+                outdatedStatistic.getCategory(), outdatedStatistic.getStartDate(), outdatedStatistic.getEndDate());
+        Statistic statistic = statsFactory.generateStatistic();
+        this.statistic.resetData(statistic);
+    }
+
+    @Override
+    public void setStatistic(Statistic statistic) {
         this.statistic.resetData(statistic);
     }
 

@@ -143,7 +143,7 @@ public class ParserUtil {
         String trimmedEndDate = endDate.trim();
         parseDate(trimmedEndDate);
         if (!Date.isEndDateAfterStartDate(startDate.toString(), trimmedEndDate)) {
-            throw new ParseException("End date must be before ");
+            throw new ParseException("End date must be after start date");
         }
         return new Date(trimmedEndDate);
     }

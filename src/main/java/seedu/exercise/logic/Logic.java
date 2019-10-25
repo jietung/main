@@ -81,7 +81,7 @@ public interface Logic {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the Statistic.
+     * Returns the Statistic object currently in focus.
      */
     Statistic getStatistic();
 

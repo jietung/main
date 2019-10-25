@@ -31,6 +31,54 @@ public class StatisticBuilder {
         this.values = new ArrayList<>();
     }
 
+    /**
+     * Sets the category of the {@code Statistic} that we are building.
+     */
+    public StatisticBuilder withCategory(String category) {
+        this.category = category;
+        return this;
+    }
+
+    /**
+     * Sets the chart of the {@code Statistic} that we are building.
+     */
+    public StatisticBuilder withChart(String chart) {
+        this.chart = chart;
+        return this;
+    }
+
+    /**
+     * Sets the start date of the {@code Statistic} that we are building.
+     */
+    public StatisticBuilder withStartDate(Date startDate) {
+        this.startDate = startDate;
+        return this;
+    }
+
+    /**
+     * Sets the end date of the {@code Statistic} that we are building.
+     */
+    public StatisticBuilder withEndDate(Date endDate) {
+        this.endDate = endDate;
+        return this;
+    }
+
+    /**
+     * Sets the properties of the {@code Statistic} that we are building.
+     */
+    public StatisticBuilder withProperties(ArrayList<String> properties) {
+        this.properties = properties;
+        return this;
+    }
+
+    /**
+     * Sets the values of the {@code Statistic} that we are building.
+     */
+    public StatisticBuilder withValues(ArrayList<Double> values) {
+        this.values = values;
+        return this;
+    }
+
     public Statistic build() {
         return new Statistic(category, chart, startDate, endDate, properties, values);
     }

@@ -2,8 +2,10 @@ package seedu.exercise.logic.commands.statistic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import seedu.exercise.commons.core.LogsCenter;
 import seedu.exercise.model.ReadOnlyResourceBook;
 import seedu.exercise.model.property.Date;
 import seedu.exercise.model.property.Name;
@@ -15,6 +17,11 @@ import seedu.exercise.model.resource.Exercise;
  */
 public class StatsFactory {
 
+    private static final String BAR_CHART = "barchart";
+    private static final String LINE_CHART = "linechart";
+    private static final String PIE_CHART = "piechart";
+
+    private static final Logger logger = LogsCenter.getLogger(StatsFactory.class);
     private ObservableList<Exercise> exercises;
     private String chart;
     private String category;
@@ -23,6 +30,8 @@ public class StatsFactory {
 
     /**
      * Generates a StatsFactory object that can generate Statistic.
+     * If start date and end date is not given,
+     * it will set end date to today's date and start date to be one week before.
      */
     public StatsFactory(ReadOnlyResourceBook<Exercise> exercises, String chart, String category,
                         Date startDate, Date endDate) {
@@ -42,19 +51,20 @@ public class StatsFactory {
      * Generates and returns statistic for different chart type.
      */
     public Statistic generateStatistic() {
-        HashMap<String, Double> data;
-        if (chart.equals("linechart")) {
+        switch(chart) {
 
-            return generateLineChartStatistic();
-
-        } else if (chart.equals("piechart")) {
-
+        case PIE_CHART:
             return generatePieChartStatistic();
 
-        } else { //barchart
+        case LINE_CHART:
+            return generateLineChartStatistic();
 
+        case BAR_CHART:
             return generateBarChartStatistic();
 
+        default:
+            logger.fine("Chart type is not correct. Default chart will be displayed.");
+            return getDefaultStatistic();
         }
     }
 
@@ -66,7 +76,7 @@ public class StatsFactory {
         ArrayList<Double> values;
 
         if (category.equals("exercise")) {
-            values = exerciseCountByDate(getFilteredExercise(), dates);
+            values = exerciseFrequencyByDate(getFilteredExercise(), dates);
         } else {
             values = caloriesByDate(getFilteredExercise(), dates);
         }
@@ -97,7 +107,7 @@ public class StatsFactory {
     private Statistic generatePieChartStatistic() {
         HashMap<String, Double> data;
         if (category.equals("exercise")) {
-            data = getTotalExerciseCount();
+            data = getTotalExerciseFrequency();
         } else { //calories
             data = getTotalCaloriesData();
         }
@@ -111,7 +121,7 @@ public class StatsFactory {
     /**
      * Compute exercise count with filtered exercises list.
      */
-    private HashMap<String, Double> getTotalExerciseCount() {
+    private HashMap<String, Double> getTotalExerciseFrequency() {
         ArrayList<Exercise> filteredExercise = getFilteredExercise();
         HashMap<String, Double> data = new HashMap<>();
 
@@ -235,7 +245,7 @@ public class StatsFactory {
     /**
      * Compute exercise count by dates with filtered exercises list.
      */
-    private ArrayList<Double> exerciseCountByDate(ArrayList<Exercise> exercises, ArrayList<Date> dates) {
+    private ArrayList<Double> exerciseFrequencyByDate(ArrayList<Exercise> exercises, ArrayList<Date> dates) {
 
         int size = dates.size();
         ArrayList<Double> values = listWithZeroes(size);
@@ -276,6 +286,6 @@ public class StatsFactory {
         ArrayList<Date> dates = Date.getListOfDates(startDate, endDate);
         ArrayList<String> properties = datesToString(dates);
         ArrayList<Double> values = caloriesByDate(filteredExercise, dates);
-        return new Statistic("calories", "linechart", startDate, endDate, properties, values);
+        return new Statistic("calories", LINE_CHART, startDate, endDate, properties, values);
     }
 }

@@ -271,7 +271,18 @@ public interface Model {
      */
     ReadOnlyResourceBook<Exercise> getDatabaseBook();
 
-    void updateStatistic(Statistic statistic);
+    /**
+     * Update statistic with updated exercises.
+     */
+    void updateStatistic();
 
+    /**
+     * Set the statistic to the updated statistic.
+     */
+    void setStatistic(Statistic statistic);
+
+    /**
+     * Returns the Statistic object currently in focus.
+     */
     Statistic getStatistic();
 }

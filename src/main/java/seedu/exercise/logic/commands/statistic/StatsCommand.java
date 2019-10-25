@@ -3,8 +3,8 @@ package seedu.exercise.logic.commands.statistic;
 import static java.util.Objects.requireNonNull;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CHART;
-import static seedu.exercise.logic.parser.CliSyntax.PREFIX_ENDDATE;
-import static seedu.exercise.logic.parser.CliSyntax.PREFIX_STARTDATE;
+import static seedu.exercise.logic.parser.CliSyntax.PREFIX_END_DATE;
+import static seedu.exercise.logic.parser.CliSyntax.PREFIX_START_DATE;
 
 import seedu.exercise.logic.commands.Command;
 import seedu.exercise.logic.commands.CommandResult;
@@ -20,21 +20,23 @@ public class StatsCommand extends Command {
 
     public static final String COMMAND_WORD = "stats";
 
+    public static final String MESSAGE_STATS_DISPLAY_SUCCESS = "Chart displayed.";
+
     public static final String MESSAGE_USAGE = "Parameters: "
         + PREFIX_CATEGORY + "CATEGORY "
         + PREFIX_CHART + "CHART TYPE "
-        + PREFIX_STARTDATE + "START DATE "
-        + PREFIX_ENDDATE + "END DATE " + "\n"
+        + PREFIX_START_DATE + "START DATE "
+        + PREFIX_END_DATE + "END DATE " + "\n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_CATEGORY + "calories "
         + PREFIX_CHART + "barchart "
-        + PREFIX_STARTDATE + "30/03/2019 "
-        + PREFIX_ENDDATE + "05/04/2019 ";
+        + PREFIX_START_DATE + "30/03/2019 "
+        + PREFIX_END_DATE + "05/04/2019 ";
 
-    private String chart;
-    private String category;
-    private Date startDate;
-    private Date endDate;
+    private final String chart;
+    private final String category;
+    private final Date startDate;
+    private final Date endDate;
 
     /**
      * Creates a StatsCommand to generate statistic.
@@ -52,8 +54,8 @@ public class StatsCommand extends Command {
         ReadOnlyResourceBook<Exercise> exercises = model.getExerciseBookData();
         StatsFactory statsFactory = new StatsFactory(exercises, chart, category, startDate, endDate);
         Statistic statistic = statsFactory.generateStatistic();
-        model.updateStatistic(statistic);
-        return new CommandResult("Chart displayed");
+        model.setStatistic(statistic);
+        return new CommandResult(MESSAGE_STATS_DISPLAY_SUCCESS);
     }
 
     @Override

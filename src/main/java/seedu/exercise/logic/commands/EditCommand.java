@@ -25,10 +25,7 @@ import seedu.exercise.commons.util.CollectionUtil;
 import seedu.exercise.logic.commands.events.EventHistory;
 import seedu.exercise.logic.commands.events.EventPayload;
 import seedu.exercise.logic.commands.exceptions.CommandException;
-import seedu.exercise.logic.commands.statistic.Statistic;
-import seedu.exercise.logic.commands.statistic.StatsFactory;
 import seedu.exercise.model.Model;
-import seedu.exercise.model.ReadOnlyResourceBook;
 import seedu.exercise.model.property.Calories;
 import seedu.exercise.model.property.Date;
 import seedu.exercise.model.property.Muscle;
@@ -99,20 +96,8 @@ public class EditCommand extends Command implements UndoableCommand, PayloadCarr
         model.setExercise(exerciseToEdit, editedExercise);
         EventHistory.getInstance().addCommandToUndoStack(this);
         model.updateFilteredExerciseList(Model.PREDICATE_SHOW_ALL_EXERCISES);
-        updateStatistic(model);
+        model.updateStatistic();
         return new CommandResult(String.format(MESSAGE_EDIT_EXERCISE_SUCCESS, editedExercise));
-    }
-
-    /**
-     * Update statistic with edited exercise.
-     */
-    private void updateStatistic(Model model) {
-        ReadOnlyResourceBook<Exercise> exercises = model.getExerciseBookData();
-        Statistic outdatedStatistic = model.getStatistic();
-        StatsFactory statsFactory = new StatsFactory(exercises, outdatedStatistic.getChart(),
-                outdatedStatistic.getCategory(), outdatedStatistic.getStartDate(), outdatedStatistic.getEndDate());
-        Statistic statistic = statsFactory.generateStatistic();
-        model.updateStatistic(statistic);
     }
 
     @Override

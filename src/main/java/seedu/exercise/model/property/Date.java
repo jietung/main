@@ -11,7 +11,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
- * Represents an Exercise's date in ExerHealth.
+ * Represents Exercise's and Statistic's date in ExerHealth.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class Date {
@@ -51,11 +51,7 @@ public class Date {
         try {
             LocalDate sDate = LocalDate.parse(startDate, formatter);
             LocalDate eDate = LocalDate.parse(endDate, formatter);
-            if (eDate.compareTo(sDate) < 0) {
-                return false;
-            } else {
-                return true;
-            }
+            return eDate.compareTo(sDate) >= 0;
         } catch (DateTimeParseException e) {
             return false;
         }
@@ -77,11 +73,7 @@ public class Date {
             return false;
         }
 
-        if (d.compareTo(sDate) >= 0 && d.compareTo(eDate) <= 0) {
-            return true;
-        }
-
-        return false;
+        return d.compareTo(sDate) >= 0 && d.compareTo(eDate) <= 0;
     }
 
     /**
@@ -104,7 +96,7 @@ public class Date {
      * Returns today's Date.
      */
     public static Date getToday() {
-        LocalDate today = LocalDate.now(ZoneId.of("Asia/Singapore"));
+        LocalDate today = LocalDate.now(ZoneId.systemDefault());
         return new Date(today.format(formatter));
     }
 
