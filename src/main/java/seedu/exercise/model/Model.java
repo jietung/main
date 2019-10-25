@@ -260,11 +260,17 @@ public interface Model {
     ObservableList<Exercise> getSuggestedExerciseList();
 
     /**
-     * Updates the filter of the filtered exercise list to filter by the give {@code predicate}.
+     * Replaces suggestions with the those in {@code suggestions}.
+     */
+    void setSuggestions(List<Exercise> suggestions);
+
+    /**
+     * Updates the list of suggested exercises to filter by the given {@code predicate}.
      *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateSuggestedExerciseList(Predicate<Exercise> predicateShowAllExercises);
+
 
     /**
      * Returns the data of all exercises in the database
@@ -285,4 +291,9 @@ public interface Model {
      * Returns the Statistic object currently in focus.
      */
     Statistic getStatistic();
+
+    /**
+     * Returns the data in the exercise database
+     */
+    public ReadOnlyResourceBook<Exercise> getExerciseDatabaseData();
 }
