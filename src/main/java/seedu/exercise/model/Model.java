@@ -255,6 +255,11 @@ public interface Model {
     void addCustomProperty(CustomProperty customProperty);
 
     /**
+     * Removes the custom property with the given {@code fullName} from the PropertyBook.
+     */
+    void removeCustomProperty(String fullName);
+
+    /**
      * Returns an unmodifiable view of the list of suggested exercises
      */
     ObservableList<Exercise> getSuggestedExerciseList();
@@ -295,5 +300,5 @@ public interface Model {
     /**
      * Returns the data in the exercise database
      */
-    public ReadOnlyResourceBook<Exercise> getExerciseDatabaseData();
+    ReadOnlyResourceBook<Exercise> getExerciseDatabaseData();
 }

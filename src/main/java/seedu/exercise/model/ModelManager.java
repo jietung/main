@@ -163,7 +163,6 @@ public class ModelManager implements Model {
 
     public void setExercise(Exercise target, Exercise editedExercise) {
         requireAllNonNull(target, editedExercise);
-
         exerciseBook.setResource(target, editedExercise);
     }
 
@@ -254,7 +253,7 @@ public class ModelManager implements Model {
             addResolvedSchedule(conflict.getScheduleByRegime(regime));
         } else {
             UniqueResourceList<Exercise> resolvedExercises =
-                    getResolvedExerciseList(indexFromSchedule, indexFromConflict);
+                getResolvedExerciseList(indexFromSchedule, indexFromConflict);
             Schedule resolvedSchedule = getResolvedSchedule(regimeName, resolvedExercises);
             addResolvedSchedule(resolvedSchedule);
             addCombinedRegime(resolvedSchedule.getRegime());
@@ -280,7 +279,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Exercise} backed by the internal list of
-     * {@code versionedExerciseBook}
+     * {@code exerciseBook}.
      */
     @Override
     public ObservableList<Exercise> getFilteredExerciseList() {
@@ -297,7 +296,7 @@ public class ModelManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Regime} backed by the internal list of
-     * {@code versionedRegimeBook}
+     * {@code regimeBook}.
      */
     public ObservableList<Regime> getFilteredRegimeList() {
         return filteredRegimes;
@@ -335,6 +334,10 @@ public class ModelManager implements Model {
 
     public void addCustomProperty(CustomProperty customProperty) {
         propertyBook.addCustomProperty(customProperty);
+    }
+
+    public void removeCustomProperty(String fullName) {
+        propertyBook.removeCustomProperty(fullName);
     }
 
     //=========== ExerciseDatabase ===============================================================
@@ -431,9 +434,9 @@ public class ModelManager implements Model {
         Regime scheduledRegime = conflict.getScheduledRegime();
         Regime conflictRegime = conflict.getConflictingRegime();
         List<Exercise> exercisesToAddFromScheduled = scheduledRegime.getRegimeExercises()
-                .getAllResourcesIndex(indexFromSchedule);
+            .getAllResourcesIndex(indexFromSchedule);
         List<Exercise> exercisesToAddFromConflicted = conflictRegime.getRegimeExercises()
-                .getAllResourcesIndex(indexFromConflict);
+            .getAllResourcesIndex(indexFromConflict);
         List<Exercise> resolvedExercises = append(exercisesToAddFromScheduled, exercisesToAddFromConflicted);
         UniqueResourceList<Exercise> uniqueResolveList = new UniqueResourceList<>();
         uniqueResolveList.setAll(resolvedExercises);
