@@ -18,6 +18,7 @@ import java.util.Set;
 
 import seedu.exercise.commons.core.index.Index;
 import seedu.exercise.commons.util.StringUtil;
+import seedu.exercise.logic.commands.statistic.Statistic;
 import seedu.exercise.logic.parser.exceptions.ParseException;
 import seedu.exercise.model.property.Calories;
 import seedu.exercise.model.property.CustomProperty;
@@ -147,7 +148,7 @@ public class ParserUtil {
         String trimmedEndDate = endDate.trim();
         parseDate(trimmedEndDate);
         if (!Date.isEndDateAfterStartDate(startDate.toString(), trimmedEndDate)) {
-            throw new ParseException("End date must be after start date");
+            throw new ParseException(Date.MESSAGE_INVALID_END_DATE);
         }
         return new Date(trimmedEndDate);
     }
@@ -372,7 +373,7 @@ public class ParserUtil {
         String trimmedCategory = chart.trim();
         if (!trimmedCategory.equals("piechart") && !trimmedCategory.equals("linechart")
             && !trimmedCategory.equals("barchart")) {
-            throw new ParseException("Category can only be \'piechart\' or \'linechart\' or \'barchart\'");
+            throw new ParseException(Statistic.MESSAGE_INVALID_CHART_TYPE);
         }
         return trimmedCategory;
     }
@@ -387,7 +388,7 @@ public class ParserUtil {
         requireNonNull(statisticCategory);
         String trimmedCategory = statisticCategory.trim();
         if (!trimmedCategory.equals("exercise") && !trimmedCategory.equals("calories")) {
-            throw new ParseException("Category can only be \'exercise\' or \'calories\'");
+            throw new ParseException(Statistic.MESSAGE_INVALID_CATEGORY);
         }
         return trimmedCategory;
     }

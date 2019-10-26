@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class Date {
     public static final String PROPERTY_DATE = "Date";
     public static final String MESSAGE_CONSTRAINTS = "Dates should be of the format dd/MM/yyyy and must be valid.";
+    public static final String MESSAGE_INVALID_END_DATE = "End date must be after start date";
     private static final String DATE_FORMAT = "dd/MM/yyyy";
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
     public final LocalDate value;

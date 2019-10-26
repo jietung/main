@@ -11,6 +11,11 @@ import seedu.exercise.model.property.Date;
  * Represents a Statistic with data needed to generate chart.
  */
 public class Statistic {
+
+    public static final String MESSAGE_INVALID_CATEGORY = "Category can only be \'exercise\' or \'calories\'";
+    public static final String MESSAGE_INVALID_CHART_TYPE = "Chart type can only be \'piechart\' or "
+             + "\'linechart\' or \'barchart\'";
+
     private String category;
     private String chart;
     private Date startDate;
