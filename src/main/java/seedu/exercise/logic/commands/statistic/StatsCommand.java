@@ -60,6 +60,15 @@ public class StatsCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this;
+        if (other == this) {
+            return true;
+        }
+
+        if (other instanceof StatsCommand) {
+            return this.category.equals(((StatsCommand) other).category)
+                && this.chart.equals(((StatsCommand) other).chart);
+        }
+
+        return false;
     }
 }
