@@ -10,6 +10,7 @@ import static seedu.exercise.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_INDEX;
 import static seedu.exercise.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -62,7 +63,7 @@ public class AddRegimeCommand extends AddCommand implements PayloadCarrierComman
         requireNonNull(model);
 
         List<Exercise> lastShownList = model.getFilteredExerciseList();
-        checkDuplicateIndexes();
+        checkDuplicateIndexes(toAddIndexes);
         checkValidIndexes(toAddIndexes, lastShownList);
 
         CommandResult commandResult;
@@ -164,9 +165,14 @@ public class AddRegimeCommand extends AddCommand implements PayloadCarrierComman
      *
      * @throws CommandException If a duplicate index is found
      */
-    private void checkDuplicateIndexes() throws CommandException {
-        HashSet<Index> indexesSet = new HashSet<>(toAddIndexes);
-        if (indexesSet.size() < toAddIndexes.size()) {
+    private void checkDuplicateIndexes(List<Index> indexes) throws CommandException {
+        List<Integer> intIndexes = new ArrayList<>();
+        for (Index i : indexes) {
+            intIndexes.add(i.getZeroBased());
+        }
+
+        HashSet<Integer> set = new HashSet<>(intIndexes);
+        if (set.size() < indexes.size()) {
             throw new CommandException(MESSAGE_DUPLICATE_INDEX);
         }
     }
