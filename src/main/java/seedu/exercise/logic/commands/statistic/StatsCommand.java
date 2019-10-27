@@ -65,8 +65,17 @@ public class StatsCommand extends Command {
         }
 
         if (other instanceof StatsCommand) {
-            return this.category.equals(((StatsCommand) other).category)
-                && this.chart.equals(((StatsCommand) other).chart);
+            if (this.startDate == null && this.endDate == null) {
+                return this.category.equals(((StatsCommand) other).category)
+                        && this.chart.equals(((StatsCommand) other).chart)
+                        && ((StatsCommand) other).startDate == null
+                        && ((StatsCommand) other).endDate == null;
+            } else {
+                return this.category.equals(((StatsCommand) other).category)
+                        && this.chart.equals(((StatsCommand) other).chart)
+                        && this.startDate.equals(((StatsCommand) other).startDate)
+                        && this.endDate.equals(((StatsCommand) other).endDate);
+            }
         }
 
         return false;
