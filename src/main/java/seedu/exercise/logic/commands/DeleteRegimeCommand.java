@@ -6,7 +6,6 @@ import static seedu.exercise.logic.commands.events.EditRegimeEvent.KEY_EDITED_RE
 import static seedu.exercise.logic.commands.events.EditRegimeEvent.KEY_IS_REGIME_EDITED;
 import static seedu.exercise.logic.commands.events.EditRegimeEvent.KEY_ORIGINAL_REGIME;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
