@@ -1,8 +1,8 @@
 package seedu.exercise.logic.commands;
 
+import static seedu.exercise.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.exercise.model.util.DefaultPropertyBookUtil.getDefaultPropertyBook;
 import static seedu.exercise.testutil.exercise.TypicalExercises.getTypicalExerciseBook;
-import static seedu.exercise.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,12 +18,13 @@ import seedu.exercise.model.resource.Exercise;
 
 public class StatsCommandTest {
 
+    private static final String CATEGORY = "calories";
+    private static final String CHART = "linechart";
+    private static final Date START_DATE = new Date("25/09/2019");
+    private static final Date END_DATE = new Date("27/09/2019");
+
     private Model model;
     private Model expectedModel;
-    private final static String CATEGORY = "calories";
-    private final static String CHART = "linechart";
-    private final static Date START_DATE = new Date("25/09/2019");
-    private final static Date END_DATE = new Date("27/09/2019");
 
     @BeforeEach
     public void setUp() {

@@ -35,15 +35,15 @@ public class StatsFactoryTest {
 
     @Test
     public void generateLineChartStatistic() {
-        String[] dates = new String[] {"25/09/2019", "26/09/2019", "27/09/2019", "28/09/2019",
-                "29/09/2019", "30/09/2019"};
+        String[] dates = new String[]{"25/09/2019", "26/09/2019", "27/09/2019", "28/09/2019", "29/09/2019",
+            "30/09/2019"};
         ArrayList<String> expectedLineChartProperties = new ArrayList<>(Arrays.asList(dates));
         //======calories================================================================================================
         StatsFactory caloriesStatsFactory = new StatsFactory(eb, "linechart", "calories",
                 new Date("25/09/2019"), new Date("30/09/2019"));
         Statistic actualCaloriesStatistic = caloriesStatsFactory.generateStatistic();
 
-        Double[] caloriesArr = new Double[] {0.0, 111.0, 300.0, 261.0, 0.0, 0.0};
+        Double[] caloriesArr = new Double[]{0.0, 111.0, 300.0, 261.0, 0.0, 0.0};
         ArrayList<Double> expectedCaloriesValues = new ArrayList<>(Arrays.asList(caloriesArr));
 
         Statistic expectedCaloriesStatistic = new StatisticBuilder().withCategory("calories").withChart("linechart")
@@ -57,7 +57,7 @@ public class StatsFactoryTest {
                 new Date("25/09/2019"), new Date("30/09/2019"));
         Statistic actualExerciseStatistic = exerciseStatsFactory.generateStatistic();
 
-        Double[] valuesArr = new Double[] {0.0, 1.0, 1.0, 2.0, 0.0, 0.0};
+        Double[] valuesArr = new Double[]{0.0, 1.0, 1.0, 2.0, 0.0, 0.0};
         ArrayList<Double> expectedExerciseValues = new ArrayList<>(Arrays.asList(valuesArr));
 
         Statistic expectedExerciseStatistic = new StatisticBuilder().withCategory("exercise").withChart("linechart")
@@ -70,14 +70,14 @@ public class StatsFactoryTest {
 
     @Test
     public void generateBarChartStatistic() {
-        String[] propertiesArr = new String[] {"Cycling (km)", "Running (hours)", "Swimming (laps)"};
+        String[] propertiesArr = new String[]{"Cycling (km)", "Running (hours)", "Swimming (laps)"};
         ArrayList<String> expectedProperties = new ArrayList<>(Arrays.asList(propertiesArr));
         //=====calories=================================================================================================
         StatsFactory caloriesStatsFactory = new StatsFactory(eb, "barchart", "calories",
                 new Date("25/09/2019"), new Date("30/09/2019"));
         Statistic actualCaloriesStatistic = caloriesStatsFactory.generateStatistic();
 
-        Double[] caloriesArr = new Double[] {150.0, 222.0, 300.0};
+        Double[] caloriesArr = new Double[]{150.0, 222.0, 300.0};
         ArrayList<Double> expectedCalories = new ArrayList<>(Arrays.asList(caloriesArr));
 
         Statistic expectedCaloriesStatistic = new StatisticBuilder().withCategory("calories").withChart("barchart")
@@ -91,7 +91,7 @@ public class StatsFactoryTest {
                 new Date("25/09/2019"), new Date("30/09/2019"));
         Statistic actualExerciseStatistic = exerciseStatsFactory.generateStatistic();
 
-        Double[] valuesArr = new Double[] {5.0, 1.5, 10.0};
+        Double[] valuesArr = new Double[]{5.0, 1.5, 10.0};
         ArrayList<Double> expectedValues = new ArrayList<>(Arrays.asList(valuesArr));
 
         Statistic expectedExerciseStatistic = new StatisticBuilder().withCategory("exercise").withChart("barchart")
@@ -103,14 +103,14 @@ public class StatsFactoryTest {
 
     @Test
     public void generatePieChartStatistic() {
-        String[] propertiesArr = new String[] {"Cycling (km)", "Running (hours)", "Swimming (laps)"};
+        String[] propertiesArr = new String[]{"Cycling (km)", "Running (hours)", "Swimming (laps)"};
         ArrayList<String> expectedProperties = new ArrayList<>(Arrays.asList(propertiesArr));
         //=====calories=================================================================================================
         StatsFactory caloriesStatsFactory = new StatsFactory(eb, "piechart", "calories",
                 new Date("25/09/2019"), new Date("30/09/2019"));
         Statistic actualCaloriesStatistic = caloriesStatsFactory.generateStatistic();
 
-        Double[] caloriesArr = new Double[] {150.0, 222.0, 300.0};
+        Double[] caloriesArr = new Double[]{150.0, 222.0, 300.0};
         ArrayList<Double> expectedCalories = new ArrayList<>(Arrays.asList(caloriesArr));
 
         Statistic expectedCaloriesStatistic = new StatisticBuilder().withCategory("calories").withChart("piechart")
@@ -124,7 +124,7 @@ public class StatsFactoryTest {
                 new Date("25/09/2019"), new Date("30/09/2019"));
         Statistic actualExerciseStatistic = exerciseStatsFactory.generateStatistic();
 
-        Double[] valuesArr = new Double[] {1.0, 2.0, 1.0};
+        Double[] valuesArr = new Double[]{1.0, 2.0, 1.0};
         ArrayList<Double> expectedValues = new ArrayList<>(Arrays.asList(valuesArr));
 
         Statistic expectedExerciseStatistic = new StatisticBuilder().withCategory("exercise").withChart("piechart")
