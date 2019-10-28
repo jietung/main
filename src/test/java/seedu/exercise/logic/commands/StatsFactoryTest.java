@@ -6,6 +6,8 @@ import static seedu.exercise.testutil.CommonTestData.VALID_LINE_CHART;
 import static seedu.exercise.testutil.CommonTestData.VALID_PIE_CHART;
 import static seedu.exercise.testutil.CommonTestData.VALID_STATISTIC_CATEGORY_CALORIES;
 import static seedu.exercise.testutil.CommonTestData.VALID_STATISTIC_CATEGORY_EXERCISE;
+import static seedu.exercise.testutil.typicalutil.TypicalExercises.CYCLING;
+import static seedu.exercise.testutil.typicalutil.TypicalExercises.SWIMMING;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,13 +33,9 @@ public class StatsFactoryTest {
     @BeforeEach
     public void setUp() {
         Exercise running = new ExerciseBuilder().build(); //Running, 111 kcal, 0.5 hours
-        Exercise swimming = new ExerciseBuilder().withName("Swimming").withDate("27/09/2019")
-                .withCalories("300").withQuantity("10").withUnit("laps").build();
-        Exercise cycling = new ExerciseBuilder().withName("Cycling").withDate("28/09/2019")
-                .withCalories("150").withQuantity("5").withUnit("km").build();
         Exercise anotherRunning = new ExerciseBuilder().withDate("28/09/2019").withQuantity("1.0").build();
-        eb = new ExerciseBookBuilder().withExercise(running).withExercise(swimming)
-                .withExercise(cycling).withExercise(anotherRunning).build();
+        eb = new ExerciseBookBuilder().withExercise(running).withExercise(SWIMMING)
+                .withExercise(CYCLING).withExercise(anotherRunning).build();
     }
 
     @Test

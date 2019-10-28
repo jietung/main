@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.exercise.commons.core.index.Index.MESSAGE_CONSTRAINTS;
 import static seedu.exercise.testutil.Assert.assertThrows;
 import static seedu.exercise.testutil.typicalutil.TypicalIndexes.INDEX_ONE_BASED_FIRST;
+import static seedu.exercise.testutil.typicalutil.TypicalIndexes.INDEX_ONE_BASED_SECOND;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -89,8 +90,8 @@ public class ParserUtilTest {
     @Test
     public void parseIndexes_collectionWithValidMuscles_returnsIndexList() throws Exception {
         ArrayList<Index> actualIndexSet = ParserUtil.parseIndexes(Arrays.asList("1", "2"));
-        ArrayList<Index> expectedIndexSet = new ArrayList<>(Arrays.asList(Index.fromOneBased(1),
-                Index.fromOneBased(2)));
+        ArrayList<Index> expectedIndexSet = new ArrayList<>(Arrays.asList(INDEX_ONE_BASED_FIRST,
+                INDEX_ONE_BASED_SECOND));
 
         assertEquals(expectedIndexSet, actualIndexSet);
     }
