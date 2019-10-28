@@ -166,12 +166,7 @@ public class AddRegimeCommand extends AddCommand implements PayloadCarrierComman
      * @throws CommandException If a duplicate index is found
      */
     private void checkDuplicateIndexes(List<Index> indexes) throws CommandException {
-        List<Integer> intIndexes = new ArrayList<>();
-        for (Index i : indexes) {
-            intIndexes.add(i.getZeroBased());
-        }
-
-        HashSet<Integer> set = new HashSet<>(intIndexes);
+        HashSet<Index> set = new HashSet<>(indexes);
         if (set.size() < indexes.size()) {
             throw new CommandException(MESSAGE_DUPLICATE_INDEX);
         }
