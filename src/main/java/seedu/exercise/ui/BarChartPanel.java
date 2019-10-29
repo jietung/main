@@ -51,7 +51,8 @@ public class BarChartPanel extends UiPart<Region> {
 
         int size = names.size();
         for (int i = 0; i < size; i++) {
-            series.getData().add(new XYChart.Data<>(ChartTextUtil.firstLetterUpperCaseFormatter(names.get(i)), values.get(i)));
+            series.getData().add(new XYChart.Data<>(ChartTextUtil
+                .firstLetterUpperCaseFormatter(names.get(i)), values.get(i)));
         }
 
         barChart.setLegendVisible(false);

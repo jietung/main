@@ -35,6 +35,11 @@ public class PieChartPanel extends UiPart<Region> {
         ArrayList<Double> values = statistic.getValues();
 
         int size = names.size();
+        if (size == 0) {
+            PieChart.Data slice = new PieChart.Data("No exercise data found", 1);
+            pieChart.getData().add(slice);
+        }
+
         for (int i = 0; i < size; i++) {
             PieChart.Data slice = new PieChart.Data(names.get(i), values.get(i));
             pieChart.getData().add(slice);
