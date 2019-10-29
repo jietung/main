@@ -18,6 +18,7 @@ import seedu.exercise.model.ReadOnlyResourceBook;
 import seedu.exercise.model.UserPrefs;
 import seedu.exercise.model.property.Name;
 import seedu.exercise.model.resource.Regime;
+import seedu.exercise.ui.ListResourceType;
 
 public class DeleteRegimeCommandTest {
 
@@ -39,7 +40,8 @@ public class DeleteRegimeCommandTest {
                 getDefaultPropertyBook());
         expectedModel.deleteRegime(regimeToDelete);
 
-        assertCommandSuccess(deleteRegimeCommand, model, expectedMessage, expectedModel);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, ListResourceType.REGIME);
+        assertCommandSuccess(deleteRegimeCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
