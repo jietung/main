@@ -9,7 +9,7 @@ public class ChartTextUtil {
      * Returns the formatted title of line chart and bar chart.
      */
     public static String lineAndBarChartTitleFormatter(String category, String startDate, String endDate) {
-        return firstLetterUpperCaseFormatter(category + " (" + startDate + " to " + endDate + ")");
+        return changeFirstLetterToUpperCase(String.format("%s (%s to %s)", category, startDate, endDate));
     }
 
     /**
@@ -17,9 +17,9 @@ public class ChartTextUtil {
      */
     public static String pieChartTitleFormatter(String category, String startDate, String endDate) {
         if (category.equals("exercise")) {
-            return firstLetterUpperCaseFormatter(category + " Frequency (" + startDate + " to " + endDate + ")");
+            return changeFirstLetterToUpperCase(String.format("%s Frequency (%s to %s)", category, startDate, endDate));
         } else {
-            return firstLetterUpperCaseFormatter(category + " (" + startDate + " to " + endDate + ")");
+            return changeFirstLetterToUpperCase(String.format("%s (%s to %s)", category, startDate, endDate));
         }
     }
 
@@ -28,7 +28,7 @@ public class ChartTextUtil {
      */
     public static String barChartLabelFormatter(String category) {
         if (category.equals("exercise")) {
-            return firstLetterUpperCaseFormatter("quantity");
+            return "Quantity";
         } else {
             return "kcal";
         }
@@ -39,7 +39,7 @@ public class ChartTextUtil {
      */
     public static String lineChartLabelFormatter(String category) {
         if (category.equals("exercise")) {
-            return firstLetterUpperCaseFormatter("frequency");
+            return "frequency";
         } else {
             return "kcal";
         }
@@ -48,7 +48,7 @@ public class ChartTextUtil {
     /**
      * Returns the string with first letter changed to upper case.
      */
-    public static String firstLetterUpperCaseFormatter(String string) {
+    public static String changeFirstLetterToUpperCase(String string) {
         return string.substring(0, 1).toUpperCase() + string.substring(1);
     }
 }

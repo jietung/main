@@ -44,7 +44,7 @@ public class BarChartPanel extends UiPart<Region> {
         barChart.setAnimated(false);
         barChart.layout();
 
-        xAxis.setLabel(ChartTextUtil.firstLetterUpperCaseFormatter("exercises"));
+        xAxis.setLabel(ChartTextUtil.changeFirstLetterToUpperCase("exercises"));
         yAxis.setLabel(ChartTextUtil.barChartLabelFormatter(statistic.getCategory()));
 
         XYChart.Series<String, Double> series = new XYChart.Series<>();
@@ -52,7 +52,7 @@ public class BarChartPanel extends UiPart<Region> {
         int size = names.size();
         for (int i = 0; i < size; i++) {
             series.getData().add(new XYChart.Data<>(ChartTextUtil
-                .firstLetterUpperCaseFormatter(names.get(i)), values.get(i)));
+                .changeFirstLetterToUpperCase(names.get(i)), values.get(i)));
         }
 
         barChart.setLegendVisible(false);

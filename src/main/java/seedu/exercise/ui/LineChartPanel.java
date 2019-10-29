@@ -45,7 +45,7 @@ public class LineChartPanel extends UiPart<Region> {
         lineChart.setAnimated(false);
         lineChart.layout();
 
-        xAxis.setLabel(ChartTextUtil.firstLetterUpperCaseFormatter("date"));
+        xAxis.setLabel(ChartTextUtil.changeFirstLetterToUpperCase("date"));
         yAxis.setLabel(ChartTextUtil.lineChartLabelFormatter(category));
 
         XYChart.Series<String, Double> series = new XYChart.Series<>();
