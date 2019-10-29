@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -31,13 +32,13 @@ public class SuggestPossibleCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalExerciseBook(), new ReadOnlyResourceBook<>(),
-                getTypicalExerciseBook(), new ReadOnlyResourceBook<>(),
-                new UserPrefs(), getDefaultPropertyBook());
+            getTypicalExerciseBook(), new ReadOnlyResourceBook<>(),
+            new UserPrefs(), getDefaultPropertyBook());
         expectedModel = new ModelManager(model.getExerciseBookData(), new ReadOnlyResourceBook<>(),
-                getTypicalExerciseBook(), new ReadOnlyResourceBook<>(),
-                new UserPrefs(), getDefaultPropertyBook());
+            getTypicalExerciseBook(), new ReadOnlyResourceBook<>(),
+            new UserPrefs(), getDefaultPropertyBook());
         targetMuscles = new HashSet<>();
-        targetCustomProperties = new HashMap<>();
+        targetCustomProperties = new TreeMap<>();
     }
 
     @Test
@@ -47,7 +48,7 @@ public class SuggestPossibleCommandTest {
 
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, ListResourceType.SUGGESTION);
         assertCommandSuccess(new SuggestPossibleCommand(targetMuscles, targetCustomProperties),
-                model, expectedCommandResult, expectedModel);
+            model, SuggestPossibleCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
@@ -59,7 +60,7 @@ public class SuggestPossibleCommandTest {
 
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, ListResourceType.SUGGESTION);
         assertCommandSuccess(new SuggestPossibleCommand(targetMuscles, targetCustomProperties),
-                model, expectedCommandResult, expectedModel);
+            model, SuggestPossibleCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     private Predicate<Exercise> getMusclePredicate() {

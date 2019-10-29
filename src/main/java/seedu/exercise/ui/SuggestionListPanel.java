@@ -31,7 +31,7 @@ public class SuggestionListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Exercise} using a {@code ExerciseCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Exercise} using a {@code ExerciseInfoPanel}.
      */
     class SuggestionListViewCell extends ListCell<Exercise> {
         @Override
@@ -42,7 +42,7 @@ public class SuggestionListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new ExerciseCard(exercise, getIndex() + 1).getRoot());
+                setGraphic(new ExerciseListCard(exercise, getIndex() + 1).getRoot());
             }
         }
     }
