@@ -40,6 +40,6 @@ public class PieChartPanel extends UiPart<Region> {
             pieChart.getData().add(slice);
         }
 
-        pieChart.setTitle(ChartTextUtil.titleFormatter(category, startDate, endDate));
+        pieChart.setTitle(ChartTextUtil.pieChartTitleFormatter(category, startDate, endDate));
     }
 }

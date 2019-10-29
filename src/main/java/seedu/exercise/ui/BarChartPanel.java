@@ -44,18 +44,18 @@ public class BarChartPanel extends UiPart<Region> {
         barChart.setAnimated(false);
         barChart.layout();
 
-        xAxis.setLabel(statistic.getCategory());
+        xAxis.setLabel(ChartTextUtil.firstLetterUpperCaseFormatter("exercises"));
         yAxis.setLabel(ChartTextUtil.barChartLabelFormatter(statistic.getCategory()));
 
-        XYChart.Series series = new XYChart.Series();
+        XYChart.Series<String, Double> series = new XYChart.Series<>();
 
         int size = names.size();
         for (int i = 0; i < size; i++) {
-            series.getData().add(new XYChart.Data<>(names.get(i), values.get(i)));
+            series.getData().add(new XYChart.Data<>(ChartTextUtil.firstLetterUpperCaseFormatter(names.get(i)), values.get(i)));
         }
 
         barChart.setLegendVisible(false);
-        barChart.setTitle(ChartTextUtil.titleFormatter(category, startDate, endDate));
+        barChart.setTitle(ChartTextUtil.lineAndBarChartTitleFormatter(category, startDate, endDate));
         barChart.getData().add(series);
     }
 }
