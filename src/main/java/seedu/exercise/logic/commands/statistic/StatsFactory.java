@@ -81,7 +81,10 @@ public class StatsFactory {
             values = caloriesByDate(getFilteredExercise(), dates);
         }
 
-        return new Statistic(category, chart, startDate, endDate, datesToString(dates), values);
+        double total = getTotal(values);
+        double average = getAverage(total);
+
+        return new Statistic(category, chart, startDate, endDate, datesToString(dates), values, total, average);
     }
 
     /**
@@ -97,8 +100,10 @@ public class StatsFactory {
 
         ArrayList<String> names = hashMapNameToList(data);
         ArrayList<Double> values = hashMapDoubleToList(data, names);
+        double total = getTotal(values);
+        double average = getAverage(total);
 
-        return new Statistic(category, chart, startDate, endDate, names, values);
+        return new Statistic(category, chart, startDate, endDate, names, values, total, average);
     }
 
     /**
@@ -114,8 +119,31 @@ public class StatsFactory {
 
         ArrayList<String> names = hashMapNameToList(data);
         ArrayList<Double> values = hashMapDoubleToList(data, names);
+        double total = getTotal(values);
+        double average = getAverage(total);
 
-        return new Statistic(category, chart, startDate, endDate, names, values);
+        return new Statistic(category, chart, startDate, endDate, names, values, total, average);
+    }
+
+    /**
+     * Returns the sum of all values.
+     * Values can be calories or exercise frequency.
+     */
+    private double getTotal(ArrayList<Double> values) {
+        double total = 0;
+        for (double d : values) {
+            total += d;
+        }
+        return total;
+    }
+
+    /**
+     * Returns the average value.
+     * Value can be calories or exercise frequency.
+     */
+    private double getAverage(double total) {
+        int numberOfDays = Date.numberOfDaysBetween(startDate, endDate) + 1;
+        return total / numberOfDays;
     }
 
     /**
@@ -136,28 +164,6 @@ public class StatsFactory {
             }
 
             data.put(nameWithUnit, count);
-        }
-
-        return data;
-    }
-
-    /**
-     * Compute exercise quantity with filtered exercises list.
-     */
-    private HashMap<String, Double> getTotalExerciseQuantity() {
-        ArrayList<Exercise> filteredExercise = getFilteredExercise();
-        HashMap<String, Double> data = new HashMap<>();
-
-        for (Exercise e : filteredExercise) {
-            Name name = e.getName();
-            Unit unit = e.getUnit();
-            String nameWithUnit = name.toString() + " (" + unit.toString() + ")";
-            double quantity = Double.parseDouble(e.getQuantity().toString());
-            if (data.containsKey(nameWithUnit)) {
-                quantity = data.get(nameWithUnit) + quantity;
-            }
-
-            data.put(nameWithUnit, quantity);
         }
 
         return data;
@@ -286,6 +292,8 @@ public class StatsFactory {
         ArrayList<Date> dates = Date.getListOfDates(startDate, endDate);
         ArrayList<String> properties = datesToString(dates);
         ArrayList<Double> values = caloriesByDate(filteredExercise, dates);
-        return new Statistic("calories", LINE_CHART, startDate, endDate, properties, values);
+        double total = getTotal(values);
+        double average = getAverage(total);
+        return new Statistic("calories", LINE_CHART, startDate, endDate, properties, values, total, average);
     }
 }
