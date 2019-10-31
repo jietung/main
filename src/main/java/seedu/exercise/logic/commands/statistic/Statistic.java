@@ -56,6 +56,9 @@ public class Statistic {
         setAverage(newStatistic.getAverage());
     }
 
+    /**
+     * Calculates and returns the percentage of value.
+     */
     public static double percentage(double value, double total) {
         return value / total * 100;
     }
