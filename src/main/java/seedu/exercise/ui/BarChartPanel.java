@@ -15,7 +15,7 @@ import seedu.exercise.logic.commands.statistic.Statistic;
  */
 public class BarChartPanel extends UiPart<Region> {
     private static final String FXML = "BarChartPanel.fxml";
-
+    private static final String DEFAULT_EXERCISES = "Exercises";
     private Statistic statistic;
 
     @FXML
@@ -44,7 +44,7 @@ public class BarChartPanel extends UiPart<Region> {
         barChart.setAnimated(false);
         barChart.layout();
 
-        xAxis.setLabel("Exercises");
+        xAxis.setLabel(DEFAULT_EXERCISES);
         yAxis.setLabel(ChartTextUtil.labelFormatter(statistic.getCategory()));
 
         XYChart.Series<String, Double> series = new XYChart.Series<>();

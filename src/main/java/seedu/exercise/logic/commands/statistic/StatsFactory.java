@@ -17,9 +17,11 @@ import seedu.exercise.model.resource.Exercise;
  */
 public class StatsFactory {
 
-    private static final String BAR_CHART = "barchart";
-    private static final String LINE_CHART = "linechart";
-    private static final String PIE_CHART = "piechart";
+    private static final String DEFAULT_BAR_CHART = "barchart";
+    private static final String DEFAULT_LINE_CHART = "linechart";
+    private static final String DEFAULT_PIE_CHART = "piechart";
+    private static final String DEFAULT_CALORIES = "calories";
+    private static final String DEFAULT_EXERCISE = "exercise";
 
     private static final Logger logger = LogsCenter.getLogger(StatsFactory.class);
     private ObservableList<Exercise> exercises;
@@ -53,13 +55,13 @@ public class StatsFactory {
     public Statistic generateStatistic() {
         switch(chart) {
 
-        case PIE_CHART:
+        case DEFAULT_PIE_CHART:
             return generatePieChartStatistic();
 
-        case LINE_CHART:
+        case DEFAULT_LINE_CHART:
             return generateLineChartStatistic();
 
-        case BAR_CHART:
+        case DEFAULT_BAR_CHART:
             return generateBarChartStatistic();
 
         default:
@@ -75,7 +77,7 @@ public class StatsFactory {
         ArrayList<Date> dates = Date.getListOfDates(startDate, endDate);
         ArrayList<Double> values;
 
-        if (category.equals("exercise")) {
+        if (category.equals(DEFAULT_EXERCISE)) {
             values = exerciseFrequencyByDate(getFilteredExercise(), dates);
         } else {
             values = caloriesByDate(getFilteredExercise(), dates);
@@ -92,7 +94,7 @@ public class StatsFactory {
      */
     private Statistic generateBarChartStatistic() {
         HashMap<String, Double> data;
-        if (category.equals("exercise")) {
+        if (category.equals(DEFAULT_EXERCISE)) {
             data = getTotalExerciseFrequency();
         } else { //calories
             data = getTotalCaloriesData();
@@ -111,7 +113,7 @@ public class StatsFactory {
      */
     private Statistic generatePieChartStatistic() {
         HashMap<String, Double> data;
-        if (category.equals("exercise")) {
+        if (category.equals(DEFAULT_EXERCISE)) {
             data = getTotalExerciseFrequency();
         } else { //calories
             data = getTotalCaloriesData();
@@ -127,7 +129,6 @@ public class StatsFactory {
 
     /**
      * Returns the sum of all values.
-     * Values can be calories or exercise frequency.
      */
     private double getTotal(ArrayList<Double> values) {
         double total = 0;
@@ -139,7 +140,6 @@ public class StatsFactory {
 
     /**
      * Returns the average value.
-     * Value can be calories or exercise frequency.
      */
     private double getAverage(double total) {
         int numberOfDays = Date.numberOfDaysBetween(startDate, endDate) + 1;
@@ -294,6 +294,7 @@ public class StatsFactory {
         ArrayList<Double> values = caloriesByDate(filteredExercise, dates);
         double total = getTotal(values);
         double average = getAverage(total);
-        return new Statistic("calories", LINE_CHART, startDate, endDate, properties, values, total, average);
+        return new Statistic(DEFAULT_CALORIES, DEFAULT_LINE_CHART, startDate, endDate,
+                properties, values, total, average);
     }
 }
