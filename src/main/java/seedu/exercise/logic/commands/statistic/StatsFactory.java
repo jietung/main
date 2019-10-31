@@ -90,7 +90,7 @@ public class StatsFactory {
     private Statistic generateBarChartStatistic() {
         HashMap<String, Double> data;
         if (category.equals("exercise")) {
-            data = getTotalExerciseQuantity();
+            data = getTotalExerciseFrequency();
         } else { //calories
             data = getTotalCaloriesData();
         }
