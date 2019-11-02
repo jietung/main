@@ -44,7 +44,7 @@ public class ChartTextUtil {
     }
 
     /**
-     * If the string is too long, it will format string to first 10 character plus last 10 character.
+     * If the string is too long, it will format string to first 10 character plus last 8 character.
      */
     public static String propertyFormatter(String string) {
         string = changeFirstLetterToUpperCase(string);
