@@ -224,6 +224,11 @@ Format: `stats t/CAT_NAME h/CHART_TYPE [s/START_DATE] [e/END_DATE]`
 ** For example, exercise `Strength Training (counts)` is more than 18 characters, it will be formatted to `Strength T...(counts)`.
 * It also includes total and average `CATEGORY` per day of exercises in the date range.
 
+Figure below shows an example of pie chart. +
+
+image::PieChart.png[width="790"]
+NOTE: Due to space constraint, some labels may not appear. Labels can be seen when mouse cursor hovers over the pie chart.
+
 Example:
 
 * `stats t/exercise h/piechart`
