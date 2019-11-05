@@ -7,6 +7,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Region;
 import seedu.exercise.logic.commands.statistic.Statistic;
 
@@ -58,5 +59,11 @@ public class BarChartPanel extends UiPart<Region> {
         barChart.setLegendVisible(false);
         barChart.setTitle(ChartTextUtil.lineAndBarChartTitleFormatter(category, startDate, endDate));
         barChart.getData().add(series);
+
+        series.getData().stream().forEach(data -> {
+            Tooltip tooltip = new Tooltip();
+            tooltip.setText(data.getXValue() + "\n" + data.getYValue());
+            Tooltip.install(data.getNode(), tooltip);
+        });
     }
 }
