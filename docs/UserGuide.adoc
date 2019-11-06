@@ -88,6 +88,7 @@ You can enter the following additional information for each exercise:
 Format: `add t/exercise n/EXERCISE_NAME d/DATE c/CALORIES q/QUANTITY u/UNITS [m/MUSCLE]...`
 
 ****
+* Calories entered have to be less than or equal to 50000.
 * Dates that are entered have to be of the form `dd/MM/yyyy`.
 * The day of each date must be between 01 and 31 inclusive.
 * The month of each date must be between 01 and 12 inclusive.
@@ -117,9 +118,21 @@ Example:
 
 Adds the 1st, 2nd and 3rd exercise in the list to the regime named `power sets`.
 
+Expected result:
+
+image::AddNewRegime.png[]
+
 * `add t/regime n/cardio i/4`
 
 Adds the 4th exercise in the list to the regime named `cardio`.
+
+Figure below shows regime list with regime named `cardio`:
+
+image::RegimeCardioBefore.png[]
+
+Expected result after `add t/regime n/cardio i/4` command executed:
+
+image::RegimeCardioAfter.png[]
 
 === Listing information : `list`
 
@@ -228,8 +241,25 @@ Examples:
 
 * `delete t/regime n/cardio i/2` +
 Deletes the exercise indexed 2 in the cardio regime
+
+Figure below shows regime list with regime named `cardio` with 4 exercises:
+
+image::RegimeCardioAfter.png[]
+
+Expected result after `delete t/regime n/cardio i/2` command executed:
+
+image::DeleteExerciseFromRegime.png[]
+
 * `delete t/regime n/legs` +
 Deletes the entire regime named legs
+
+Figure below shows regime list with regime named `legs`:
+
+image::DeleteEntireRegimeBefore.png[]
+
+Expected result after `delete t/regime n/legs` command executed:
+
+image::DeleteEntireRegimeAfter.png[]
 
 === Clearing all entries : `clear`
 
@@ -256,27 +286,21 @@ Format: `stats t/CAT_NAME h/CHART_TYPE [s/START_DATE] [e/END_DATE]`
 * It also includes total and average `CATEGORY` per day of exercises in the date range.
 ****
 
-Examples of chart:
-//TODO: Add figure number
-
-image::PieChart.png[width="500"]
-Figure ?. A pie chart.
-
-image::BarChart.png[width="500"]
-Figure ?. A bar chart.
-
-image::LineChart.png[width="500"]
-Figure ?. A line chart with total and average.
-
-
-
 NOTE: Due to space constraint, some labels may not appear. Labels can be seen when mouse cursor hovers over the chart.
 
 Example:
 
 * `stats t/exercise h/piechart`
+
+image::PieChart.png[width="500"]
+
 * `stats t/calories h/linechart`
-* `stats t/exercise h/barchart s/20/09/2019 e/27/09/2019`
+
+image::LineChart.png[width="500"]
+
+* `stats t/exercise h/barchart s/31/10/2019 e/06/11/2019`
+
+image::BarChart.png[width="500"]
 
 // end::statistic[]
 
