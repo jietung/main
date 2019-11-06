@@ -7,7 +7,6 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Region;
 import seedu.exercise.logic.commands.statistic.Statistic;
 
@@ -47,7 +46,7 @@ public class LineChartPanel extends UiPart<Region> {
         lineChart.layout();
 
         xAxis.setLabel(DEFAULT_DATE);
-        yAxis.setLabel(ChartTextUtil.labelFormatter(category));
+        yAxis.setLabel(ChartUtil.labelFormatter(category));
 
         XYChart.Series<String, Double> series = new XYChart.Series<>();
 
@@ -57,13 +56,9 @@ public class LineChartPanel extends UiPart<Region> {
         }
 
         lineChart.setLegendVisible(false);
-        lineChart.setTitle(ChartTextUtil.lineAndBarChartTitleFormatter(category, startDate, endDate));
+        lineChart.setTitle(ChartUtil.lineAndBarChartTitleFormatter(category, startDate, endDate));
         lineChart.getData().add(series);
 
-        series.getData().stream().forEach(data -> {
-            Tooltip tooltip = new Tooltip();
-            tooltip.setText(data.getXValue() + "\n" + data.getYValue());
-            Tooltip.install(data.getNode(), tooltip);
-        });
+        ChartUtil.installToolTipXyChart(series.getData());
     }
 }
