@@ -256,10 +256,21 @@ Format: `stats t/CAT_NAME h/CHART_TYPE [s/START_DATE] [e/END_DATE]`
 * It also includes total and average `CATEGORY` per day of exercises in the date range.
 ****
 
-Figure below shows an example of pie chart. +
+Examples of chart:
+//TODO: Add figure number
 
-image::PieChart.png[width="790"]
-NOTE: Due to space constraint, some labels may not appear. Labels can be seen when mouse cursor hovers over the pie chart.
+image::PieChart.png[width="500"]
+Figure ?. A pie chart.
+
+image::BarChart.png[width="500"]
+Figure ?. A bar chart.
+
+image::LineChart.png[width="500"]
+Figure ?. A line chart with total and average.
+
+
+
+NOTE: Due to space constraint, some labels may not appear. Labels can be seen when mouse cursor hovers over the chart.
 
 Example:
 
