@@ -236,6 +236,8 @@ Deletes the entire regime named legs
 Clears all entries from the exercise tracker. +
 Format: `clear`
 
+// tag::statistic[]
+
 === Display statistics : `stats`
 
 Display the statistics of exercises.
@@ -264,6 +266,8 @@ Example:
 * `stats t/exercise h/piechart`
 * `stats t/calories h/linechart`
 * `stats t/exercise h/barchart s/20/09/2019 e/27/09/2019`
+
+// end::statistic[]
 
 === Undo previous command: `undo`
 
