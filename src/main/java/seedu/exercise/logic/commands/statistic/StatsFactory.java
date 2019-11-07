@@ -56,16 +56,19 @@ public class StatsFactory {
         switch(chart) {
 
         case DEFAULT_PIE_CHART:
+            logger.info("Chart type is pie chart. Pie Chart statistic generated.");
             return generatePieChartStatistic();
 
         case DEFAULT_LINE_CHART:
+            logger.info("Chart type is line chart. Line Chart statistic generated.");
             return generateLineChartStatistic();
 
         case DEFAULT_BAR_CHART:
+            logger.info("Chart type is bar chart. Bar Chart statistic generated.");
             return generateBarChartStatistic();
 
         default:
-            logger.fine("Chart type is not correct. Default chart will be displayed.");
+            logger.info("Chart type is not correct. Default chart statistic will be generated.");
             return getDefaultStatistic();
         }
     }
@@ -294,6 +297,7 @@ public class StatsFactory {
         ArrayList<Double> values = caloriesByDate(filteredExercise, dates);
         double total = getTotal(values);
         double average = getAverage(total);
+        logger.info("Generate default statistic");
         return new Statistic(DEFAULT_CALORIES, DEFAULT_LINE_CHART, startDate, endDate,
                 properties, values, total, average);
     }

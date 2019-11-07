@@ -22,8 +22,8 @@ import seedu.exercise.ui.ListResourceType;
  */
 public class DeleteExerciseCommand extends DeleteCommand implements PayloadCarrierCommand {
 
-    public static final String MESSAGE_USAGE_EXERCISE = "Parameters: INDEX (must be a positive integer)\n"
-            + "\t\tExample: "
+    public static final String MESSAGE_USAGE_EXERCISE = "Parameters: INDEX (must be a positive integer)"
+            + "\tExample: "
             + COMMAND_WORD + " "
             + PREFIX_CATEGORY + "exercise "
             + PREFIX_INDEX + "1";
