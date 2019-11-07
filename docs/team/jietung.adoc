@@ -15,7 +15,8 @@ exercises which both beginners and advanced users can choose from to incorporate
 interacts with it using a command line interface, and it has a GUI created with JavaFX.
 
 Figure below is a screenshot of what our application looks like:
-//TODO: Add image of UI
+
+image::Ui.png[]
 
 Figure 1. The graphical user interface for ExerHealth
 
