@@ -22,14 +22,12 @@ import seedu.exercise.model.resource.Exercise;
  */
 public class StatsCommand extends Command {
 
-    private static final Logger logger = LogsCenter.getLogger(StatsCommand.class);
-
     public static final String COMMAND_WORD = "stats";
 
     public static final String MESSAGE_STATS_DISPLAY_SUCCESS = "Chart displayed.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Display statistic of completed exercises\n"
-        +"Parameters: "
+        + "Parameters: "
         + PREFIX_CATEGORY + "CATEGORY "
         + PREFIX_CHART + "CHART TYPE "
         + PREFIX_START_DATE + "START DATE "
@@ -40,6 +38,7 @@ public class StatsCommand extends Command {
         + PREFIX_START_DATE + "30/03/2019 "
         + PREFIX_END_DATE + "05/04/2019 ";
 
+    private static final Logger logger = LogsCenter.getLogger(StatsCommand.class);
     private final String chart;
     private final String category;
     private final Date startDate;

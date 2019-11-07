@@ -137,7 +137,7 @@ public class StatsFactory {
     private void removeZeroValues(ArrayList<Integer> values, ArrayList<String> properties) {
         int size = values.size();
         int i = 0;
-        while(i < size) {
+        while (i < size) {
             if (values.get(i) == 0) {
                 values.remove(i);
                 properties.remove(i);
