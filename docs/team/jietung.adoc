@@ -8,7 +8,7 @@
 == Overview
 
 My team of 5 computer science students were tasked with enhancing a basic command line interface desktop Addressbook3
-application for software engineering project. Our team decided to morph the application in to ExerHealth. ExerHealth is
+application for software engineering project. Our team decided to morph the application to ExerHealth. ExerHealth is
 a desktop application used for tracking and scheduling the user's exercises. The application has statistical analysis of
 exercises user have completed in the past. Additionally, it also acts as a personal trainer by suggesting different
 exercises which both beginners and advanced users can choose from to incorporate into their exercise regime. The user

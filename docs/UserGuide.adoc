@@ -289,7 +289,7 @@ Format: `stats t/CAT_NAME h/CHART_TYPE [s/START_DATE] [e/END_DATE]`
 * Only exercise with same name and unit will be counted as same exercise.
 * Exercise will appear as `NAME (UNIT)` in the charts. E.g `Running (km)`. If it is too long (more than 18 characters), it will be formatted to first 10 characters plus last 8 characters.
 ** For example, exercise `Strength Training (counts)` is more than 18 characters, it will be formatted to `Strength T...(counts)`.
-* Total and average `CATEGORY` per day of exercises in the date range is shown at the below of chart.
+* Total and average `CATEGORY` per day of exercises in the date range is shown below the chart.
 ****
 
 NOTE: Due to space constraint, some labels may not appear. Labels can be seen when mouse cursor hovers over the chart.
