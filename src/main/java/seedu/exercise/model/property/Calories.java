@@ -10,7 +10,7 @@ import static seedu.exercise.commons.util.AppUtil.checkArgument;
  */
 public class Calories {
     public static final String PROPERTY_CALORIES = "Calories";
-    public static final String MESSAGE_CONSTRAINTS = "Calories should only contain positive integer and "
+    public static final String MESSAGE_CONSTRAINTS = "Calories should only contain non-negative integer and "
             + "should be less than or equal to 50,000";
     public final String value;
 

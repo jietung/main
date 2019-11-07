@@ -228,7 +228,7 @@ Examples:
 
 Deletes exercises from a certain scheduling regime.
 
-Format: `delete t/exercise n/REGIME_NAME [i/INDEX]...`
+Format: `delete t/regime n/REGIME_NAME [i/INDEX]...`
 
 ****
 * Deletes the exercise at the specified `INDEX`.
@@ -270,7 +270,7 @@ Format: `clear`
 
 === Display statistics : `stats`
 
-Display the statistics of exercises.
+Display the statistics of exercises in completed exercise list.
 
 Format: `stats t/CAT_NAME h/CHART_TYPE [s/START_DATE] [e/END_DATE]`
 
@@ -283,7 +283,7 @@ Format: `stats t/CAT_NAME h/CHART_TYPE [s/START_DATE] [e/END_DATE]`
 * Only exercise with same name and unit will be counted as same exercise.
 * Exercise will appear as `NAME (UNIT)` in the charts. E.g `Running (km)`. If it is too long (more than 18 characters), it will be formatted to first 10 characters plus last 8 characters.
 ** For example, exercise `Strength Training (counts)` is more than 18 characters, it will be formatted to `Strength T...(counts)`.
-* It also includes total and average `CATEGORY` per day of exercises in the date range.
+* Total and average `CATEGORY` per day of exercises in the date range is shown at the below of chart.
 ****
 
 NOTE: Due to space constraint, some labels may not appear. Labels can be seen when mouse cursor hovers over the chart.
@@ -298,7 +298,7 @@ image::PieChart.png[width="500"]
 
 image::LineChart.png[width="500"]
 
-* `stats t/exercise h/barchart s/31/10/2019 e/06/11/2019`
+* `stats t/calories h/barchart s/31/10/2019 e/06/11/2019`
 
 image::BarChart.png[width="500"]
 
