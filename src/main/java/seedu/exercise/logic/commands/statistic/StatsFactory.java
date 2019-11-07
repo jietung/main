@@ -124,10 +124,28 @@ public class StatsFactory {
 
         ArrayList<String> names = hashMapNameToList(data);
         ArrayList<Integer> values = hashMapIntegerToList(data, names);
+        removeZeroValues(values, names);
         double total = getTotal(values);
         double average = getAverage(total);
 
         return new Statistic(category, chart, startDate, endDate, names, values, total, average);
+    }
+
+    /**
+     * Remove zero values from data for pie chart
+     */
+    private void removeZeroValues(ArrayList<Integer> values, ArrayList<String> properties) {
+        int size = values.size();
+        int i = 0;
+        while(i < size) {
+            if (values.get(i) == 0) {
+                values.remove(i);
+                properties.remove(i);
+                size = values.size();
+            } else {
+                i++;
+            }
+        }
     }
 
     /**
