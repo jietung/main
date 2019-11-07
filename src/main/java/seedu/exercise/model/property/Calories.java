@@ -1,7 +1,7 @@
 package seedu.exercise.model.property;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.exercise.commons.core.ValidationRegex.ONLY_NUMBERS;
+import static seedu.exercise.commons.core.ValidationRegex.ONLY_INTEGER;
 import static seedu.exercise.commons.util.AppUtil.checkArgument;
 
 /**
@@ -10,7 +10,7 @@ import static seedu.exercise.commons.util.AppUtil.checkArgument;
  */
 public class Calories {
     public static final String PROPERTY_CALORIES = "Calories";
-    public static final String MESSAGE_CONSTRAINTS = "Calories should only contain numbers and "
+    public static final String MESSAGE_CONSTRAINTS = "Calories should only contain positive integer and "
             + "should be less than or equal to 50,000";
     public final String value;
 
@@ -29,12 +29,12 @@ public class Calories {
      * Returns true if a given string is a valid calories burnt.
      */
     public static boolean isValidCalories(String test) {
-        return test.matches(ONLY_NUMBERS) && Double.parseDouble(test) <= 50000;
+        return test.matches(ONLY_INTEGER) && Integer.parseInt(test) <= 50000;
     }
 
     @Override
     public String toString() {
-        return value;
+        return Integer.toString(Integer.parseInt(value));
     }
 
     @Override

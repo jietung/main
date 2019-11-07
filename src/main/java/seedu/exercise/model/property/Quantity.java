@@ -33,7 +33,15 @@ public class Quantity {
 
     @Override
     public String toString() {
-        return value;
+        if (!value.contains(".")) {
+            return Integer.toString(Integer.parseInt(value));
+        } else {
+            double dValue = Double.parseDouble(value);
+            if (dValue == (int) dValue) {
+                return Integer.toString((int) dValue);
+            }
+            return Double.toString(dValue);
+        }
     }
 
     @Override
