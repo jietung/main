@@ -12,7 +12,7 @@ public class Calories {
     public static final String PROPERTY_CALORIES = "Calories";
     public static final String MESSAGE_CONSTRAINTS = "Calories should only contain non-negative integer and "
             + "should be less than or equal to 50,000";
-    public final String value;
+    private final String value;
 
     /**
      * Constructs a {@code Calories}.
@@ -22,7 +22,7 @@ public class Calories {
     public Calories(String calories) {
         requireNonNull(calories);
         checkArgument(isValidCalories(calories), MESSAGE_CONSTRAINTS);
-        value = calories;
+        value = removeLeadingZeros(calories);
     }
 
     /**
@@ -32,9 +32,16 @@ public class Calories {
         return test.matches(ONLY_INTEGER) && Integer.parseInt(test) <= 50000;
     }
 
+    private String removeLeadingZeros(String calories) {
+        return calories.replaceFirst("^0*", "");
+    }
+
     @Override
     public String toString() {
-        return Integer.toString(Integer.parseInt(value));
+        if (value.length() == 0) {
+            return "0";
+        }
+        return value;
     }
 
     @Override

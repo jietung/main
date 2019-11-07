@@ -11,7 +11,7 @@ import static seedu.exercise.commons.util.AppUtil.checkArgument;
 public class Quantity {
     public static final String PROPERTY_QUANTITY = "Quantity";
     public static final String MESSAGE_CONSTRAINTS = "Quantity should only contain numbers, and it should not be blank";
-    public final String value;
+    private final String value;
 
     /**
      * Constructs an {@code Quantity}.
