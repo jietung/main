@@ -16,6 +16,7 @@ import seedu.exercise.model.ReadOnlyResourceBook;
 import seedu.exercise.model.property.Date;
 import seedu.exercise.model.resource.Exercise;
 
+//@@author jietung
 /**
  * Generate statistic with given parameters.
  */

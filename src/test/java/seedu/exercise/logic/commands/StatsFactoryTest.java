@@ -24,6 +24,7 @@ import seedu.exercise.testutil.builder.ExerciseBookBuilder;
 import seedu.exercise.testutil.builder.ExerciseBuilder;
 import seedu.exercise.testutil.builder.StatisticBuilder;
 
+//@@author jietung
 public class StatsFactoryTest {
 
     private static final String START_DATE = "25/09/2019";

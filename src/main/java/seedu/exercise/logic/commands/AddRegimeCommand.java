@@ -26,6 +26,7 @@ import seedu.exercise.model.resource.Exercise;
 import seedu.exercise.model.resource.Regime;
 import seedu.exercise.ui.ListResourceType;
 
+//@@author jietung
 /**
  * Adds a regime to the regime book.
  */

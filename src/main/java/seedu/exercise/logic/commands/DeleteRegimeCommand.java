@@ -25,6 +25,7 @@ import seedu.exercise.model.resource.Exercise;
 import seedu.exercise.model.resource.Regime;
 import seedu.exercise.ui.ListResourceType;
 
+//@@author jietung
 /**
  * Deletes a regime identified using it's name or deletes exercises in regime.
  */
