@@ -31,7 +31,10 @@ import seedu.exercise.ui.ListResourceType;
  */
 public class DeleteRegimeCommand extends DeleteCommand implements PayloadCarrierCommand {
 
-    public static final String MESSAGE_USAGE_REGIME = "Parameters: REGIME NAME, INDEX (must be a positive integer)"
+    public static final String MESSAGE_USAGE_REGIME = "Parameters: "
+            + PREFIX_CATEGORY + "CATEGORY "
+            + PREFIX_NAME + "REGIME NAME "
+            + PREFIX_INDEX + "INDEX (must be a positive integer) "
             + "\tExample: "
             + COMMAND_WORD + " "
             + PREFIX_CATEGORY + "regime "
