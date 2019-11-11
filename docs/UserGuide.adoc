@@ -13,6 +13,7 @@ ifdef::env-github[]
 :note-caption: :information_source:
 endif::[]
 :repoURL: https://github.com/AY1920S1-CS2103T-T09-2/main/tree/master
+:baseRepoURL: https://github.com/AY1920S1-CS2103T-T09-2/main
 
 By: `Team ExerHealth`      Since: `Sep 2019`      Licence: `MIT`
 
@@ -34,7 +35,7 @@ Interested? Jump to <<Quick Start>> to get started! Enjoy!
 == Quick Start
 
 .  Ensure you have Java `11` or above installed in your Computer.
-.  Download the latest `exerhealth.jar` link:{repoURL}/releases[here].
+.  Download the latest `exerhealth.jar` link:{baseRepoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for ExerHealth.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
@@ -91,7 +92,7 @@ Views the help dialog box which will bring you to this UserGuide. You can expect
 Format: `help`
 
 .Here's how the help dialog box look like
-image::HelpDialogBox.png[align="center", width=85%, scaledwidth=15cm]
+image::HelpWindow.png[align="center", width=85%, scaledwidth=15cm]
 
 Clicking on the `Copy URL` button will copy the link to your clipboard and you can open any browser of your choice to access the UserGuide for `ExerHealth`.
 
@@ -111,7 +112,7 @@ You can enter the following additional information for each exercise:
 * Muscle group(s) that are being worked out
 * <<customproperty, Custom properties>> that have been added
 
-Format: `add t/exercise n/EXERCISE_NAME d/DATE c/CALORIES q/QUANTITY u/UNITS [m/MUSCLE]...[CUSTOM_PROPERTY_PREFIX/VALUE]...`
+Format: `add t/exercise n/EXERCISE_NAME d/DATE c/CALORIES q/QUANTITY u/UNITS [m/MUSCLE]...[CUSTOM_PROPERTY_PREFIX_NAME/VALUE]...`
 
 ****
 * Calories entered have to be less than or equal to 50000.
@@ -135,7 +136,7 @@ image::AddRunResult.png[align="center", width=85%, scaledwidth=15cm]
 * `add t/exercise n/Sprinting d/11/11/2019 c/500 q/400 u/metres m/Thighs`
 
 .The exercise `Sprinting` is added
-image::AddExerciseWithMuscle.png[align="center", width=95%, scaledwidth=15cm]
+image::AddExerciseWithMuscle.png[align="center", width=85%, scaledwidth=15cm]
 
 ==== Adding exercises to scheduling regime +
 
@@ -227,7 +228,7 @@ The index *must be a positive integer:* 1, 2, 3, ...
 * Existing values will be updated to the input values.
 ****
 
-Format: `edit i/INDEX [n/EXERCISE_NAME] [d/DATE] [c/CALORIES] [q/QUANTITY] [u/UNITS] [m/MUSCLE]...[CUSTOM_PROPERTY_PREFIX/VALUE]...`
+Format: `edit i/INDEX [n/EXERCISE_NAME] [d/DATE] [c/CALORIES] [q/QUANTITY] [u/UNITS] [m/MUSCLE]...[CUSTOM_PROPERTY_PREFIX_NAME/VALUE]...`
 
 Example:
 
@@ -729,7 +730,7 @@ Format: `suggest s/basic`
 Suggests exercises matching specified tags.
 
 ===== Based on matching muscle tags
-Format: `suggest s/possible o/OPERATION_TYPE [m/MUSCLE CUSTOM_PROPERTY_PREFIX_NAME/VALUE]`
+Format: `suggest s/possible o/OPERATION_TYPE [m/MUSCLE]... CUSTOM_PROPERTY_PREFIX_NAME/VALUE]...`
 
 ****
 * You must choose one of the following operation types: `and` / `or` i.e. commands such as `suggest s/possible m/Chest m/Legs` will fail whereas `suggest s/possible o/or m/Chest m/Legs` will succeed.
@@ -820,8 +821,8 @@ property in the `add` and `edit` command to include information for the new prop
 * Every word in the full name of each custom property will be changed to Start Case style, where the first letter of each
 word is capitalised with the other letters in lower case e.g. `enD DaTe` will be changed to `End Date`.
 * The date entered for custom properties with a `DATE` parameter must follow the same requirements as that of <<addexercise, add>> command.
-* The text entered for custom properties with a `TEXT` parameter can contain only alphabets.
-* The number entered for custom properties with a `NUMBER` parameter must be non-negative.
+* The text entered for custom properties with a `TEXT` parameter can contain only alphabets and spaces.
+* The number entered for custom properties with a `NUMBER` parameter must be a non-negative integer.
 * You need not include the custom properties when adding a new exercise to the app.
 ****
 
@@ -855,7 +856,7 @@ image::CustomRating.png[align="center", width=85%, scaledwidth=15cm]
 
 You can now add a new exercise with `Rating`!
 
-* `add t/exercise n/Run d/07/11/2019 c/400 q/2.4 u/km r/5`
+* `add t/exercise n/Dancing d/07/11/2019 c/400 q/2 u/hours r/5`
 
 Expected Result:
 
@@ -881,22 +882,22 @@ Example:
 
 * `custom rm/Rating`
 
-Before the execution, the `Rating` property will be present in exercises that have them.
+Before the execution, the `Rating` property will be present in exercises that have it.
 
-.A rating of 4.5 for exercise 6
-image::EditCustomRating.png[align="center", width=85%, scaledwidth=15cm]
+.A rating of 5 for exercise 6
+image::AddCustomRating.png[align="center", width=85%, scaledwidth=15cm]
 
-.A rating of 3.5 for exercise 7
-image::EditAnotherCustomRating.png[align="center", width=85%, scaledwidth=15cm]
+.A rating of 3 for exercise 7
+image::EditAnotherCustomrating.png[align="center", width=85%, scaledwidth=15cm]
 
 After the execution, the `Rating` property will be removed from all of the exercises and the app
 as illustrated in the next few figures.
 
 .Rating in exercise 6 is removed
-image::RunRatingRemoved.png[align="center", width=85%, scaledwidth=15cm]
+image::DancingRatingRemoved.png[align="center", width=85%, scaledwidth=15cm]
 
 .Rating in exercise 7 is also removed
-image::BenchPressRatingRemoved.png[align="center", width=85%, scaledwidth=15cm]
+image::RunningRatingRemoved.png[align="center", width=85%, scaledwidth=15cm]
 
 // end::customfeature[]
 
@@ -904,10 +905,10 @@ image::BenchPressRatingRemoved.png[align="center", width=85%, scaledwidth=15cm]
 
 Before the execution, both exercises 6 and 7 have a rating attached to them.
 
-.A rating of 4.5 for exercise 6
-image::EditCustomRating.png[align="center", width=85%, scaledwidth=15cm]
+.A rating of 5 for exercise 6
+image::AddCustomRating.png[align="center", width=85%, scaledwidth=15cm]
 
-.A rating of 3.5 for exercise 7
+.A rating of 3 for exercise 7
 image::EditAnotherCustomRating.png[align="center", width=85%, scaledwidth=15cm]
 
 After the execution, only exercise 6 has its rating property removed.
@@ -936,7 +937,7 @@ Example:
 Expected Result:
 
 .A window showing the custom properties you have defined is opened
-image::ViewCustom.png[align="center", width=85%, scaledwidth=15cm]
+image::ViewCustom.png[align="center", width=400]
 
 === Exiting the program : `exit`
 
@@ -992,7 +993,7 @@ image::LongNamesTooltip.png[align="center", width="400"]
 
 == Command Summary
 
-* *Add exercises* : `add t/exercise n/EXERCISE_NAME d/DATE c/CALORIES q/QUANTITY u/UNITS [m/MUSCLE]...[CUSTOM_PROPERTY_PREFIX/VALUE]...` +
+* *Add exercises* : `add t/exercise n/EXERCISE_NAME d/DATE c/CALORIES q/QUANTITY u/UNITS [m/MUSCLE]... [CUSTOM_PROPERTY_PREFIX_NAME/VALUE]...` +
 e.g. `add t/exercise n/Bench press d/19/09/2019 c/500 q/50 u/reps m/Chest`
 * *Add regimes* : `add t/regime n/REGIME_NAME [i/INDEX_OF_EXERCISE]...`
 e.g. `add t/regime n/Cardio i/1 i/2 i/3`
@@ -1000,7 +1001,7 @@ e.g. `add t/regime n/Cardio i/1 i/2 i/3`
 e.g. `list t/exercise`
 * *Select* : `select t/LIST_TYPE i/INDEX`
 e.g. `select t/exercise i/1`
-* *Edit exercise* : `edit i/INDEX [n/EXERCISE_NAME] [d/DATE] [c/CALORIES] [q/QUANTITY] [u/UNITS] [m/MUSCLE]...[CUSTOM_PROPERTY_PREFIX/VALUE]...`
+* *Edit exercise* : `edit i/INDEX [n/EXERCISE_NAME] [d/DATE] [c/CALORIES] [q/QUANTITY] [u/UNITS] [m/MUSCLE]... [CUSTOM_PROPERTY_PREFIX_NAME/VALUE]...`
 e.g. `edit i/3 n/Bench press d/22/09/2019 c/240 q/10 u/sets m/Chest`
 * *Delete exercise* : `delete t/exercise i/INDEX`
 e.g. `delete t/exercise i/2`
@@ -1023,7 +1024,7 @@ e.g. `resolve n/scheduled`, `resolve n/conflicting`
 * *Resolve(Take some exercise from both regime)* : `resolve n/NEW_REGIME_NAME [i/INDEX_OF_SCHEDULED_EXERCISE] [r/INDEX_OF_CONFLICTING_EXERCISE]`
 e.g. `resolve n/new cardio i/1 i/3 r/2`
 * *Suggest basic* : `suggest s/basic`
-* *Suggest possible* : `suggest s/possible [o/OPERATION_TYPE] [m/MUSCLE]... [CUSTOM_PROPERTY_PREFIX/VALUE]...`
+* *Suggest possible* : `suggest s/possible [o/OPERATION_TYPE] [m/MUSCLE]... [CUSTOM_PROPERTY_PREFIX_NAME/VALUE]...`
 e.g. `suggest s/possible m/Legs`, `suggest s/possible o/and m/Chest m/Leg`
 * *Add custom property* : `custom s/PREFIX_NAME f/FULL_NAME p/PARAMETER_TYPE`
 e.g. `custom s/ed f/End Date p/Date`
